@@ -1,0 +1,265 @@
+.splash {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    min-height: 1000px;
+    position: relative;
+}
+
+.splash-body {
+    display: flex;
+    width: 80%;
+    align-items: center;
+    flex-direction: column;
+}
+
+.splash-buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.splash-button {
+    width: 225px;
+    margin: 20px;
+    font-size: 17px;
+    height: 50px;
+}
+
+.login-button {
+    color: #8e9297;
+    border: 2px solid #8e9297;
+    padding: 5px 17px 7px;
+    border-radius: 20px;
+    line-height: 24px;
+    margin-right: 18px;
+    background-color: transparent
+}
+
+.splash h1 {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 44px;
+    margin: 0;
+}
+
+.splash p {
+    max-width: 710px;
+    color: hsla(0,0%,100%,.6);
+    font-weight: 200;
+    font-size: 14px;
+    text-align: center;
+    line-height: 24px;
+}
+
+.logo img {
+    height: 45px;
+}
+
+img.logo-img {
+    display: flex;
+    height: 25px;
+    justify-content: center;
+}
+
+.logo {
+    align-items: center;
+    display: flex;
+    float: left;
+}
+
+.splash-header {
+    width: 100%;
+    height: 100px;
+    margin: 20px 40px;
+}
+
+.header-right {
+    display: flex;
+    float:right;
+}
+
+img.splash-img {
+    position: absolute;
+    left: 50%;
+}
+
+img.grey {
+    opacity: .3;
+}
+
+.floating {  
+    animation-name: floating;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+    transition: all .5s ease;
+}
+
+@keyframes floating {
+    from { transform: translate(0,  0px); }
+    65%  { transform: translate(0, 15px); }
+    to   { transform: translate(0, -0px); }    
+}
+
+img.bomb {
+    margin-left: -481px;
+    bottom: 335px;
+    animation-delay: .4s;
+}
+
+
+img.circlefill-1 {
+    margin-left: -599px;
+    bottom: 200px;
+}
+
+img.circlefill-2 {
+    margin-left: -319px;
+    bottom: 600px;
+}
+
+img.circlefill-3 {
+    margin-left: 181px;
+    bottom: 500px;
+}
+
+img.circlefill-4 {
+    margin-left: 531px;
+    bottom: 600px;
+}
+
+img.circlefill-5 {
+    margin-left: 621px;
+    bottom: 140px;
+}
+
+img.circleopen-1 {
+    margin-left: -359px;
+    bottom: 530px;
+}
+
+img.circleopen-2 {
+    margin-left: 576px;
+    bottom: 280px;
+}
+
+img.circleopen-3 {
+    margin-left: -199px;
+    bottom: 88px;
+}
+
+img.coin-1 {
+    margin-left: -428px;
+    bottom: 300px;    
+}
+
+img.coin-2 {
+    margin-left: 80px;
+    bottom: 530px;
+}
+
+img.controller {
+    margin-left: -255px;
+    bottom: 10px;
+    z-index: 2;
+}
+
+img.gamepak {
+    margin-left: 250px;
+    bottom: 392px;
+}
+
+img.desktop {
+    margin-left: -289.5px;
+    bottom: 10px;
+    z-index: 1;
+}
+
+img.disc {
+    margin-left: 423px;
+    bottom: 10px;
+}
+
+img.headphones {
+    margin-left: 270px;
+    bottom: 142px;
+    z-index: 3;    
+    transform: scale(.75);
+}
+
+img.iphone {
+    margin-left: -401.5px;
+    bottom: 10px;
+    z-index: 2;
+}
+
+img.laptop {
+    margin-left: -4px;
+    bottom: 10px;
+    z-index: 2;
+}
+
+img.mariobox {
+    margin-left: -239px;
+    bottom: 462px;
+}
+
+img.potion {
+    margin-left: -609px;
+    bottom: 10px;
+    z-index: 1;
+    cursor: pointer;
+}
+
+img.android {
+    margin-left: -548px;
+    bottom: 10px;
+    z-index: 3;
+}
+
+img.square-1 {
+    margin-left: 17px;
+    bottom: 92px;
+}
+
+img.square-2 {
+    margin-left: 431px;
+    bottom: 400px;
+}
+
+img.square-3 {
+    margin-left: 331px;
+    bottom: 600px;
+}
+
+img.triangle-1 {
+    margin-left: -579px;
+    bottom: 300px;
+}
+
+img.triangle-2 {
+    margin-left: 31px;
+    bottom: 550px;
+}
+
+img.triangle-3 {
+    margin-left: -289px;
+    bottom: 448px;
+}
+
+img.x-1 {
+    margin-left: 101px;
+    bottom: 440px;
+}
+
+img.x-2 {
+    margin-left: 541px;
+    bottom: 220px;
+}
+
+img.x-3 {
+    margin-left: -579px;
+    bottom: 510px;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DaccordApp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+
+    <script src="https://kit.fontawesome.com/82e90f5064.js" crossorigin="anonymous"></script>
+    
+    <script type='text/javascript'>
+      window.android = "<%= image_url('splash/android.svg') %>";
+      window.bomb = "<%= image_url('splash/bomb.svg') %>";
+      window.circle = "<%= image_url('splash/circle.svg') %>";
+      window.circlefill = "<%= image_url('splash/circlefill.svg') %>";
+      window.coin = "<%= image_url('splash/coin.svg') %>";
+      window.controller = "<%= image_url('splash/controller.svg') %>";
+      window.desktop = "<%= image_url('splash/desktop.svg') %>";
+      window.disc = "<%= image_url('splash/disc.svg') %>";
+      window.gamepak = "<%= image_url('splash/gamepak.svg') %>";
+      window.headphones = "<%= image_url('splash/headphones.svg') %>";
+      window.icon = "<%= image_url('splash/icon.svg') %>";
+      window.iphone = "<%= image_url('splash/iphone.svg') %>";
+      window.laptop = "<%= image_url('splash/laptop.svg') %>";
+      window.logo = "<%= image_url('splash/logo.svg') %>";
+      window.mariobox = "<%= image_url('splash/mariobox.svg') %>";
+      window.potion = "<%= image_url('splash/potion.svg') %>";
+      window.sessionbg = "<%= image_url('session/sessionbg.jpg') %>";
+      window.square = "<%= image_url('splash/square.svg') %>";
+      window.triangle = "<%= image_url('splash/triangle.svg') %>";
+      window.x = "<%= image_url('splash/x.svg') %>";
+    </script>
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>

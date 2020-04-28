@@ -1,0 +1,93 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ .app {
+    overflow: auto;
+    position: absolute;
+    display: flex;
+    background-color: #25252b;
+    top: 0; 
+    left: 0; 
+    height: 100%; 
+    width: 100%;
+}
+
+.blue {
+    color: #7289da;
+}
+
+.grey {
+    color: #8e9297;
+}
+
+button {
+    cursor: pointer;
+    text-align: center;
+    border: 1px black solid;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 0px 10px;
+}
+
+button.blue {
+    color: white;
+    background-color: #7289da;
+}
+
+button.blue:hover {
+    background-color: #5a71c5;
+}
+
+button.grey {
+    color: #8e9297;
+    border: 2px solid #8e9297;
+    padding: 5px 17px 7px;
+    border-radius: 20px;
+    line-height: 24px;
+    margin-right: 18px;
+    background-color: rgba(0,0,0,0);
+}
+
+button.grey:hover {
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+body {
+    overflow: hidden;
+}
+
+h1 {
+    color: white;
+    margin:0px;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 44px;
+}
+
+p {
+    font-weight: 400;
+    color: #737f8d;
+    font-size: 16px;
+    line-height: 24px;
+    margin-top: 12px;
+    font-family: Whitney, Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+h1, label, input, div {
+    font-family: Whitney,Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+
