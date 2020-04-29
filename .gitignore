@@ -15,15 +15,16 @@
 
 # Ignore uploaded files in development
 /storage/*
-!/storage/.keep
-
 /node_modules
 /yarn-error.log
-/bundle.js
-/bundle.js.map
-
 /public/assets
 .byebug_history
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+node_modules/
+bundle.js*
+.byebug_history
+.DS_Store
+npm-debug.log
