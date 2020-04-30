@@ -32,7 +32,13 @@
     border-radius: 20px;
     line-height: 24px;
     margin-right: 18px;
-    background-color: transparent
+    background-color: transparent;
+    transition: border-color 0.1s ease-in-out;
+}
+
+.login-button:hover {
+    color: white;
+    border: 2px solid white
 }
 
 .splash h1 {
