@@ -88,7 +88,7 @@
     font-size: 14px;
     font-weight: 350;
     color: #dcddde;
-    background-color: black;
+    background-color: rgba(0,0,0,0.15);
     padding: 10px;
     margin-bottom: 16px;
     height: 18px;
