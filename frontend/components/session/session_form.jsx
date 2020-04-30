@@ -69,7 +69,6 @@ class SessionForm extends React.Component {
             <>
                 <h5>USERNAME</h5>
                 <input 
-                    tabindex="1" 
                     type="text"
                     value={this.state.username}
                     onChange={this.update('username')}
@@ -153,7 +152,6 @@ class SessionForm extends React.Component {
 
                         <h5>EMAIL</h5>
                         <input type="email"
-                                tabindex="1"
                                 value={this.state.email}
                                 onChange={this.update('email')}
                                 className="session-input"
@@ -164,7 +162,6 @@ class SessionForm extends React.Component {
                             }
                         <h5>PASSWORD </h5>
                         <input type="password"
-                                tabindex="1"
                                 value={this.state.password}
                                 onChange={this.update('password')}
                                 className="session-input"

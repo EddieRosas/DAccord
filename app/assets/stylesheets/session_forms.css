@@ -83,7 +83,7 @@
 
 .session-input {
     width: 95.5%;
-    border: black 1px solid;
+    border: rgb(49, 49, 49) 1px solid;
     border-radius: 3px;
     font-size: 14px;
     font-weight: 350;
@@ -93,7 +93,6 @@
     margin-bottom: 16px;
     height: 18px;
     transition: border-color 0.2s ease-in-out;
-    
 }
 
 .session-input:focus{

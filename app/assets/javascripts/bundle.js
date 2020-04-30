@@ -626,7 +626,6 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
     key: "usernameInput",
     value: function usernameInput() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "USERNAME"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        tabindex: "1",
         type: "text",
         value: this.state.username,
         onChange: this.update('username'),
@@ -698,13 +697,11 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
         className: "form-header"
       }, this.headerMessage()), this.renderErrors(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "EMAIL"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "email",
-        tabindex: "1",
         value: this.state.email,
         onChange: this.update('email'),
         className: "session-input"
       }), this.props.formType === 'signup' ? this.usernameInput() : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "PASSWORD "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "password",
-        tabindex: "1",
         value: this.state.password,
         onChange: this.update('password'),
         className: "session-input"
