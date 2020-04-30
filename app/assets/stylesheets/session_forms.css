@@ -32,10 +32,10 @@
     animation-name: fadeIn;
 }
 
-.session-background img{
+/* .session-background img{
     position: absolute;
     background-size: cover;
-}
+} */
 
 .session-logo img {
     position: relative;
@@ -52,6 +52,7 @@
     width: 100%;
     z-index: 0;
     height: 100%;
+    background-size: cover;
 }
 
 .form-header {
@@ -76,14 +77,14 @@
 .session-form h5 {
     margin-bottom: 8px;
     color: #8e9297;
-    font-size: 12px;
+    font-size: 11px;
     line-height: 16px;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .session-input {
     width: 95.5%;
-    border: rgb(49, 49, 49) 1px solid;
+    border: rgb(29, 29, 29) 1px solid;
     border-radius: 3px;
     font-size: 14px;
     font-weight: 350;
@@ -150,8 +151,19 @@
     text-decoration: underline;
 }
 
-.errors-list {
-    color: red;
-    /* list-style: bullet; */
-    /* text-decoration-style: wavy; */
+.error-label-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.error-label-container h5 {
+    color: #f04747;
+}
+
+.error-label {
+    font-style: italic;
+}
+
+.session-input.error-input {
+    border-color: #f04747;
 }

@@ -7,7 +7,10 @@ class SessionForm extends React.Component {
         this.state = {
             email: "",
             username: "",
-            password: ""
+            password: "",
+            emailErrors: false,
+            passwordErrors: false,
+            usernameErrors: false
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,14 +31,133 @@ class SessionForm extends React.Component {
         });
     }
 
-    labelErrors() {
+    componentWillUnmount() {
+        this.props.clearErrors();
+    }
 
+    errorStateCleanse() {
+        this.state.emailErrors = false;
+        this.state.usernameErrors = false;
+        this.state.passwordErrors = false;
+    }
+
+    passwordLabel() {
+        if (this.props.errors.length > 0) {
+            if (this.props.errors.includes("Password is too short (minimum is 6 characters)")) {
+                this.state.passwordErrors = true;
+                return (
+                    <div className="error-label-container">
+                        <h5>PASSWORD</h5>
+                        <h5 className="error-label">
+                            &nbsp;- Password too short. Must be a minimum of 6 characters!
+                        </h5>
+                    </div>
+                )
+            } else if (this.props.errors.includes("Invalid credentials")) {
+                this.state.passwordErrors = true;
+                return (
+                    <div className="error-label-container">
+                        <h5>PASSWORD</h5>
+                        <h5 className="error-label">
+                            &nbsp;- Invalid Email or Password
+                        </h5>
+                    </div>
+                )
+            } else {
+                return (
+                    <h5>PASSWORD</h5>
+                )
+            }
+        } else {
+            return (
+                <h5>PASSWORD</h5>
+            )
+        }
+    }
+
+    emailLabel() {
+        if (this.props.errors.length > 0) {
+            if (this.props.errors.includes("Invalid credentials")) {
+                this.state.emailErrors = true;
+                return (
+                    <div className="error-label-container">
+                        <h5>EMAIL</h5>
+                        <h5 className="error-label">
+                            &nbsp;- Invalid Email or Password
+                        </h5>
+                    </div>
+                )
+            } else if (this.props.errors.includes("Email can't be blank")) {
+                this.state.emailErrors = true;
+                return (
+                    <div className="error-label-container">
+                        <h5>EMAIL</h5>
+                        <h5 className="error-label">
+                            &nbsp;- Email can't be blank!
+                        </h5>
+                    </div>
+                )
+            } else if (this.props.errors.includes("Email has already been taken")) {
+                this.state.emailErrors = true;
+                return(
+                    <div className="error-label-container">
+                        <h5>EMAIL</h5>
+                        <h5 className="error-label">
+                            &nbsp;- Email has already been taken!
+                        </h5>
+                    </div>
+                )
+            } else {
+                return (
+                    <h5>EMAIL</h5>
+                )
+            }
+        } else {
+            return (
+                <h5>EMAIL</h5>
+            )
+        }
+    }
+
+    usernameLabel() {
+        if (this.props.errors.length > 0) {
+            if (this.props.errors.includes("Username can't be blank")) {
+                this.state.usernameErrors = true;
+                return (
+                    <div className="error-label-container">
+                        <h5>USERNAME</h5>
+                        <h5 className="error-label">
+                            &nbsp;- Username can't be blank!
+                        </h5>
+                    </div>
+                )
+            } else if (this.props.errors.includes("Username has already been taken")) {
+                this.state.usernameErrors = true;
+                return (
+                    <div className="error-label-container">
+                        <h5>USERNAME</h5>
+                        <h5 className="error-label">
+                            &nbsp;- Username has already been taken!
+                        </h5>
+                    </div>
+                )
+            } else {
+                return (
+                    <h5>USERNAME</h5>
+                )
+            }
+        } else {
+            return (
+                <h5>USERNAME</h5>
+            )
+        }
     }
 
     handleSubmit(e) {
         e.preventDefault();
         const user = Object.assign({}, this.state);
         this.props.processForm(user);
+        this.errorStateCleanse();
     }
 
     demoLogin(e) {
@@ -50,7 +172,6 @@ class SessionForm extends React.Component {
     }
 
     renderErrors() {
-        // console.log(this.props.errors);
         if (this.props.errors.length > 0) {
             return (
                 <ul className="errors-list">
@@ -67,12 +188,13 @@ class SessionForm extends React.Component {
     usernameInput() {
         return(
             <>
-                <h5>USERNAME</h5>
+                {(this.usernameLabel())}
                 <input 
                     type="text"
                     value={this.state.username}
                     onChange={this.update('username')}
-                    className="session-input"
+                    className=
+                        {(this.state.usernameErrors === false) ? "session-input" : "session-input error-input"}
                 />
             </>
         )
@@ -100,7 +222,7 @@ class SessionForm extends React.Component {
         if (this.props.formType === 'signup') {
             return (
                 <div className="form-footer signup">
-                    <Link to='/login' className="session-link">
+                    <Link to='/login' className="session-link" onClick={this.errorStateCleanse()}>
                         Already have an account?
                     </Link>
                     <Link to="/channels/@me" className="session-demo-link" onClick={this.demoLogin}>
@@ -114,7 +236,7 @@ class SessionForm extends React.Component {
                     <p>
                         Need an account?
                         &nbsp;
-                        <Link to='/signup' className="session-link">Register</Link>
+                        <Link to='/signup' className="session-link" onClick={this.errorStateCleanse()}>Register</Link>
                     </p>
                     <p>
                         <Link to="/channels/@me" className="session-demo-link" onClick={this.demoLogin}>
@@ -148,23 +270,25 @@ class SessionForm extends React.Component {
                         {this.headerMessage()}
                     </div>
                     
-                        {this.renderErrors()}
+                        {/* {this.renderErrors()} */}
 
-                        <h5>EMAIL</h5>
+                        {this.emailLabel()}
                         <input type="email"
                                 value={this.state.email}
                                 onChange={this.update('email')}
-                                className="session-input"
+                                className=
+                                    {(this.state.emailErrors === false) ? "session-input" : "session-input error-input"}
                         />
-                            { 
-                                (this.props.formType === 'signup') ?
-                                this.usernameInput() : ""
-                            }
-                        <h5>PASSWORD </h5>
+                        { 
+                            (this.props.formType === 'signup') ?
+                            this.usernameInput() : ""
+                        }
+                        {this.passwordLabel()}
                         <input type="password"
                                 value={this.state.password}
                                 onChange={this.update('password')}
-                                className="session-input"
+                                className=
+                                    { (this.state.passwordErrors === false) ? "session-input" : "session-input error-input" }
                          />
                         <button type="submit" className="form-button blue">
                             {
