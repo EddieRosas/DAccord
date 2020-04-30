@@ -52,20 +52,14 @@
     line-height: 24px;
 }
 
-.logo img {
+.splash-logo img {
     height: 45px;
 }
 
-img.logo-img {
+img.splash-logo-img {
     display: flex;
     height: 25px;
     justify-content: center;
-}
-
-.logo {
-    align-items: center;
-    display: flex;
-    float: left;
 }
 
 .splash-header {
@@ -76,7 +70,7 @@ img.logo-img {
 
 .header-right {
     display: flex;
-    float:right;
+    float: right;
 }
 
 img.splash-img {
@@ -108,7 +102,6 @@ img.bomb {
     bottom: 335px;
     animation-delay: .4s;
 }
-
 
 img.circlefill-1 {
     margin-left: -599px;
@@ -210,7 +203,6 @@ img.potion {
     margin-left: -609px;
     bottom: 10px;
     z-index: 1;
-    cursor: pointer;
 }
 
 img.android {

@@ -1,40 +1,158 @@
-.session-page {
-    position: absolute;
-    width: 100%;
-    height: 100;
-}
-
-.session-bg-img {
-    position: absolute;
-    display: flex;
-    width: 100%;
-    height: 100;
-}
-
 .session-form {
-    background-color: #36393f;
-    border: 1px solid;
     display: flex;
     position: absolute;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #36393f;
+    width: 500px;
+    border: 1px solid;
     left: 30%;
     top: 20%;
-    flex-direction: column;
-    padding: 10px 30px 20px 30px;
+    padding: 32px;
     color: #8e9297;
-    width: 500px;
     border-radius: 8px;
+    -webkit-animation-duration: .5s;
+    animation-duration: .5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
 }
 
-.session-form > form > label {
-    padding-bottom: 2px;
-    font-size: 13px;;
+@-webkit-keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
 }
 
-.session-form input {
-    width: 96%;
-    border: black 1px solid;
-    border-radius: 5px;
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+.fadeIn {
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+}
+
+.session-background img{
+    position: absolute;
+    background-size: cover;
+}
+
+.session-logo img {
+    position: relative;
+    top: 15px;
+    left: 15px;
+    color: black;
+    filter: invert(100%);
+    height: 45px;
+} 
+
+.session-bg-img {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    z-index: 0;
+    height: 100%;
+}
+
+.form-header {
+    text-align: center;
+    padding-bottom: 18px;
+}
+
+.form-header h2 {
     color: white;
-    background-color: #2e2e2e;
+    line-height: 30px;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.form-header h3 {
+    color: rgb(172, 169, 169);
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.session-form h5 {
+    margin-bottom: 8px;
+    color: #8e9297;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 600;
+}
+
+.session-input {
+    width: 95.5%;
+    border: rgb(43, 43, 43) 1px solid;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 350;
+    color: #dcddde;
+    background-color: rgb(0, 0, 0, .3);
     padding: 10px;
+    margin-bottom: 16px;
+    height: 18px;
+    transition: border-color 0.2s ease-in-out;
+    
+}
+
+.session-input:focus{
+    border: 1px solid #7289da !important;
+    box-shadow: 0 0 3px #7289da !important;
+    -moz-box-shadow: 0 0 3px #7289da !important;
+    -webkit-box-shadow: 0 0 3px #7289da !important;    
+    outline-offset: 0px !important;
+    outline: none !important;   
+}
+
+.session-input:hover {
+    border-color: black;
+}
+
+.form-button {
+    width: 100%;
+    font-size: 15px;
+    font-weight: 400;
+    padding: 10px 20px;
+}
+
+.form-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.form-footer.login {
+    margin-top: -6px;
+}
+
+.form-footer.signup {
+    border-top: 5px solid transparent;
+}
+
+.form-footer p {
+    font-size: 14px;
+}
+
+.session-demo-link {
+    font-weight: 400;
+    font-size: 14px;
+    color: #7289da;
+    text-decoration: none;
+}
+
+.session-link {
+    font-size: 14px;
+    color: #7289da;
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}
+
+.errors-list {
+    color: red;
+    /* list-style: bullet; */
+    /* text-decoration-style: wavy; */
 }

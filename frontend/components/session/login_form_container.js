@@ -14,6 +14,7 @@ const mapDispatchToProps = dispatch => {
     // debugger
     return {
         processForm: (user) => dispatch(login(user)),
+        demoLogin: user => dispatch(login(user))
     };
 };
 

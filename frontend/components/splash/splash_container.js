@@ -7,7 +7,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    demoLogin: () => dispatch(login({email: "demo@daccord.com", password: 'password'}))
+    demoLogin: user => dispatch(login(user))
 });
 
 

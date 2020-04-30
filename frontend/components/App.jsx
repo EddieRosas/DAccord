@@ -5,6 +5,7 @@ import SplashContainer from './splash/splash_container'
 import SignupFormContainer from './session/signup_form_container';
 import LoginFormContainer from './session/login_form_container';
 import NavBarContainer from './navbar/navbar_container'
+import ChannelsIndexContainer from './channels/channels_index_container'
 
 
 const App = () => {
@@ -12,9 +13,11 @@ const App = () => {
             <div className="app">
 
                 <Switch>
-                    <Route exact path='/' component={SplashContainer} />
+                    
+                    <ProtectedRoute path="/channels/@me" component={ChannelsIndexContainer}/>
                     <AuthRoute exact path='/signup' component={SignupFormContainer} />
                     <AuthRoute exact path="/login" component={LoginFormContainer} />
+                    <Route exact path='/' component={SplashContainer} />
                 </Switch>
             </div>
         )

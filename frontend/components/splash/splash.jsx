@@ -1,16 +1,27 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Splash = (props) => {
 
-    // bubble
+    const demoLogin = () => {
+        // e.preventDefault()
+        console.log("hi")
+        const demoUser = {
+            email: "iamnotarealperson@hotmail.com",
+            password: "password"
+        };
+
+        props.demoLogin(demoUser)
+            .then(() => props.history.push("/channels/@me"))
+    }
 
     return (
         <div className="splash">
             <div className='splash-body'>
                 <header className='splash-header'>
-                    <div className='logo'>
-                        <img src={window.logo} className="logo-img" alt="logo"/>
+                    <div className='splash-logo'>
+                        <img src={window.logo} className="splash-logo-img" alt="logo"/>
                     </div>
                     <div className="header-right">
                         <Link to='/login'><button className='login-button'>Login</button></Link>
@@ -27,7 +38,7 @@ const Splash = (props) => {
 
                 <div className='splash-buttons'>
                     <Link to='/signup'> <button className="splash-button" >Sign Up</button></Link>
-                    <button className='splash-button blue' onClick={props.demoLogin}>Try the Demo</button>
+                    <button className='splash-button blue' onClick={() => demoLogin()}>Try the Demo</button>
                 </div>
 
                 <div className='somanyimgs-splash'>

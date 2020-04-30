@@ -11,6 +11,7 @@ class SessionForm extends React.Component {
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.demoLogin = this.demoLogin.bind(this);
     }
 
     componentDidMount() {
@@ -27,98 +28,157 @@ class SessionForm extends React.Component {
         });
     }
 
+    labelErrors() {
+
+    }
+
     handleSubmit(e) {
         e.preventDefault();
         const user = Object.assign({}, this.state);
         this.props.processForm(user);
     }
 
-    // demoLogin(e) {
-    //     e.preventDefault();
-    //     const demoUser = {
-    //         email: "iamnotarealperson@hotmail.com",
-    //         password: "password"
-    //     };
-    //     this.props.processform(demoUser)
-    //         .then(() => this.props.history.push("/servers/@me"));
-    // }
+    demoLogin(e) {
+        e.preventDefault();
+        const demoUser = {
+            email: "iamnotarealperson@hotmail.com",
+            password: "password"
+        };
+
+        this.props.demoLogin(demoUser)
+            .then(() => this.props.history.push("/channels/@me"));
+    }
 
     renderErrors() {
         // console.log(this.props.errors);
-        return (
-            <ul>
-                {this.props.errors.map((error, i) => (
-                    <li key={`error-${i}`}>
-                        {error}
-                    </li>
-                ))}
-            </ul>
-        );
+        if (this.props.errors.length > 0) {
+            return (
+                <ul className="errors-list">
+                    {this.props.errors.map((error, i) => (
+                        <li key={`error-${i}`}>
+                            {error}
+                        </li>
+                    ))}
+                </ul>
+            );
+        }
     }
 
     usernameInput() {
         return(
-            <label>USERNAME
-                <input type="text"
+            <>
+                <h5>USERNAME</h5>
+                <input 
+                    tabindex="1" 
+                    type="text"
                     value={this.state.username}
                     onChange={this.update('username')}
+                    className="session-input"
                 />
-            </label>
+            </>
         )
     }
 
-    welcomeMessage() {
-        return(
-            <div className='welcome-msg'>
-                <h2>Welcome back!</h2>
-                <h3>We're so excited to see you again!</h3>
-            </div>
-        )
+    
+    headerMessage() {
+        if (this.props.formType === 'login') {
+            return (
+                    <div className='form-header-login'>
+                        <h2>Welcome back!</h2>
+                        <h3>We're so excited to see you again!</h3>
+                    </div>
+            )
+        } else {
+            return(
+                    <div className='form-header-signup'>
+                        <h2>Create an account</h2>
+                    </div>
+            )
+        }
+    }
+
+    footerLink() {
+        if (this.props.formType === 'signup') {
+            return (
+                <div className="form-footer signup">
+                    <Link to='/login' className="session-link">
+                        Already have an account?
+                    </Link>
+                    <Link to="/channels/@me" className="session-demo-link" onClick={this.demoLogin}>
+                        Use Demo Account!
+                    </Link>
+                </div>
+            )
+        } else {
+            return (
+                <div className="form-footer login">
+                    <p>
+                        Need an account?
+                        &nbsp;
+                        <Link to='/signup' className="session-link">Register</Link>
+                    </p>
+                    <p>
+                        <Link to="/channels/@me" className="session-demo-link" onClick={this.demoLogin}>
+                            Use Demo Account!
+                        </Link>
+                    </p>
+                </div>
+            )
+        }
     }
 
     render() {
         return (
-            <div className="session-page">
-                <div className="session-background">
-                    <img className='session-bg-img' src={window.sessionbg} alt=''/>
-                    <img src={window.logo} className='logo-img' alt="logo"/>
+            <div>
+                <div className='session-background'>
+                    <img className='session-bg-img' src={window.sessionbg} alt="" />
+                    <div>
+                        <Link to='/'>
+                            <div className='session-logo'>
+                                <img src={window.logosvg} className='logo-img' alt="logo" />
+                            </div>
+                        </Link>
+                    </div>
                 </div>
 
-                { (this.props.formType) === 'login' ?
-                    this.welcomeMessage() : ""
-                }
+                <div className='session-form fadeIn'>
 
-                <div className="session-form">
                     <form onSubmit={this.handleSubmit}>
 
+                    <div className='form-header'>
+                        {this.headerMessage()}
+                    </div>
+                    
                         {this.renderErrors()}
 
-                        <label>EMAIL
-                         <input type="email"
+                        <h5>EMAIL</h5>
+                        <input type="email"
+                                tabindex="1"
                                 value={this.state.email}
                                 onChange={this.update('email')}
-                                className="login-input"
-                            />
-                        </label>
-                        <br />
-                        { 
-                            (this.props.formType === 'signup') ?
-                            this.usernameInput() : ""
-                        }
-                        <br />
-                        <label>PASSWORD
-                          <input type="password"
+                                className="session-input"
+                        />
+                            { 
+                                (this.props.formType === 'signup') ?
+                                this.usernameInput() : ""
+                            }
+                        <h5>PASSWORD </h5>
+                        <input type="password"
+                                tabindex="1"
                                 value={this.state.password}
                                 onChange={this.update('password')}
-                                className="login-input"
-                            />
-                        </label>
-                        <br />
-                        <input className="submit-form" type="submit" value={this.props.formType} />
+                                className="session-input"
+                         />
+                        <button type="submit" className="form-button blue">
+                            {
+                                (this.props.formType === 'login') ?
+                                    "Login" : "Continue"
+                            }
+                        </button>
                     </form>
-                    <div className='session-footer'>
-                        <span>Need an Account? <Link to='signup' className='register-link'>Register</Link></span>
-                    </div>
+                        
+                        {this.footerLink()}
+                        
                 </div>
             </div>
         )

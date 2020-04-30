@@ -39,7 +39,6 @@ button {
     border: 1px black solid;
     border-radius: 5px;
     padding: 10px 20px;
-    margin: 0px 10px;
 }
 
 button.blue {
@@ -76,6 +75,12 @@ h1 {
     font-weight: 700;
     font-size: 36px;
     line-height: 44px;
+}
+
+.logo {
+    align-items: center;
+    display: flex;
+    float: left;
 }
 
 p {
