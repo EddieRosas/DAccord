@@ -1,5 +1,5 @@
 import React from 'react';
-import AtMe from '../@me/@me'
+import ServerIndexContainer from '../navbar/server_index_container';
 
 class ChannelsIndex extends React.Component {
     render () {
@@ -7,9 +7,10 @@ class ChannelsIndex extends React.Component {
             <div>
                 <header>
                     <h1>Hello,&nbsp;{this.props.currentUser.username}!</h1>
+                    <img src={this.props.currentUser.imageUrl} alt=''/>
                     <button onClick={() => this.props.logout(this.props.currentUser)}>Log Out</button>
                 </header>
-                <AtMe />
+                <ServerIndexContainer />
             </div>
         )
     }

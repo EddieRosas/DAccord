@@ -10,7 +10,8 @@ import ChannelsIndexContainer from './channels/channels_index_container'
 
 const App = () => {
         return(
-            <div className="app">
+            <div className="app">   
+
 
                 <Switch>
                     

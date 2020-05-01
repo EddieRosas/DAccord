@@ -10,6 +10,9 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
+
+require 'open-uri'
+
 class User < ApplicationRecord
     validates :email, :username, :password_digest, :session_token, presence: true
     validates :email, :session_token, uniqueness: true
@@ -18,7 +21,22 @@ class User < ApplicationRecord
 
     attr_reader :password
 
-    after_initialize :ensure_session_token
+    has_one_attached :image
+
+    after_initialize :ensure_session_token, :ensure_default_icon
+
+    has_many :owned_servers,
+        foreign_key: :owner_id,
+        class_name: :Server 
+
+    has_many :server_memberships,
+        foreign_key: :user_id,
+        class_name: :ServerMembership,
+        dependent: :destroy
+
+    has_many :servers,
+        through: :server_memberships,
+        source: :servers
 
     def self.find_by_credentials(email, password)
         user = User.find_by(email: email)
@@ -43,6 +61,20 @@ class User < ApplicationRecord
 
     def ensure_session_token
         self.session_token ||= SecureRandom.urlsafe_base64
+    end
+
+    def ensure_default_icon
+        unless self.image.attached?
+            icons = [
+                "https://active-storage-daccord-seeds.s3-us-west-1.amazonaws.com/blue-default-icon.png",
+                "https://active-storage-daccord-seeds.s3-us-west-1.amazonaws.com/green-default-icon.png",
+                "https://active-storage-daccord-seeds.s3-us-west-1.amazonaws.com/grey-default-icon.png",
+                "https://active-storage-daccord-seeds.s3-us-west-1.amazonaws.com/red-default-icon.png",
+                "https://active-storage-daccord-seeds.s3-us-west-1.amazonaws.com/yellow-default-con.png"
+            ]
+            file = open(icons.sample)
+            self.image.attach(io: file, filename: 'server-default-icon.png')
+        end
     end
 
 end

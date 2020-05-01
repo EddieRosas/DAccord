@@ -1,4 +1,5 @@
 import React from 'react';
+import ServerIndex from './server_index';
 import { Link } from 'react-router-dom';
 
 export default ({ currentUser, logout }) => {
@@ -10,11 +11,13 @@ export default ({ currentUser, logout }) => {
     ) : <p>No current user</p>  
 
     return (
-        <header className="nav-bar">
-            <h1 className="logo">D'ACCOHHH</h1>
-            <div>
-                {display}
-            </div>
-        </header>
+        <div>
+            <ServerIndex />
+            <footer className="current-user-display">
+                <div>
+                    {display}
+                </div>
+            </footer>
+        </div>
     );
 };
