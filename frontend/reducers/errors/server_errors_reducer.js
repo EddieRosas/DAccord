@@ -4,7 +4,7 @@ import {
     RECEIVE_SERVER_ERRORS
 } from '../../actions/server_actions'
 
-const serversErrorsReducer = (state = [], action) => {
+const serverErrorsReducer = (state = [], action) => {
     Object.freeze(state);
     switch (action.type) {
         case RECEIVE_SERVER_ERRORS:
@@ -18,4 +18,4 @@ const serversErrorsReducer = (state = [], action) => {
     }
 };
 
-export default serversErrorsReducer;
+export default serverErrorsReducer;

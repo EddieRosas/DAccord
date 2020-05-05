@@ -13,6 +13,7 @@ const Auth = ({ component: Component, path, loggedIn, exact }) => (
 );
 
 const Protected = ({ component: Component, path, loggedIn, exact }) => (
+
     <Route
     path={path}
     exact={exact}
@@ -20,26 +21,27 @@ const Protected = ({ component: Component, path, loggedIn, exact }) => (
         loggedIn ? <Component {...props} /> : <Redirect to="/login" />
     }
     />
-    );
+);
     
-    const mapStateToProps = state => {
-        return { loggedIn: Boolean(state.session.currentUserId) };
-    };
+const mapStateToProps = state => {
+    return { loggedIn: Boolean(state.session.currentUserId) };
+};
     
-    export const AuthRoute = withRouter(
-        connect(
+    
+export const AuthRoute = withRouter(
+    connect(
         mapStateToProps,
         null
-        )(Auth)
-        );
-        
-        export const ProtectedRoute = withRouter(
-            connect(
-                mapStateToProps,
-                null
-                )(Protected)
+    )(Auth)
 );
 
+export const ProtectedRoute = withRouter(
+    connect(
+        mapStateToProps,
+        null
+    )(Protected)
+);
+        
 // const Auth = ({ component: Component, path, loggedIn, exact }) => (
 //     <Route
 //         path={path}

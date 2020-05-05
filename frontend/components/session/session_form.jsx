@@ -171,19 +171,19 @@ class SessionForm extends React.Component {
             .then(() => this.props.history.push("/channels/@me"));
     }
 
-    renderErrors() {
-        if (this.props.errors.length > 0) {
-            return (
-                <ul className="errors-list">
-                    {this.props.errors.map((error, i) => (
-                        <li key={`error-${i}`}>
-                            {error}
-                        </li>
-                    ))}
-                </ul>
-            );
-        }
-    }
+    // renderErrors() {
+    //     if (this.props.errors.length > 0) {
+    //         return (
+    //             <ul className="errors-list">
+    //                 {this.props.errors.map((error, i) => (
+    //                     <li key={`error-${i}`}>
+    //                         {error}
+    //                     </li>
+    //                 ))}
+    //             </ul>
+    //         );
+    //     }
+    // }
 
     usernameInput() {
         return(
@@ -256,7 +256,7 @@ class SessionForm extends React.Component {
                     <div>
                         <Link to='/'>
                             <div className='session-logo'>
-                                <img src={window.logosvg} className='logo-img' alt="logo" />
+                                <img src={window.logo} className='session-logo-img' alt="logo" />
                             </div>
                         </Link>
                     </div>
@@ -266,11 +266,9 @@ class SessionForm extends React.Component {
 
                     <form onSubmit={this.handleSubmit}>
 
-                    <div className='form-header'>
-                        {this.headerMessage()}
-                    </div>
-                    
-                        {/* {this.renderErrors()} */}
+                        <div className='form-header'>
+                            {this.headerMessage()}
+                        </div>
 
                         {this.emailLabel()}
                         <input type="email"
@@ -289,7 +287,7 @@ class SessionForm extends React.Component {
                                 onChange={this.update('password')}
                                 className=
                                     { (this.state.passwordErrors === false) ? "session-input" : "session-input error-input" }
-                         />
+                            />
                         <button type="submit" className="form-button blue">
                             {
                                 (this.props.formType === 'login') ?

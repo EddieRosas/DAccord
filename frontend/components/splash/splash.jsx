@@ -6,7 +6,6 @@ const Splash = (props) => {
 
     const demoLogin = () => {
         // e.preventDefault()
-        console.log("hi")
         const demoUser = {
             email: "iamnotarealperson@hotmail.com",
             password: "password"
@@ -21,11 +20,11 @@ const Splash = (props) => {
             <div className='splash-body'>
                 <header className='splash-header'>
                     <div className='splash-logo'>
-                        <img src={window.logo} className="splash-logo-img" alt="logo"/>
+                        <img src={window.logo} className="splash-logo-image" alt="logo"/>
                     </div>
-                    <div className="header-right">
-                        <Link to='/login'><button className='login-button'>Login</button></Link>
-                    </div>
+                    {/* <div className="header-right"> */}
+                        <Link className="header-right" to='/login'><button className='login-button'>Login</button></Link>
+                    {/* </div> */}
                 </header>
 
                 <h1>A new way to chat with your communities and friends.</h1>

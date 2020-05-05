@@ -14,11 +14,13 @@ export const fetchServer = serverId => (
     })
 )
 
-export const createServer = server => (
+export const createServer = formData => (
     $.ajax({
         method: 'POST',
         url: '/api/servers',
-        data: { server }
+        data: formData,
+        contentType: false,
+        processData: false
     })
 )
 

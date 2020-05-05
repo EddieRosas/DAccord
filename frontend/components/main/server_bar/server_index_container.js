@@ -1,20 +1,21 @@
 import { connect } from 'react-redux';
 import ServerIndex from './server_index';
 
-import { fetchServers, createServer } from '../../actions/server_actions';
+import { fetchServers, createServer } from '../../../actions/server_actions';
+import { openModal } from '../../../actions/modal_actions'
 
 const mapStateToProps = state => {
     return(
         {
             servers: Object.values(state.entities.servers),
-            string: "hi"
         }
     )
 }
 
 const mapDispatchToProps = dispatch => ({
     fetchServers: () => dispatch(fetchServers()),
-    createServers: server => dispatch(createServer(server))
+    createServers: server => dispatch(createServer(server)),
+    openModal: () => dispatch(openModal('add/join'))
 });
 
 export default connect(
