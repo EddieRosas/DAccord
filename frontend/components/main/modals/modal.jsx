@@ -3,7 +3,10 @@ import { Route } from 'react-router-dom';
 
 import AddOrJoinServerContainer from './add_or_join_server_container';
 import CreateServerContainer from './create_server_container';
-// import JoinServerContainer from './join_server_container';
+import JoinServerContainer from './join_server_container';
+import DeleteServerContainer from './delete_server_container';
+import LeaveServerContainer from './leave_server_container';
+import CreateChannelContainer from './create_channel_container';
 
 
 const Modal = ({ modal, closeModal }) => {
@@ -26,15 +29,43 @@ const Modal = ({ modal, closeModal }) => {
                 </div>
             )
             break;
-        // case 'join':
-        //     component = (
-        //         <div className="modal-child" onMouseDown={e => e.stopPropagation()}>
-        //             <JoinServerContainer />;
-        //         </div>
-        //     )     
+        case 'join':
+            component = (
+                <div className="modal-child" onMouseDown={e => e.stopPropagation()}>
+                    <JoinServerContainer />;
+                </div>
+            )
+            break;
+        case 'editServer':
+            component = (
+                <div className="modal-child" onMouseDown={e => e.stopPropagation()}>
+                    <Route path="/channels/:serverId" component={EditServerContainer} />;
+                </div>
+            )
+            break;
+        case 'deleteServer':
+            component = (
+                <div className="modal-child-channel" onMouseDown={e => e.stopPropagation()}>
+                    <Route path="/channels/:serverId/" component={DeleteServerContainer} />
+                </div>
+            )
+            break;
+        case 'leaveServer':
+            component = (
+                <div className="modal-child-channel" onMouseDown={e => e.stopPropagation()}>
+                    <Route path="/channels/:serverId/" component={LeaveServerContainer} />
+                </div>
+            )
+            break;
+        case 'createChannel':
+            component = (
+                <div className="modal-child-channel" onMouseDown={e => e.stopPropagation()}>
+                    <Route path="/channels/:serverId/" component={CreateChannelContainer} />
+                </div>
+            )
+            break;
         default:
-            return null;
-    }
+            return null;}
     return (
         <div className="modal-background" onMouseDown={closeModal}>
             {component}

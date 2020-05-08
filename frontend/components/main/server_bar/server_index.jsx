@@ -18,47 +18,51 @@ class ServerIndex extends React.Component {
         this.props.openModal();
     }
 
-    nameAbrv (serverName) {
-        let chars = serverName.split();
-        let newName = chars[0]
-        let nextChar = Math.floor(Math.random() * chars.slice(1))
-        for (let i = 0; i < 4; i++) {
-            newName += nextChar;
-        }
-
-        return newName;
-    }
-
-    serverIcon (server) {
-        if (server.imageUrl) {
-            return (
-                <img className="server-list-item" src={server.imageUrl} alt="" />
-            )
-        } else {
-
-            return (
-                <div className="server-list-item"></div> 
-            )
-        }
-    }
-
     render () {
+
+        function nameAbrv(server) {
+            let newName = "";
+            if (server.name !== undefined) {
+                let words = server.name.split(" ")
+                words.forEach((word) => {
+                    newName += word[0];
+                })
+            }
+            return newName;
+        }
+
         return (
             <div className="server-list" >
-                <Link className="server-list-item at-me" to="/channels/@me">
-                    <img src={window.atMe} alt="@me-link-icon"/>
-                </Link>
+                <div className="server-button at-me">
+                    <Link to="/channels/@me">
+                        <img src={window.atMe} alt="@me-link-icon"/>
+                    </Link>
+                    <div className="server-button-label">Home</div>
+                </div>
+                <div className="separator"></div>
                 <ul>
-                    <div className="separator"></div>
                     {this.props.servers.map(server => (
-                        // <Link to={`channels/${server.id}`}>{server.name}</Link>
-                        <li>
-                            <img className="server-list-item" src={server.imageUrl} alt="" />
-                            <p className="server-list-item-label">{server.name}</p>
+                        <li key={server.id}>
+                            { server.imageUrl
+                                ? 
+                                <div className="server-button">
+                                    <Link to={`/channels/${server.id}/`}>
+                                        <img className="server-button-img" src={server.imageUrl}></img>
+                                        <div className="server-button-label">{server.name}</div>
+                                    </Link>
+                                </div>
+                                :
+                                <div className="server-button">
+                                    <Link to={`/channels/${server.id}/`}>
+                                        <p className="server-button text" spellCheck="false">{nameAbrv(server)}</p>
+                                        <div className="server-button-label" spellCheck="false">{server.name}</div>
+                                    </Link>
+                                </div>
 
+                            }
                         </li>
                     ))} 
-                    <div className="server-list-item add-or-join-server" >
+                    <div className="server-button add-or-join-server" >
                         <a onClick={this.handleAddOrJoinClick}>
                             <svg
                                 aria-hidden="false" 
@@ -69,8 +73,8 @@ class ServerIndex extends React.Component {
                                     </path>
                             </svg>
                         </a>
+                        <div className="server-button-label">Add Server</div>
                     </div>
-                    <div className="add-or-join-hover-label"><p>Add Server</p></div>
                 </ul>
                 
             </div>

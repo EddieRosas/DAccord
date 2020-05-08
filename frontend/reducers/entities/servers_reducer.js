@@ -4,18 +4,21 @@ import {
     DELETE_SERVER
 } from '../../actions/server_actions';
 
+import { LOGOUT_CURRENT_USER } from '../../actions/session_actions';
+
 const serversReducer = (state = {}, action) => {
     Object.freeze(state);
     switch (action.type) {
         case RECEIVE_SERVERS:
-            return {...state, ...action.servers}
+            return Object.assign({}, state, action.servers)
         case RECEIVE_SERVER:
-            const newServer = { [action.server.id]: action.server };
-            return Object.assign({}, state, newServer)
+            return action.payload.server
         case DELETE_SERVER:
             const nextState = Object.assign({}, state);
             delete nextState[action.serverId]
             return nextState;
+        case LOGOUT_CURRENT_USER:
+            return {};
         default:
             return state;
     }

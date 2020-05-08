@@ -28,8 +28,8 @@ class CreateServer extends React.Component {
         if (this.state.imageFile) {
             formData.append('server[image]', this.state.imageFile);
         }
-        this.props.createServer(formData)
         this.props.closeModal();
+        this.props.createServer(formData)
     }
 
     handleClick(modal) {
@@ -76,7 +76,9 @@ class CreateServer extends React.Component {
                 </div>
                 <div id="create-server-buttons-bottom">
                     <div id="create-server-buttons-container">
-                        <button onClick={this.handleClick("add/join")} id="create-server-back-button">Back</button>
+                        <button onClick={this.handleClick("add/join")} id="create-server-back-button">
+                            <img src={window.backToPrevIcon} id="join-server-back-icon" /> BACK
+                        </button>
                         <button onClick={this.handleSubmit} id="create-server-create-button">Create Server</button>
                     </div>
                 </div>

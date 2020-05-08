@@ -22,7 +22,7 @@ fake_user = User.create(
     password: "password"
 )
 
-first_server = Server.create(name: "bootycheeks town", owner_id: demo_user.id)
+first_server = Server.create(name: "cheeky cheese", owner_id: demo_user.id)
 second_server = Server.create(name: "HAIII", owner_id: demo_user.id)
 
 membership1 = ServerMembership.create(user_id: demo_user.id, server_id: first_server.id)

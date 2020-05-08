@@ -1,0 +1,95 @@
+.server-button {
+    display: flex;
+    flex-direction: column;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-bottom: 8px;
+    align-items: center;
+    background-color: #36393f;
+    justify-content: center;
+}
+
+.server-button-img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+
+.server-button-img:hover {
+    animation: change-border-radius 0.2s linear 0s 1 forwards;
+}
+
+.server-button:hover p {
+    background-color: #7289DA;
+}
+
+.server-button:hover {
+    animation: change-border-radius 0.2s linear 0s 1 forwards;
+    background-color: #7289DA;
+}
+
+.server-button.text {
+    color: white;
+    overflow: hidden;
+}
+
+
+.server-button.at-me {
+    background-color: #36393f;
+    -webkit-transition: background-color 0.2s;
+}
+
+.server-button.at-me img {
+    width: 85px;
+    height: 85px;
+}
+
+.server-button.at-me:hover {
+    background-color: #7289DA;
+}
+
+.server-button-label {
+    position: absolute;
+    width: fit-content;
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    border-radius: 3px;
+    height: 15px;
+    padding: 2px;
+    left: 75px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 16px;
+    display: none;
+}
+
+.server-button:hover div{
+  display: block;
+}
+
+@keyframes change-border-radius {
+    from { border-radius: 50%; }
+    to { border-radius: 35%; }
+}
+
+.separator {
+    width: 32px;
+    min-height: 2px;
+    margin-bottom: 8px;
+    background-color: darkgrey
+}
+
+.server-button.add-or-join-server {
+    background-color: #36393f;
+    fill: green;
+    cursor: pointer;
+    -webkit-transition: background-color 0.2s;
+}
+
+.server-button.add-or-join-server:hover {
+    fill: #fff;
+    background-color: #43b581;
+}

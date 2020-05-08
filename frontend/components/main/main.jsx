@@ -1,26 +1,35 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 
+import ServerDisplayContainer from './channel_bar/server_display_container'
 import ServerIndexContainer from './server_bar/server_index_container';
+import ChannelsIndexContainer from './channel_bar/channels_index_container';
+import UsersIndexContainer from './users_bar/users_index_container';
 import ModalContainer from '../main/modals/modal_container'
+import MessagesDisplay from './messages/messages_display';
 
 
-class ChannelsIndex extends React.Component {
+class Main extends React.Component {
+
+
     render() {
         return (
             <div className="main">
                 <ServerIndexContainer />
                 <ModalContainer />
-                <div className="out-of-the-way">
-                    <footer >
-                        <span>
-                            <img src={this.props.currentUser.imageUrl} alt='' />
-                            <button onClick={() => this.props.logout(this.props.currentUser)}>Log Out</button>
-                        </span>
-                    </footer>
+                <div id="content-outer-container">
+                    <div id="content-header-container">
+                        <Route path="/channels/:serverId" component={ServerDisplayContainer} />
+                    </div>
+                    <div id="content-body-container">
+                        <ChannelsIndexContainer />
+                        <MessagesDisplay />
+                        <Route path="/channels/:serverId/" component={UsersIndexContainer} />
+                    </div>
                 </div>
             </div>
         )
     }
 }
 
-export default ChannelsIndex;
+export default Main;

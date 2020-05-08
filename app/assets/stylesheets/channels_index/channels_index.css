@@ -1,0 +1,132 @@
+#server-name-button {
+  width: 240px;
+  border-bottom: 1px solid rgba(0,0,0,0.5);
+  height: 49px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #2F3136;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+}
+
+#server-name-button:hover {
+  animation: server-name-bg-change 0.2s ease-out 0s 1 forwards;
+}
+
+@keyframes server-name-bg-change {
+  from { background-color: #2F3136; }
+  to { background-color: #36393f; }
+}
+
+#server-name-button span {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+#server-name-dropdown-icon {
+  margin-right: 15px;
+}
+
+#channels-index-footer-bar {
+  display: flex;
+  align-items: center;
+  height: 52px;
+  background-color: #292b2f;
+  bottom: 100%;
+  /* right: 20%; */
+}
+
+#channels-index-footer-bar-content {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#channels-index-footer-bar-username {
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 18px;
+}
+
+#user-name-icon-button {
+  height: 32px;
+  background-color: inherit;
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  padding: 0px;
+}
+
+#user-name-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+#user-name-box {
+  margin-left: 5px;
+}
+
+#user-logout-button-button {
+  width: 25px;
+  height: 25px;
+  margin-left: 70px;
+  background-color: inherit;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  border-radius: 0px;
+  padding: 0px;
+}
+
+#user-logout-button-image {
+  width: 25px;
+  height: 25px;
+  fill: rgb(129, 131, 138);
+}
+
+#user-logout-button-button:hover #user-logout-button-image{
+  fill: rgb(145, 149, 163);
+}
+
+#user-logout-button-button:hover .tooltip {
+  display: block;
+  margin-top: -50px;
+}
+
+#user-name-avatar-button:hover .tooltip {
+  display: block;
+  margin-top: -50px;
+  margin-left: -25px;
+}
+
+.tooltip {
+  width: 80px;
+  height: 40px;
+  position: absolute;
+  background-color: rgba(0,0,0,0.7);
+  color: white;
+  text-align: center;
+  line-height: 40px;
+  font-size: 10px;
+  font-weight: bold;
+  border-radius: 5px;
+  margin-left: -34px;
+  display: none;
+  animation: tooltip-fade 0.15s ease-out 0s 1 forwards;
+  z-index: 100;
+  }
+
+@keyframes tooltip-fade {
+  from { background-color: rgba(0,0,0,0.0); color: rgba(255,255,255,0) }
+  to { background-color: rgba(0,0,0,0.7); color: rgba(255, 255, 255,1) }
+}

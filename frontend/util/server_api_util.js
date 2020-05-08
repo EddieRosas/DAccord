@@ -7,12 +7,15 @@ export const fetchServers = () => {
     )
 }
 
-export const fetchServer = serverId => (
+export const fetchServer = serverId => {
+ 
+    return(
     $.ajax({
         method: 'GET',
-        url: `/api/servers/${serverId}`,
-    })
-)
+        url: `/api/servers/${serverId} `,
+    }))
+
+}
 
 export const createServer = formData => (
     $.ajax({
@@ -24,25 +27,30 @@ export const createServer = formData => (
     })
 )
 
-export const deleteServer = serverId => (
+export const deleteServer = serverId => {
+    return (
     $.ajax({
         method: 'DELETE',
         url: `/api/servers/${serverId}`,
     })
-)
+    )
+}
 
-export const joinServer = serverId => (
+export const joinServer = server_name => (
     $.ajax({
         method: 'POST',
         url: `/api/server_memberships`,
-        data: { serverId }
+        data: { name: server_name }
     })
 )
 
-export const leaveServer = (userId, serverId) => (
+
+export const leaveServer = (userId, serverId) => {
+    debugger
+    return(
     $.ajax({
         method: 'DELETE',
         url: `/api/server_memberships`,
         data: { user_id: userId, server_id: serverId}
-    })
-)
+    }))
+}

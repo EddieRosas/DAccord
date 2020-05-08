@@ -1,6 +1,7 @@
 class Api::ServersController < ApplicationController 
     def index 
         @servers = current_user.servers
+
         render :index
     end
 
@@ -10,6 +11,7 @@ class Api::ServersController < ApplicationController
 
         if @server.save
             ServerMembership.create(user_id: @server.owner_id, server_id: @server.id)
+            
             render :show
         else
             render json: @servers.errors.full_messages, status: 422
@@ -26,14 +28,14 @@ class Api::ServersController < ApplicationController
     def destroy
         @server = Server.find_by(id: params[:id])
 
-        if @server.owner_id == current_user.id
+        if @server.owner.id == current_user.id
             if @server.destroy
                 render json: @server.id
             else
                 render json: @server.errors.full_messages, status: 422
             end
         else
-            render json: ["Unauthoraized Action: Only Server Owner can delete the server!"], status: 422
+            render json: ["Unauthorized Action: Only Server Owner can delete the server!"], status: 422
         end
     end
 

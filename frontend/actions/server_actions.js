@@ -12,15 +12,18 @@ export const receiveServers = servers => {
     })
 }
 
-export const receiveServer = server => ({
+export const receiveServer = payload => ({
     type: RECEIVE_SERVER,
-    server
+    payload
 });
 
-export const deleteServer = serverId => ({
+export const deleteServer = serverId => {
+    
+    return(
+    {
     type: DELETE_SERVER,
     serverId
-});
+})};
 
 export const receiveErrors = errors => ({
     type: RECEIVE_SERVER_ERRORS,
@@ -42,7 +45,7 @@ export const fetchServers = () => dispatch => {
 export const fetchServer = serverId => dispatch => (
     ServerApiUtil.fetchServer(serverId)
         .then(
-            server => dispatch(receiveServers(server)),
+            payload => dispatch(receiveServer(payload)),
             errors => dispatch(receiveErrors(errors))
         )
 );
@@ -58,23 +61,23 @@ export const createServer = server => dispatch => (
 export const destroyServer = serverId => dispatch => (
     ServerApiUtil.deleteServer(serverId)
         .then(
-            () => dispatch(deleteServer()),
+            (serverId) => dispatch(deleteServer(serverId)),
             errors => dispatch(receiveErrors(errors))
         )
 );
 
-export const joinServer = serverId => dispatch => (
-    ServerApiUtil.joinServer(serverId)
+export const joinServer = (userId, serverId) => dispatch => (
+    ServerApiUtil.joinServer(userId, serverId)
         .then(
             server => dispatch(receiveServer(server)),
             errors => dispatch(receiveErrors(errors))
         )
 );
 
-export const leaveServer = serverId => dispatch => (
-    ServerApiUtil.leaveServer(userId, serverId)
+export const leaveServer = (serverId, userId) => dispatch => (
+    ServerApiUtil.leaveServer(serverId, userId)
         .then(
-            () => dispatch(deleteServer()),
+            (serverId) => dispatch(deleteServer(serverId)),
             errors => dispatch(receiveErrors(errors))
         )
 );
