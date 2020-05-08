@@ -13,33 +13,18 @@ class ChannelList extends React.Component {
         this.props.openModal('addChannel');
     }
 
-    componentDidMount() {
-        this.props.fetchChannels(this.props.match.params.serverId)
-    }
+    componentWillMount() {
 
-    componentDidUpdate(prevState) {
-        const { serverId: oldServerId } = prevState;
-        const { serverId } = this.props;
-
-        if (oldServerId !== serverId) {
-            this.changeServer();
+        if (this.props.match.params.channelId) {
+            this.props.fetchChannels(this.props.match.params.serverId)
         }
     }
 
-    changeServer() {
-        const {
-            fetchServer,
-            serverId,
-            history,
-        } = this.props;
+    componentDidUpdate(prevProps) {
 
-        fetchServer(serverId)
-            .then((res) => {
-                const { payload: { channels } } = res;
-                const channelIds = Object.keys(channels);
-                const firstChannelId = Math.min(...channelIds);
-                history.push(`/channels/${serverId}/${firstChannelId}`);
-            });
+        if ((prevProps.location.pathname) !== (this.props.location.pathname)) {
+            this.props.fetchChannels(this.props.match.params.serverId)
+        }
     }
 
     render() {

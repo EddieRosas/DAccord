@@ -151,8 +151,8 @@ var fetchChannel = function fetchChannel(channelId) {
 };
 var fetchChannels = function fetchChannels(serverId) {
   return function (dispatch) {
-    return _util_channel_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchChannels"](serverId).then(function () {
-      return dispatch(receiveChannels());
+    return _util_channel_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchChannels"](serverId).then(function (channels) {
+      return dispatch(receiveChannels(channels));
     }, function (error) {
       return dispatch(receiveErrors(error));
     });
@@ -463,18 +463,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _channel_list_item_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./channel_list_item_container */ "./frontend/components/main/channel_bar/channel_list_item_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -520,33 +508,18 @@ var ChannelList = /*#__PURE__*/function (_React$Component) {
       this.props.openModal('addChannel');
     }
   }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.fetchChannels(this.props.match.params.serverId);
-    }
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevState) {
-      var oldServerId = prevState.serverId;
-      var serverId = this.props.serverId;
-
-      if (oldServerId !== serverId) {
-        this.changeServer();
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      if (this.props.match.params.channelId) {
+        this.props.fetchChannels(this.props.match.params.serverId);
       }
     }
   }, {
-    key: "changeServer",
-    value: function changeServer() {
-      var _this$props = this.props,
-          fetchServer = _this$props.fetchServer,
-          serverId = _this$props.serverId,
-          history = _this$props.history;
-      fetchServer(serverId).then(function (res) {
-        var channels = res.payload.channels;
-        var channelIds = Object.keys(channels);
-        var firstChannelId = Math.min.apply(Math, _toConsumableArray(channelIds));
-        history.push("/channels/".concat(serverId, "/").concat(firstChannelId));
-      });
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (prevProps.location.pathname !== this.props.location.pathname) {
+        this.props.fetchChannels(this.props.match.params.serverId);
+      }
     }
   }, {
     key: "render",
@@ -617,7 +590,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
-    channels: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["serverChannelsSelector"])(state, ownProps.match.params.serverId),
+    channels: Object.values(state.entities.channels),
     servers: state.entities.servers,
     currentUserId: state.session.currentUserId
   };
@@ -697,7 +670,7 @@ var ChannelListItem = /*#__PURE__*/function (_React$Component) {
   _createClass(ChannelListItem, [{
     key: "handleClickEditModal",
     value: function handleClickEditModal(type, id) {
-      this.props.setEditChannelId(id);
+      // this.props.setEditChannelId(id);
       this.props.openModal(type);
     }
   }, {
@@ -731,15 +704,15 @@ var ChannelListItem = /*#__PURE__*/function (_React$Component) {
         fillRule: "evenodd",
         clipRule: "evenodd",
         d: "M14 7V9C14 9 12.5867 9 12.5733 9.00667C12.42 9.58667 12.1733 10.1267 11.84 10.6067L12.74 11.5067L11.4933 12.7533L10.5933 11.8533C10.1133 12.1867 9.57334 12.44 8.99334 12.5867V14H6.99334V12.58C6.41334 12.4333 5.87334 12.18 5.39334 11.8467L4.49333 12.7467L3.24667 11.5L4.14667 10.6C3.81333 10.1267 3.56 9.58 3.41333 9H2V7H3.41333C3.56 6.42 3.81333 5.88 4.14667 5.4L3.24667 4.5L4.5 3.24667L5.4 4.14667C5.87334 3.81333 6.42 3.56 7 3.41333V2H9V3.41333C9.58 3.56667 10.12 3.81333 10.6 4.14667L11.5067 3.25333L12.7533 4.5L11.8533 5.4C12.1867 5.87334 12.44 6.42 12.5867 7H14ZM8 10C9.10457 10 10 9.10457 10 8C10 6.89543 9.10457 6 8 6C6.89543 6 6 6.89543 6 8C6 9.10457 6.89543 10 8 10Z"
-      }))));
-      var displayActionButtons = this.props.isOwner ? actionButtons : null;
+      })))); // const displayActionButtons = this.props.isOwner ? actionButtons : null
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "channel-list-item-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "channel-list-link-container",
         onClick: this.handleClickChannel
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
-        to: "/channels/".concat(channel.serverId, "/").concat(channel.id),
+        to: "/channels/".concat(channel.server_id, "/").concat(channel.id),
         activeClassName: "channel-list-item-active"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "channel-list-item-label-container"
@@ -755,7 +728,7 @@ var ChannelListItem = /*#__PURE__*/function (_React$Component) {
         d: "M5.88657 21C5.57547 21 5.3399 20.7189 5.39427 20.4126L6.00001 17H2.59511C2.28449 17 2.04905 16.7198 2.10259 16.4138L2.27759 15.4138C2.31946 15.1746 2.52722 15 2.77011 15H6.35001L7.41001 9H4.00511C3.69449 9 3.45905 8.71977 3.51259 8.41381L3.68759 7.41381C3.72946 7.17456 3.93722 7 4.18011 7H7.76001L8.39677 3.41262C8.43914 3.17391 8.64664 3 8.88907 3H9.87344C10.1845 3 10.4201 3.28107 10.3657 3.58738L9.76001 7H15.76L16.3968 3.41262C16.4391 3.17391 16.6466 3 16.8891 3H17.8734C18.1845 3 18.4201 3.28107 18.3657 3.58738L17.76 7H21.1649C21.4755 7 21.711 7.28023 21.6574 7.58619L21.4824 8.58619C21.4406 8.82544 21.2328 9 20.9899 9H17.41L16.35 15H19.7549C20.0655 15 20.301 15.2802 20.2474 15.5862L20.0724 16.5862C20.0306 16.8254 19.8228 17 19.5799 17H16L15.3632 20.5874C15.3209 20.8261 15.1134 21 14.8709 21H13.8866C13.5755 21 13.3399 20.7189 13.3943 20.4126L14 17H8.00001L7.36325 20.5874C7.32088 20.8261 7.11337 21 6.87094 21H5.88657ZM9.41045 9L8.35045 15H14.3504L15.4104 9H9.41045Z"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "channel-list-item-name"
-      }, channel.name))), displayActionButtons));
+      }, channel.name)))));
     }
   }]);
 
@@ -1686,10 +1659,10 @@ var MessagesDisplay = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "message-box-inner"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-        path: "/channels/:serverId",
+        path: "/channels/:serverId/:channelId",
         component: _message_list_container__WEBPACK_IMPORTED_MODULE_2__["default"]
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-        path: "/channels/:serverId",
+        path: "/channels/:serverId/:channelId",
         component: _message_input_container__WEBPACK_IMPORTED_MODULE_3__["default"]
       })));
     }
@@ -2949,7 +2922,7 @@ var ServerIndex = /*#__PURE__*/function (_React$Component) {
         }, server.imageUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "server-button"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "/channels/".concat(server.id, "/")
+          to: "/channels/".concat(server.id, "/").concat(server.channel_ids[0])
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           className: "server-button-img",
           src: server.imageUrl
@@ -2958,7 +2931,7 @@ var ServerIndex = /*#__PURE__*/function (_React$Component) {
         }, server.name))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "server-button"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "/channels/".concat(server.id, "/")
+          to: "/channels/".concat(server.id, "/").concat(server.channel_ids[0])
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
           className: "server-button text",
           spellCheck: "false"
@@ -3925,10 +3898,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_server_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/server_actions */ "./frontend/actions/server_actions.js");
-/* harmony import */ var _actions_channel_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/channel_actions */ "./frontend/actions/channel_actions.js");
+/* harmony import */ var _actions_channel_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/channel_actions */ "./frontend/actions/channel_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -3938,17 +3909,13 @@ var channelsReducer = function channelsReducer() {
   Object.freeze(state);
 
   switch (action.type) {
-    case _actions_channel_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_CHANNEL"]:
+    case _actions_channel_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CHANNEL"]:
       return Object.assign({}, state, _defineProperty({}, action.channel.id, action.channel));
 
-    case _actions_channel_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_CHANNELS"]:
-      return Object.assign({}, state, action.channels);
+    case _actions_channel_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CHANNELS"]:
+      return action.channels;
 
-    case _actions_server_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_SERVER"]:
-      var channels = action.payload.channels;
-      return Object.assign({}, state, channels);
-
-    case _actions_channel_actions__WEBPACK_IMPORTED_MODULE_1__["REMOVE_CHANNEL"]:
+    case _actions_channel_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_CHANNEL"]:
       var new_channels = Object.assign({}, state);
       delete new_channels[action.channel.id];
       return new_channels;
@@ -4358,7 +4325,10 @@ var fetchChannel = function fetchChannel(id) {
 var fetchChannels = function fetchChannels(id) {
   return $.ajax({
     method: "GET",
-    url: 'api/channels/'
+    url: 'api/channels/',
+    data: {
+      id: id
+    }
   });
 };
 var createChannel = function createChannel(channel) {

@@ -15,8 +15,8 @@ class MessagesDisplay extends React.Component {
         return (
             <section id="message-box">
                 <div id="message-box-inner">
-                    <Route path="/channels/:serverId" component={MessageListContainer} />
-                    <Route path="/channels/:serverId" component={MessageInputContainer} />
+                    <Route path="/channels/:serverId/:channelId" component={MessageListContainer} />
+                    <Route path="/channels/:serverId/:channelId" component={MessageInputContainer} />
                 </div>
             </section>
         )

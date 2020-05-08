@@ -35,7 +35,7 @@ export const fetchChannel = (channelId) => dispatch => (
 
 export const fetchChannels = (serverId) => dispatch => (
     APIUtil.fetchChannels(serverId).then(
-        () => dispatch(receiveChannels()),
+        (channels) => dispatch(receiveChannels(channels)),
         (error) => dispatch(receiveErrors(error))
     )
 );
