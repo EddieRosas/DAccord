@@ -4168,7 +4168,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectMembersByServer", function() { return selectMembersByServer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "serverChannelsSelector", function() { return serverChannelsSelector; });
 var selectMembersByServer = function selectMembersByServer(state, serverId) {
-  debugger;
   if (serverId === "@me") return [];
   if (!serverId) return [];
   if (!state.entities.servers[serverId]) return [];
@@ -4490,7 +4489,6 @@ var joinServer = function joinServer(server_name) {
   });
 };
 var leaveServer = function leaveServer(userId, serverId) {
-  debugger;
   return $.ajax({
     method: 'DELETE',
     url: "/api/server_memberships",

@@ -1,5 +1,4 @@
 export const selectMembersByServer = (state, serverId) => {
-    debugger
     if (serverId === "@me") return [];
     if (!serverId) return [];
     if (!state.entities.servers[serverId]) return [];

@@ -46,7 +46,6 @@ export const joinServer = server_name => (
 
 
 export const leaveServer = (userId, serverId) => {
-    debugger
     return(
     $.ajax({
         method: 'DELETE',
