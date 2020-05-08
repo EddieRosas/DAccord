@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy]
     resources :servers, only: [:index, :create, :show, :destroy, :update]
     resources :server_memberships, only: [:create]
-    resources :channels, only: [:show, :create, :update, :destroy]
+    resources :channels, only: [:index, :show, :create, :update, :destroy]
 
 
     delete 'server_memberships', to: 'server_memberships#leave'

@@ -14,7 +14,7 @@ class ChannelList extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchServer(this.props.match.params.serverId)
+        this.props.fetchChannels(this.props.match.params.serverId)
     }
 
     componentDidUpdate(prevState) {
