@@ -1,24 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Link D'Accord
 
-Things you may want to cover:
+D'accord is a clone of the widely-used chatting app, Discord! The app allows users to create their own accounts. When logged into those accounts, users have the ability to create their own servers and create channels within those servers. Users also have the ability to join other servers.
 
-* Ruby version
+## Technologies currently used are as follows! 
+    * Ruby on Rails and Postgres
+        * Backend server and database
+    * Action Cable 
+        * Used through Rails to integrate
+    * Active Storage
+        * Attaches image urls to users and servers, linking them with Amazon Web Services storage
+    * React-Redux
+        * Frontend utilization with React-Router to produce a single page application
 
-* System dependencies
+## Future Directions of D'Accord
 
-* Configuration
+    * Implementation of Action Cable 
+        * Presence of working chat rooms within channels as well as direct messages between users
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+    * Abilities to edit server images, user images, channel names, and for a server's owner to remove and block other user's from their server
