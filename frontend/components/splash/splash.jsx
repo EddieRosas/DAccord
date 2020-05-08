@@ -22,9 +22,7 @@ const Splash = (props) => {
                     <div className='splash-logo'>
                         <img src={window.logo} className="splash-logo-image" alt="logo"/>
                     </div>
-                    {/* <div className="header-right"> */}
-                        <Link className="header-right" to='/login'><button className='login-button'>Login</button></Link>
-                    {/* </div> */}
+                    <Link className="header-right" to='/login'><button className='login-button'>Login</button></Link>
                 </header>
 
                 <h1>A new way to chat with your communities and friends.</h1>
