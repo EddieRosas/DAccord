@@ -6,7 +6,7 @@ import ServerIndexContainer from './server_bar/server_index_container';
 import ChannelsIndexContainer from './channel_bar/channels_index_container';
 import UsersIndexContainer from './users_bar/users_index_container';
 import ModalContainer from '../main/modals/modal_container'
-import MessagesDisplay from './messages/messages_display';
+import MessagesDisplay from '../main/messages/messages_display';
 
 
 class Main extends React.Component {

@@ -8,15 +8,28 @@ class UsersIndex extends React.Component {
         super(props);
     }
 
+    componentWillMount() {
+        if ((this.props.match.params.serverId) && (this.props.match.params.serverId !== "@me")) {
+            this.props.fetchUsers(this.props.match.params.serverId)
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if ((prevProps.location.pathname) !== (this.props.location.pathname) && this.props.location.pathname !== "@me") {
+            this.props.fetchUsers(this.props.match.params.serverId)
+        }
+    }
+
     render() {
-        
-        // const list = this.props.members.map(member => <UsersIndexListItemContainer key={member.id} user={member} />);
+        if (Object.values(this.props.servers).length === 0)
+            return null
+        const list = this.props.users.map(user => <UsersIndexListItemContainer key={user.id} user={user} />);
 
         return (
             <section id="users-index">
                 <div id="users-index-content">
                     <div id="users-index-user-header">USERS</div>
-                    <div id="users-index-user-list">..of a server will be displayed here</div>
+                    <div id="users-index-user-list">{list}</div>
                 </div>
             </section>
         )

@@ -5,10 +5,11 @@ export const fetchUser = userId => (
     })
 );
 
-export const fetchUsers = serverId => (
+export const fetchUsers = id => (
     $.ajax({
-        url: `api/servers/${serverId}`,
+        url: `api/users/`,
         method: 'GET',
+        data: { id }
     })
 );
 

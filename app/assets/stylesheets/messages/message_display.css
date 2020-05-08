@@ -1,4 +1,4 @@
-#message-box-container {
+#message-display-container {
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -8,7 +8,7 @@
   bottom: 100px;
 }
 
-#message-box-inner-container {
+#message-display-inner-container {
   display: flex;
   flex-direction: column;
   position: absolute;

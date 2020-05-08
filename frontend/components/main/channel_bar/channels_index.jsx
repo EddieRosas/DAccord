@@ -12,7 +12,7 @@ class ChannelsIndex extends React.Component {
     render() {
         return (
             <div id="channels-index-container">
-                <section id="channel-index">
+                <section id="channels-index">
                     <Route path="/channels/:serverId/:channelId" component={ChannelListContainer}/>
                 </section>
                 <ChannelsIndexFooterBarContainer />

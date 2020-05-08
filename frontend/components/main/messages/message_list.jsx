@@ -8,7 +8,7 @@ class MessageList extends React.Component {
 
     render() {
         return (
-            <div id="message-box-container">
+            <div id="message-display-container">
                 <div id="message-box-inner-container">
                 </div>
             </div>
