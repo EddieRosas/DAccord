@@ -9,7 +9,8 @@ Rails.application.routes.draw do
     resources :servers, only: [:index, :create, :show, :destroy, :update]
     resources :server_memberships, only: [:create]
     resources :channels, only: [:index, :show, :create, :update, :destroy]
-
+    resources :channel_messages, only: [:index, :create, :destroy]
+    mount ActionCable.server => '/cable'
 
     delete 'server_memberships', to: 'server_memberships#leave'
   end

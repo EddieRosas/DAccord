@@ -1486,9 +1486,11 @@ var MessageInput = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      content: ''
+      content: '' // channelId: this.props.match.params.channelId
+
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1500,19 +1502,34 @@ var MessageInput = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      App.cable.subscriptions.subscriptions[1].speak({
+        message: this.state.content
+      });
+      this.setState({
+        content: ""
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "message-input-box-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        id: "message-input-box-form"
+        id: "message-input-box-form",
+        onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "message-input-box-input",
         type: "text",
         value: this.state.content,
         onChange: this.handleChange,
-        placeholder: "eventually type here",
+        placeholder: "pzl work",
         autoComplete: "off"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "submit",
+        id: "submit-message"
       })));
     }
   }]);
@@ -1536,6 +1553,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _message_input__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message_input */ "./frontend/components/main/messages/message_input.jsx");
 
+ // const mapStateToProps = (state, ownProps) => {
+//     debugger
+//     return(
+//         {
+//         currentUserId: state.session.currentUserId
+//         // channelId: ownProps.params.channelId
+//         }
+//     )
+// };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(null, null)(_message_input__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
@@ -1582,18 +1608,55 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(MessageList);
 
   function MessageList(props) {
+    var _this;
+
     _classCallCheck(this, MessageList);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.state = {
+      messages: []
+    };
+    _this.bottom = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+    return _this;
   }
 
   _createClass(MessageList, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      App.cable.subscriptions.create({
+        channel: "ServerChannel"
+      }, {
+        received: function received(data) {
+          _this2.setState({
+            messages: _this2.state.messages.concat(data.message)
+          });
+        },
+        speak: function speak(data) {
+          return this.perform("speak", data);
+        }
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var messageList = this.state.messages.map(function (message, idx) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: idx,
+          id: "new-message"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          id: "message-content-box"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          id: "sender-message"
+        }, message)));
+      });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "message-display-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "message-box-inner-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, messageList)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        ref: this.bottom
       }));
     }
   }]);
