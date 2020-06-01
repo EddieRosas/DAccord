@@ -7,24 +7,27 @@ import ChannelsIndexContainer from './channel_bar/channels_index_container';
 import UsersIndexContainer from './users_bar/users_index_container';
 import ModalContainer from '../main/modals/modal_container'
 import MessagesDisplay from '../main/messages/messages_display';
+import SocketConnectorContainer from "./socket_connector/socket_connector_container";
+
 
 
 class Main extends React.Component {
-
+    
 
     render() {
         return (
             <div className="main">
-                <ServerIndexContainer />
+                <SocketConnectorContainer />
                 <ModalContainer />
+                <ServerIndexContainer />
                 <div id="content-outer-container">
                     <div id="content-header-container">
-                        <Route path="/channels/:serverId" component={ServerDisplayContainer} />
+                        <Route path="/channels/:serverId/" component={ServerDisplayContainer} />
                     </div>
                     <div id="content-body-container">
                         <ChannelsIndexContainer />
-                        <MessagesDisplay />
-                        <Route path="/channels/:serverId/" component={UsersIndexContainer} />
+                        <Route path="/channels/:serverId" component={MessagesDisplay} />
+                        <Route path="/channels/:serverId" component={UsersIndexContainer} />
                     </div>
                 </div>
             </div>

@@ -1,6 +1,5 @@
-
+import { getChannelMessages } from "../../../actions/message_actions";
 import { connect } from 'react-redux';
-
 import ServerDisplay from './server_display';
 
 const mapStateToProps = (state, ownProps) => ({
@@ -8,4 +7,10 @@ const mapStateToProps = (state, ownProps) => ({
     currentUserId: state.session.currentUserId
 })
 
-export default connect(mapStateToProps, null)(ServerDisplay);
+const mapDispatchToProps = dispatch => {
+    return {
+      getChannelMessages: (channelId) => dispatch(getChannelMessages(channelId)),
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ServerDisplay);

@@ -52,5 +52,18 @@ class Api::ChannelsController < ApplicationController
   def channel_params
     params.require(:channel).permit(:name, :server_id)
   end
+
+   def broadcast(action, channel)
+        response = Hash.new
+        response[:action] = action
+        response[:payload] = Hash.new
+        response[:payload][:channels] = Hash.new
+        response[:payload][:channels][channel.id] = {
+            id: channel.id,
+            name: channel.name,
+            serverId: channel.server_id
+        }
+        ActionCable.server.broadcast("channel_messages_#{channel.id}", response)
+  end
   
 end

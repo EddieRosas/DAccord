@@ -1,0 +1,55 @@
+.message-first-container:hover, .message-other-container:hover {
+  background-color: rgba(4, 4, 4,0.07);
+}
+
+.message-other-container:hover .message-content-time {
+  visibility: visible;
+}
+
+.message-first-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 17px;
+  padding-top: 5px;
+  position: relative;
+}
+
+.message-first-body {
+  display: flex;
+  flex-direction: column;
+  margin-left: 21px;
+  width: 95%;
+}
+
+.message-header-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.message-user-image {
+  margin-left: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.message-first-content-text {
+  line-height: 28px;
+}
+
+.message-header-username {
+  font-weight: bold;
+}
+
+.message-other-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+}
+
+.message-content-text {
+  margin-left: 9px;
+  line-height: 28px;
+}

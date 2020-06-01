@@ -1,54 +1,40 @@
 import React from 'react';
+import MessageListItemContainer from './message_list_item_container';
 
 
 class MessageList extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            messages: []
-        }
-        this.bottom = React.createRef();
+  constructor(props) {
+    super(props);
+    this.bottom = React.createRef();
+  }
+
+  componentWillMount() {
+    this.props.getChannelMessages(this.props.location.pathname.slice(-1));
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.pathname !== this.props.location.pathname) {
+      this.props.getChannelMessages(this.props.location.pathname.slice(-1));
     }
+  }
 
-    componentDidMount() {
-        App.cable.subscriptions.create(
-            { channel: "ServerChannel" }, 
-            {
-                received: data => {
-                    this.setState({
-                        messages: this.state.messages.concat(data.message)
-                    });
-                },
-                speak: function (data) {
-                    return this.perform("speak", data)
-                }
-            }
-        );
-    }
+  render() {
+    debugger;
+    const messages = this.props.messages
+      ? this.props.messages.map((message) => (
+          <MessageListItemContainer key={message.id} message={message} />
+        ))
+      : null;
 
-    render() {
-
-        let messageList = this.state.messages.map((message, idx) => {
-            return (
-                <div key={idx} id="new-message">
-                    <div id="message-content-box">
-                        <p id="sender-message">{message}</p>
-                    </div>
-                </div>
-            );
-        });
-
-        return (
-            <div id="message-display-container">
-                <div id="message-box-inner-container">
-                    <div>
-                        {messageList}
-                    </div>
-                </div>
-                <div ref = { this.bottom } />
-            </div>
-        )
-    }
+    return (
+      <div id="message-display-container">
+        <div id="message-box-inner-container">
+          <div>{messages}</div>
+        </div>
+        <div ref={this.bottom} />
+      </div>
+    );
+  }
 }
 
 export default MessageList;

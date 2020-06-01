@@ -2,8 +2,7 @@ import { connect } from 'react-redux';
 
 import ChannelList from './channel_list';
 import { openModal } from '../../../actions/modal_actions';
-import { serverChannelsSelector } from '../../../reducers/selectors';
-import { fetchServer } from '../../../actions/server_actions';
+import { fetchUsers } from "../../../actions/user_actions";
 import { fetchChannels } from '../../../actions/channel_actions';
 
 const mapStateToProps = (state, ownProps) => {
@@ -16,10 +15,10 @@ const mapStateToProps = (state, ownProps) => {
     )
 };
 
-const mapDispatchToProps = dispatch => ({
-    openModal: data => dispatch(openModal(data)),
-    fetchServer: (serverId) => dispatch(fetchServer(serverId)),
-    fetchChannels: (serverId) => dispatch(fetchChannels(serverId))
+const mapDispatchToProps = (dispatch) => ({
+  openModal: (data) => dispatch(openModal(data)),
+  fetchChannels: (serverId) => dispatch(fetchChannels(serverId)),
+  fetchUsers: (serverId) => dispatch(fetchUsers(serverId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChannelList);

@@ -5,21 +5,18 @@ import SplashContainer from './splash/splash_container'
 import SignupFormContainer from './session/signup_form_container';
 import LoginFormContainer from './session/login_form_container';
 import MainContainer from './main/main_container'
-// import NavBarContainer from './main/serverBar/navbar_container'
-// import ChannelsIndexContainer from './channels/channels_index_container'
-// import ModalContainer from '../components/main/modals/modal_container'
 
 const App = () => {
         return(
             <div className="app">   
 
-                <Switch>
+                {/* <Switch> */}
                     
-                    <ProtectedRoute path="/channels/" component={MainContainer}/>
+                    <Route exact path='/' component={SplashContainer} />
                     <AuthRoute exact path='/signup' component={SignupFormContainer} />
                     <AuthRoute exact path="/login" component={LoginFormContainer} />
-                    <Route exact path='/' component={SplashContainer} />
-                </Switch>
+                    <ProtectedRoute path="/channels/" component={MainContainer}/>
+                {/* </Switch> */}
             </div>
         )
 }

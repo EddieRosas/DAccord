@@ -20,7 +20,7 @@ class ChannelList extends React.Component {
         }
     }
 
-    componentDidUpdate(prevProps) {
+    componentWillUpdate(prevProps) {
 
         if ((prevProps.location.pathname) !== (this.props.location.pathname)) {
             this.props.fetchChannels(this.props.match.params.serverId)
