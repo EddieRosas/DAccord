@@ -12,10 +12,6 @@ class ServerNameButton extends React.Component {
         this.setState({ selected: !this.state.selected })
     }
 
-    // componentDidMount() {
-    //     this.props.getChannelMessages(this.props.location.pathname.slice(-1));
-    // }
-
     render() {
         const serverId = this.props.match.params.serverId;
         let id, label, isOwner, serverNameDropdown;

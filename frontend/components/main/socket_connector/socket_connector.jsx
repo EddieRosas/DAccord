@@ -58,7 +58,6 @@ class SocketConnector extends React.Component {
 
   createSockets() {
     let channelIds = this.props.channelIds;
-    let sub;
     channelIds.forEach((id) => {
       this.createSocket(id);
     });

@@ -8,18 +8,23 @@ class MessageList extends React.Component {
     this.bottom = React.createRef();
   }
 
-  componentWillMount() {
-    this.props.getChannelMessages(this.props.location.pathname.slice(-1));
+  componentDidMount() {
+    if (Object.values(this.props.users) >= 2) {
+        this.props.getChannelMessages(this.props.location.pathname.slice(-1))
+    }
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.location.pathname !== this.props.location.pathname) {
+    debugger
+    if (
+      prevProps.location.pathname !== this.props.location.pathname &&
+      Object.values(this.props.users) >= 2
+    ) {
       this.props.getChannelMessages(this.props.location.pathname.slice(-1));
     }
   }
 
   render() {
-    debugger;
     const messages = this.props.messages
       ? this.props.messages.map((message) => (
           <MessageListItemContainer key={message.id} message={message} />

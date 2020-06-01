@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 import UsersIndexListItemContainer from './users_index_list_item_container';
 
 class UsersIndex extends React.Component {
@@ -8,14 +7,14 @@ class UsersIndex extends React.Component {
         super(props);
     }
 
-    componentWillMount() {
-        if ((this.props.match.params.serverId) && (this.props.match.params.serverId !== "@me")) {
-            this.props.fetchUsers(this.props.match.params.serverId)
-        }
-    }
+    // componentWillMount() {
+    //     if ((this.props.match.params.serverId) && (this.props.match.params.serverId !== "@me")) {
+    //         this.props.fetchUsers(this.props.match.params.serverId)
+    //     }
+    // }
     
 
-    componentWillUpdate(prevProps) {
+    componentDidUpdate(prevProps) {
         if (
           prevProps.match.params.serverId !==
             this.props.match.params.serverId &&

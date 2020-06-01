@@ -30,6 +30,7 @@ class ChannelListItem extends React.Component {
 
         const displayActionButtons = this.props.isOwner ? actionButtons : null
 
+
         return (
             <div className="channel-list-item-container">
                 <div className="channel-list-link-container" onClick={this.handleClickChannel}>

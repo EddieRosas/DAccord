@@ -13,17 +13,19 @@ class ChannelList extends React.Component {
         this.props.openModal('addChannel');
     }
 
-    componentWillMount() {
+    componentDidMount() {
 
         if (this.props.match.params.channelId) {
             this.props.fetchChannels(this.props.match.params.serverId)
+            this.props.fetchUsers(this.props.match.params.serverId);
         }
     }
 
-    componentWillUpdate(prevProps) {
+    componentDidUpdate(prevProps) {
 
         if ((prevProps.location.pathname) !== (this.props.location.pathname)) {
             this.props.fetchChannels(this.props.match.params.serverId)
+            this.props.fetchUsers(this.props.match.params.serverId);
         }
     }
 

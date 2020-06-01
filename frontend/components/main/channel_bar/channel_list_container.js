@@ -18,7 +18,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => ({
   openModal: (data) => dispatch(openModal(data)),
   fetchChannels: (serverId) => dispatch(fetchChannels(serverId)),
-  fetchUsers: (serverId) => dispatch(fetchUsers(serverId)),
+  fetchUsers: (serverId) => dispatch(fetchUsers(serverId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChannelList);
