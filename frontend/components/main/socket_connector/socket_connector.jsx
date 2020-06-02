@@ -10,11 +10,7 @@ class SocketConnector extends React.Component {
     this.createSocket = this.createSocket.bind(this);
     this.actions = {
       createMessage: this.props.createMessage,
-      editMessage: this.props.editMessage,
-      deleteMessage: this.props.deleteMessage,
       createChannel: this.props.createChannel,
-      editChannel: this.props.editChannel,
-      deleteChannel: this.props.deleteChannel,
       deleteServer: this.props.deleteServer
     };
   }
@@ -77,14 +73,11 @@ class SocketConnector extends React.Component {
             const match = matchPath(this.props.location.pathname, {
               path: "/channels/:serverId/:channelId",
             });
-
-            if (
-              match.params.serverId === Object.keys(data.payload.servers)[0]
-            ) {
+            if (match.params.channelId === Object.keys(data.payload.message.channelId) ) {
               this.props.history.push("/channels/@me");
             }
           }
-          this.actions[data.action](data.payload);
+          this.actions[data.action](data.payload.message);
         },
       }
     );

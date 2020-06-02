@@ -8,22 +8,6 @@ class MessageList extends React.Component {
     this.bottom = React.createRef();
   }
 
-  componentDidMount() {
-    if (Object.values(this.props.users) >= 2) {
-        this.props.getChannelMessages(this.props.location.pathname.slice(-1))
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    debugger
-    if (
-      prevProps.location.pathname !== this.props.location.pathname &&
-      Object.values(this.props.users) >= 2
-    ) {
-      this.props.getChannelMessages(this.props.location.pathname.slice(-1));
-    }
-  }
-
   render() {
     const messages = this.props.messages
       ? this.props.messages.map((message) => (
@@ -33,7 +17,7 @@ class MessageList extends React.Component {
 
     return (
       <div id="message-display-container">
-        <div id="message-box-inner-container">
+        <div id="message-display-inner-container">
           <div>{messages}</div>
         </div>
         <div ref={this.bottom} />

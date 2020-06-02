@@ -27,7 +27,7 @@ class Main extends React.Component {
                     <div id="content-body-container">
                         <ChannelsIndexContainer />
                         <Route path="/channels/:serverId" component={MessagesDisplay} />
-                        <Route path="/channels/:serverId" component={UsersIndexContainer} />
+                        <Route path="/channels/:serverId/:channelId" component={UsersIndexContainer} />
                     </div>
                 </div>
             </div>
