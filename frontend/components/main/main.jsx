@@ -22,7 +22,7 @@ class Main extends React.Component {
                 <div id="content-outer-container">
                     <div id="content-header-container">
                         <Route path="/channels/:serverId/" component={ServerDisplayContainer} />
-                        <Route path="/channels/:serverId" component={SocketConnectorContainer} />
+                        <Route path="/channels/:serverId/" component={SocketConnectorContainer} />
                     </div>
                     <div id="content-body-container">
                         <ChannelsIndexContainer />
