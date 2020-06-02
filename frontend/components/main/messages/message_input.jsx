@@ -5,7 +5,7 @@ class MessageInput extends React.Component {
     super(props);
     this.state = {
       body: "",
-      channelId: this.props.location.pathname.slice(-1),
+      
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,9 +19,11 @@ class MessageInput extends React.Component {
     e.preventDefault();
     if (this.state.body) {
       const message = {
-        message: { body: this.state.body },
+        body: this.state.body,
+        channelId: this.props.location.pathname.slice(-1),
+        authorId: this.props.currentUserId
       };
-      this.props.createMessage(message, this.props.channel.id);
+      App.cable.subscriptions.subscriptions[1].speak(message)
       this.setState({ body: "" });
     }
   }
@@ -35,7 +37,7 @@ class MessageInput extends React.Component {
             type="text"
             value={this.state.body}
             onChange={this.handleChange}
-            placeholder="pzl work"
+            placeholder="plz work"
             autoComplete="off"
           ></input>
 

@@ -10,6 +10,7 @@
 
 .message-username {
   font-weight: bold;
+  margin-top: 10px;
 }
 
 .message-body {
@@ -21,6 +22,7 @@
   line-height: 15px;
   margin-left: 10px;
   color: #72767d;
+  margin-top: 10px;
 }
 
 .message-user-image {

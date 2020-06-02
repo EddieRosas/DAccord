@@ -1,30 +1,23 @@
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
+import { fetchChannels } from "../../../actions/channel_actions";
+import { createChannelMessage } from "../../../actions/message_actions";
+import { receiveMessage } from "../../../actions/message_actions";
 import SocketConnector from "./socket_connector";
-import {
-  createChannelMessage
-} from "../../../actions/message_actions";
-import {
-  createChannel,
-} from "../../../actions/channel_actions";
-import { deleteServer } from "../../../actions/server_actions";
-// import { foreignLeaveServer } from "../../../actions/subscription_actions";
-// import { receiveUser } from "../../../actions/user_actions";
 
 const mapStateToProps = (state, ownProps) => {
   return ({
+  currentServerId: ownProps.match.params.serverId,
   currentUser: state.session.currentUserId,
-  channelIds: Object.values(state.entities.channels)
-    .map((channel) => channel.id),
+  channels: Object.values(state.entities.channels)
   })
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  fetchChannels: (serverId) => dispatch(fetchChannels(serverId)),
   createChannelMessage: (payload) => dispatch(createChannelMessage(payload)),
-  createChannel: (payload) => dispatch(createChannel(payload)),
-  editServer: (payload) => dispatch(editServer(payload)),
-  deleteServer: (payload) => dispatch(deleteServer(payload))
+  receiveMessage: (message) => dispatch(receiveMessage(message))
 });
 
 export default withRouter(

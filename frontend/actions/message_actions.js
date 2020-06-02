@@ -19,11 +19,9 @@ export const receiveMessages = ({ messages }) => ({
     messages
 });
 
-export const receiveMessage = ({ message, channelId, authorId }) => ({
+export const receiveMessage = (message) => ({
     type: RECEIVE_MESSAGE,
-    message,
-    channelId,
-    authorId
+    message
 });
 
 

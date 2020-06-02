@@ -19,7 +19,6 @@ const mapDispatchToProps = (dispatch) => ({
   openModal: (data) => dispatch(openModal(data)),
   fetchChannels: (serverId) => dispatch(fetchChannels(serverId)),
   fetchUsers: (serverId) => dispatch(fetchUsers(serverId)),
-  getChannelMessages: (channelId) => dispatch(getChannelMessages(channelId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChannelList);

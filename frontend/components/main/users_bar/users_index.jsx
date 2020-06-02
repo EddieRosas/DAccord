@@ -14,8 +14,8 @@ class UsersIndex extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        // debugger
-        if ( (this.props.users.length >= 2) && (this.props.match.params.channelId !== prevProps.match.params.channelId) ) {
+        if ( ((this.props.users.length >= 2) && (this.props.match.params.channelId !== prevProps.match.params.channelId) ) || 
+            Object.values(prevProps.messages).length !== Object.values(this.props.messages).length ) {
             this.props.getChannelMessages(this.props.location.pathname.slice(-1));
         }
     }

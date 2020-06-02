@@ -3,7 +3,6 @@ import { login, receiveErrors } from '../../actions/session_actions';
 import SessionForm from './session_form';
 
 const mapStateToProps = (state) => {
-    // debugger
     return {
         errors: state.errors.session,
         formType: 'login',
@@ -11,7 +10,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => {
-    // debugger
     return {
         processForm: (user) => dispatch(login(user)),
         demoLogin: user => dispatch(login(user)),

@@ -17,12 +17,12 @@ class Main extends React.Component {
     render() {
         return (
             <div className="main">
-                <SocketConnectorContainer />
                 <ModalContainer />
                 <ServerIndexContainer />
                 <div id="content-outer-container">
                     <div id="content-header-container">
                         <Route path="/channels/:serverId/" component={ServerDisplayContainer} />
+                        <Route path="/channels/:serverId" component={SocketConnectorContainer} />
                     </div>
                     <div id="content-body-container">
                         <ChannelsIndexContainer />

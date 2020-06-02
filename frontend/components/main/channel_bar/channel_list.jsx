@@ -14,13 +14,10 @@ class ChannelList extends React.Component {
   }
 
   componentDidMount() {
-    //   debugger
+
     if (!!this.props.match.params.channelId) {
       this.props.fetchChannels(this.props.match.params.serverId);
       this.props.fetchUsers(this.props.match.params.serverId);
-    //   if (Object.values(this.props.users) >= 2) {
-    //     this.props.getChannelMessages(this.props.location.pathname.slice(-1));
-    //   }
     }
   }
 
@@ -32,10 +29,6 @@ class ChannelList extends React.Component {
     if (prevProps.match.params.serverId !== this.props.match.params.serverId ) {
         this.props.fetchUsers(this.props.match.params.serverId);
     }
-
-    // if ( Object.values(this.props.users).length >= 2) {
-    //   this.props.getChannelMessages(this.props.location.pathname.slice(-1));
-    // }
   }
 
   render() {

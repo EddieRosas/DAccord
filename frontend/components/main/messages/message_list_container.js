@@ -17,7 +17,7 @@ const mapStateToProps = (state, ownProps) => {
 
   return ( 
     {
-        messages: messages,
+        messages: messages || undefined,
         users: state.entities.users,
     }
   )

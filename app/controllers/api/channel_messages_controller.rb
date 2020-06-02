@@ -28,19 +28,19 @@ class Api::ChannelMessagesController < ApplicationController
         params.require(:message).permit(:body)
     end
 
-    def broadcast(action, message)
-        response = Hash.new
-        response[:action] = action
-        response[:payload] = Hash.new
-        response[:payload][:messages] = Hash.new
-        response[:payload][:messages][message.id] = {
-            id: message.id,
-            authorId: message.author_id,
-            channelId: message.channel_id,
-            body: message.body,
-            createdAt: message.created_at,
-        }
-        ActionCable.server.broadcast("channel_messages_#{message.channel.id}", response)
-    end
+    # def broadcast(action, message)
+    #     response = Hash.new
+    #     response[:action] = action
+    #     response[:payload] = Hash.new
+    #     response[:payload][:messages] = Hash.new
+    #     response[:payload][:messages][message.id] = {
+    #         id: message.id,
+    #         authorId: message.author_id,
+    #         channelId: message.channel_id,
+    #         body: message.body,
+    #         createdAt: message.created_at,
+    #     }
+    #     ActionCable.server.broadcast("channel_messages_#{message.channel.id}", response)
+    # end
 
 end

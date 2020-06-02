@@ -3,9 +3,12 @@ import { withRouter } from 'react-router-dom';
 import MessageInput from './message_input';
 import { createChannelMessage } from '../../../actions/message_actions';
 
-const mapStateToProps = (state, ownProps) => ({
-  channel: state.entities.channels[ownProps.location.pathname.slice(-1)],
-});
+const mapStateToProps = (state, ownProps) => {
+  return({
+    channel: state.entities.channels[ownProps.location.pathname.slice(-1)],
+    currentUserId: state.session.currentUserId
+  })
+};
 
 
 const mapDispatchToprops = (dispatch) => {
