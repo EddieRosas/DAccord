@@ -17,7 +17,7 @@ demo_user = User.create!(
 )
 
 fake_user = User.create!( 
-    email: "lol@haha.com",
+    email: "otherDemoUser@test.com",
     username: "seededUser1994",
     password: "password"
 )
@@ -47,3 +47,30 @@ channel1 = Channel.create!(name: "general", server_id: first_server.id)
 channel2 = Channel.create!(name: "a-more-specific-topic", server_id: first_server.id)
 channel3 = Channel.create!(name: "general", server_id: second_server.id)
 channel5 = Channel.create!(name: "general", server_id: third_servver.id)
+
+message1 = ChannelMessage.create!(body: "hey everyone! welcome to the server :)", channel_id: channel1.id, author_id: demo_user.id)
+message2 = ChannelMessage.create!(body: "this is cool, what did you use to build this app?", channel_id: channel1.id, author_id: fake_user.id)
+message3 = ChannelMessage.create!(
+    body: "Ruby on Rails and PostgreSQL for the backend, Rails ActionCable for the chat websockets, and React-Redux for the front end :D",
+    channel_id: channel1.id, 
+    author_id: demo_user.id
+)
+message4 = ChannelMessage.create!(
+    body: "If you hit the green '+' button, you'll be able to either create a server with a unique name, or join another server so long as you are given the server name, case sensitive!", 
+    channel_id: channel1.id, 
+    author_id: demo_user.id
+)
+message5 = ChannelMessage.create!(body: "good to know, thanks!", channel_id: channel1.id, author_id: fake_user.id)
+message6 = ChannelMessage.create!(
+    body: "if you're logged in as the demo user and want to see the live chat in action, you can 
+        open up a private browser window (Chrome Incognito, for instance) and then sign in using these credentials:
+        \n
+        email: otherDemoUser@test.com 
+        \n
+        password: password
+        \n
+        \n
+        Make sure you're on the same channel of the same server and you can see the websockets sending the messages live in acton :)",
+    channel_id: channel1.id,
+    author_id: demo_user.id
+)

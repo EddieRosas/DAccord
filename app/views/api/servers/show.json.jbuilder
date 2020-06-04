@@ -3,7 +3,7 @@ json.server do
   json.name @server.name
   json.ownerId @server.owner_id
   json.userIds @server.user_ids
-  json.channel_ids @server.channel_ids
+  json.channelIds @server.channel_ids
   if @server.image.attached?
     json.imageUrl url_for(@server.image)
   end
