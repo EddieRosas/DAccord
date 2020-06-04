@@ -1471,7 +1471,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
         path: "/channels/:serverId/",
         component: _channel_bar_server_display_container__WEBPACK_IMPORTED_MODULE_2__["default"]
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-        path: "/channels/:serverId",
+        path: "/channels/:serverId/",
         component: _socket_connector_socket_connector_container__WEBPACK_IMPORTED_MODULE_8__["default"]
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "content-body-container"
