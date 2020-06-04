@@ -7,6 +7,15 @@ export const fetchServers = () => {
     )
 }
 
+export const fetchData = () => {
+    return(
+        $.ajax({
+            method: 'GET',
+            url: '/api/servers'
+        })
+    )
+}
+
 export const fetchServer = serverId => {
  
     return(

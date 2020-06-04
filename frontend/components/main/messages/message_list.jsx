@@ -8,6 +8,10 @@ class MessageList extends React.Component {
     this.bottom = React.createRef();
   }
 
+  componentDidUpdate() {
+    this.bottom.current.scrollIntoView(); 
+  }
+
   render() {
     const messages = this.props.messages
       ? this.props.messages.map((message) => (
@@ -19,8 +23,8 @@ class MessageList extends React.Component {
       <div id="message-display-container">
         <div id="message-display-inner-container">
           <div>{messages}</div>
+          <div ref={this.bottom} />
         </div>
-        <div ref={this.bottom} />
       </div>
     );
   }

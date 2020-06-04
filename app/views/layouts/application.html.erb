@@ -38,6 +38,16 @@
       window.createServerIcon = "<%= image_url('main/create-server-icon.svg') %>"; 
       window.backToPrevIcon= "<%= image_url('main/back-to-prev-icon.svg') %>"; 
     </script>
+
+     <% if current_user %>
+      <script>
+        window.currentUser = {
+          id: <%= current_user.id %>,
+          username: '<%= current_user.username %>',
+        }
+      </script>
+    <% end %>
+    
   </head>
 
   <body>

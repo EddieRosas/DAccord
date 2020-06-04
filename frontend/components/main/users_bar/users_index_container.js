@@ -9,8 +9,6 @@ import { selectMembersByServer } from '../../../reducers/selectors';
 import UsersIndex from './users_index';
 
 const mapStateToProps = (state, ownProps) => {
-    
-    
     return(
     {
     servers: state.entities.servers,

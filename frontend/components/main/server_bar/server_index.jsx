@@ -8,9 +8,6 @@ class ServerIndex extends React.Component {
         this.handleAddOrJoinClick = this.handleAddOrJoinClick.bind(this);
     }
     
-    componentDidMount() {
-        this.props.fetchServers();
-    }
 
     handleAddOrJoinClick(e) {
         e.preventDefault();
@@ -18,7 +15,6 @@ class ServerIndex extends React.Component {
     }
 
     render () {
-
         function nameAbrv(server) {
             let newName = "";
             if (server.name !== undefined) {
@@ -30,7 +26,7 @@ class ServerIndex extends React.Component {
             return newName;
         }
 
-        return (
+        return (    
             <div className="server-list" >
                 <div className="server-button at-me">
                     <Link to="/channels/@me">

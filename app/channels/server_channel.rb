@@ -16,9 +16,9 @@ class ServerChannel < ApplicationCable::Channel
       {
         id: message.id, 
         body: message.body, 
-        authorId: message.author_id, 
-        channelId: message.channel_id, 
-        createdAt: message.created_at
+        author_id: message.author_id, 
+        channel_id: message.channel_id, 
+        created_at: message.created_at
       }
     }
     

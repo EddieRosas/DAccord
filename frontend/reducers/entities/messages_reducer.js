@@ -3,7 +3,7 @@ import {
   RECEIVE_MESSAGES,
   RECEIVE_MESSAGE
 } from "../../actions/message_actions";
-import { RECEIVE_SERVER } from "../../actions/server_actions";
+import { RECEIVE_SERVER, RECEIVE_DATA } from "../../actions/server_actions";
 import { LOGOUT_CURRENT_USER } from "../../actions/session_actions";
 
 export default (state = {}, action) => {
@@ -13,9 +13,11 @@ export default (state = {}, action) => {
     case CREATE_MESSAGE:
       return Object.assign(nextState, action.payload.messages);
     case RECEIVE_MESSAGE:
-      return { ...state, ...action.message };
+      return Object.assign(nextState, action.message)
     case RECEIVE_SERVER:
       return Object.assign(nextState, action.payload.messages);
+    case RECEIVE_DATA:
+        return (Object.assign(nextState, action.payload.messages));
     case RECEIVE_MESSAGES:
         return Object.assign(nextState, action.messages);
     case LOGOUT_CURRENT_USER:

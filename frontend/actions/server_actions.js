@@ -4,11 +4,19 @@ export const RECEIVE_SERVERS = "RECEIVE_SERVERS";
 export const RECEIVE_SERVER = "RECEIVE_SERVER";
 export const DELETE_SERVER = "DELETE_SERVER";
 export const RECEIVE_SERVER_ERRORS = "RECEIVE_SERVER_ERRORS";
+export const RECEIVE_DATA = "RECEIVE_DATA"
 
 export const receiveServers = servers => {
     return({
         type: RECEIVE_SERVERS,
         servers
+    })
+}
+
+export const receiveData = payload => {
+    return({
+        type: RECEIVE_DATA,
+        payload
     })
 }
 
@@ -37,6 +45,16 @@ export const fetchServers = () => dispatch => {
         ServerApiUtil.fetchServers()
             .then(
                 servers => dispatch(receiveServers(servers)),
+                errors => dispatch(receiveErrors(errors))
+            )
+    )
+};
+
+export const fetchData = () => dispatch => {
+    return(
+        ServerApiUtil.fetchData()
+            .then(
+                payload => dispatch(receiveData(payload.entities)),
                 errors => dispatch(receiveErrors(errors))
             )
     )
