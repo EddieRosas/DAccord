@@ -9,7 +9,7 @@ class MessageList extends React.Component {
   }
 
   componentDidUpdate() {
-    
+    this.bottom.current.scrollIntoView(); 
   }
 
   render() {
@@ -23,8 +23,8 @@ class MessageList extends React.Component {
       <div id="message-display-container">
         <div id="message-display-inner-container">
           <div>{messages}</div>
+          <div ref={this.bottom} />
         </div>
-        <div ref={this.bottom} />
       </div>
     );
   }

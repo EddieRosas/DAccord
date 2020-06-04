@@ -1738,7 +1738,9 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
 
   _createClass(MessageList, [{
     key: "componentDidUpdate",
-    value: function componentDidUpdate() {}
+    value: function componentDidUpdate() {
+      this.bottom.current.scrollIntoView();
+    }
   }, {
     key: "render",
     value: function render() {
@@ -1752,9 +1754,9 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
         id: "message-display-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "message-display-inner-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, messages)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, messages), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         ref: this.bottom
-      }));
+      })));
     }
   }]);
 
