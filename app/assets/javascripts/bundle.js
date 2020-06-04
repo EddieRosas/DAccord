@@ -643,7 +643,7 @@ var ChannelList = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       if (Object.values(this.props.servers).length === 0) return null;
       var isOwner = this.props.servers[this.props.match.params.serverId].owner_id === this.props.currentUserId;
-      var channelItems = this.props.channels.length > 0 ? this.props.channels.map(function (channel) {
+      var channelListItems = this.props.channels.length > 0 ? this.props.channels.map(function (channel) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_channel_list_item_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: channel.id,
           channel: channel,
@@ -672,7 +672,7 @@ var ChannelList = /*#__PURE__*/function (_React$Component) {
         id: "channel-list-header-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         id: "channel-list-header-text"
-      }, "Text Channels"), addChannelButton), channelItems);
+      }, "Text Channels"), addChannelButton), channelListItems);
     }
   }]);
 
@@ -827,7 +827,7 @@ var ChannelListItem = /*#__PURE__*/function (_React$Component) {
         className: "channel-list-link-container",
         onClick: this.handleClickChannel
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
-        to: "/channels/".concat(channel.server_id, "/").concat(channel.id),
+        to: "/channels/".concat(channel.serverId, "/").concat(channel.id),
         activeClassName: "channel-list-item-active"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "channel-list-item-label-container"
@@ -3183,15 +3183,13 @@ var ServerIndex = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.handleAddOrJoinClick = _this.handleAddOrJoinClick.bind(_assertThisInitialized(_this));
     return _this;
-  }
+  } // componentDidMount() {
+  //     // this.props.fetchServers();
+  //     this.props.fetchData()
+  // }
+
 
   _createClass(ServerIndex, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      // this.props.fetchServers();
-      this.props.fetchData();
-    }
-  }, {
     key: "handleAddOrJoinClick",
     value: function handleAddOrJoinClick(e) {
       e.preventDefault();
@@ -3334,7 +3332,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var actioncable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! actioncable */ "./node_modules/actioncable/lib/assets/compiled/action_cable.js");
 /* harmony import */ var actioncable__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(actioncable__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -3362,7 +3359,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-
 var SocketConnector = /*#__PURE__*/function (_React$Component) {
   _inherits(SocketConnector, _React$Component);
 
@@ -3375,13 +3371,13 @@ var SocketConnector = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(SocketConnector, [{
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      debugger;
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this = this;
 
-      if (!!this.props.channels) {
-        this.createSubscriptions(this.props.channels);
-      }
+      this.props.fetchData().then(function (res) {
+        return _this.createSubscriptions(res.payload.channels);
+      });
     }
   }, {
     key: "componentDidUpdate",
@@ -3398,9 +3394,10 @@ var SocketConnector = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "createSubscriptions",
     value: function createSubscriptions(channels) {
-      var _this = this;
+      var _this2 = this;
 
-      Object.values(channels.channels).map(function (channel) {
+      debugger;
+      Object.values(channels).map(function (channel) {
         return App.cable.subscriptions.create({
           channel: "ServerChannel",
           channelId: channel.id
@@ -3408,7 +3405,7 @@ var SocketConnector = /*#__PURE__*/function (_React$Component) {
           received: function received(data) {
             var messagePayload = _defineProperty({}, data.message.id, data.message);
 
-            _this.props.receiveMessage(messagePayload);
+            _this2.props.receiveMessage(messagePayload);
           },
           speak: function speak(data) {
             return this.perform("speak", data);
@@ -3443,7 +3440,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _actions_channel_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions/channel_actions */ "./frontend/actions/channel_actions.js");
 /* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions/message_actions */ "./frontend/actions/message_actions.js");
-/* harmony import */ var _socket_connector__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./socket_connector */ "./frontend/components/main/socket_connector/socket_connector.jsx");
+/* harmony import */ var _actions_server_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../actions/server_actions */ "./frontend/actions/server_actions.js");
+/* harmony import */ var _socket_connector__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./socket_connector */ "./frontend/components/main/socket_connector/socket_connector.jsx");
+
 
 
 
@@ -3469,11 +3468,14 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     receiveMessage: function receiveMessage(message) {
       return dispatch(Object(_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__["receiveMessage"])(message));
+    },
+    fetchData: function fetchData() {
+      return dispatch(Object(_actions_server_actions__WEBPACK_IMPORTED_MODULE_4__["fetchData"])());
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_socket_connector__WEBPACK_IMPORTED_MODULE_4__["default"])));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_socket_connector__WEBPACK_IMPORTED_MODULE_5__["default"])));
 
 /***/ }),
 

@@ -8,10 +8,10 @@ class ServerIndex extends React.Component {
         this.handleAddOrJoinClick = this.handleAddOrJoinClick.bind(this);
     }
     
-    componentDidMount() {
-        // this.props.fetchServers();
-        this.props.fetchData()
-    }
+    // componentDidMount() {
+    //     // this.props.fetchServers();
+    //     this.props.fetchData()
+    // }
 
     handleAddOrJoinClick(e) {
         e.preventDefault();

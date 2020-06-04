@@ -1,19 +1,22 @@
 import React from "react";
+
+
+
 import Cable from "actioncable";
-import { matchPath } from "react-router-dom";
+
 
 class SocketConnector extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  componentDidUpdate() {
-    debugger
-    if (!!this.props.channels) {
-      this.createSubscriptions(this.props.channels)
-    }
+  componentDidMount() {
+    this.props.fetchData()
+      .then((res) => this.createSubscriptions(res.payload.channels)
+    )
   }
 
+  
   componentDidUpdate(prevProps) {
     if (
       prevProps.channels.length !== 0 &&
@@ -29,8 +32,9 @@ class SocketConnector extends React.Component {
   }
 
   createSubscriptions(channels) {
+    debugger
 
-    Object.values(channels.channels).map((channel) =>
+    Object.values(channels).map((channel) =>
       App.cable.subscriptions.create(
         { channel: "ServerChannel", channelId: channel.id },
         {
