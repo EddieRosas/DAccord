@@ -7,12 +7,21 @@ import { fetchChannels } from '../../../actions/channel_actions';
 import { getChannelMessages } from "../../../actions/message_actions";
 
 const mapStateToProps = (state, ownProps) => {
-    return {
-      channels: Object.values(state.entities.channels),
-      servers: state.entities.servers,
-      currentUserId: state.session.currentUserId,
-      users: state.entities.users,
-    };
+
+    let channels = Object.values(state.entities.channels)
+    channels = channels.filter(
+      (channel) =>
+        Number(channel.serverId) === Number(ownProps.match.params.serverId)
+    )
+
+    return( 
+      {
+        channels: channels,
+        servers: state.entities.servers,
+        currentUserId: state.session.currentUserId,
+        users: state.entities.users,
+      }
+    )
 };
 
 const mapDispatchToProps = (dispatch) => ({

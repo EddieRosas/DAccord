@@ -288,7 +288,7 @@ var closeModal = function closeModal() {
 /*!********************************************!*\
   !*** ./frontend/actions/server_actions.js ***!
   \********************************************/
-/*! exports provided: RECEIVE_SERVERS, RECEIVE_SERVER, DELETE_SERVER, RECEIVE_SERVER_ERRORS, receiveServers, receiveServer, deleteServer, receiveErrors, fetchServers, fetchServer, createServer, destroyServer, joinServer, leaveServer */
+/*! exports provided: RECEIVE_SERVERS, RECEIVE_SERVER, DELETE_SERVER, RECEIVE_SERVER_ERRORS, RECEIVE_DATA, receiveServers, receiveData, receiveServer, deleteServer, receiveErrors, fetchServers, fetchData, fetchServer, createServer, destroyServer, joinServer, leaveServer */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -297,11 +297,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_SERVER", function() { return RECEIVE_SERVER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DELETE_SERVER", function() { return DELETE_SERVER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_SERVER_ERRORS", function() { return RECEIVE_SERVER_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_DATA", function() { return RECEIVE_DATA; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveServers", function() { return receiveServers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveData", function() { return receiveData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveServer", function() { return receiveServer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteServer", function() { return deleteServer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveErrors", function() { return receiveErrors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchServers", function() { return fetchServers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchData", function() { return fetchData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchServer", function() { return fetchServer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createServer", function() { return createServer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "destroyServer", function() { return destroyServer; });
@@ -313,10 +316,17 @@ var RECEIVE_SERVERS = "RECEIVE_SERVERS";
 var RECEIVE_SERVER = "RECEIVE_SERVER";
 var DELETE_SERVER = "DELETE_SERVER";
 var RECEIVE_SERVER_ERRORS = "RECEIVE_SERVER_ERRORS";
+var RECEIVE_DATA = "RECEIVE_DATA";
 var receiveServers = function receiveServers(servers) {
   return {
     type: RECEIVE_SERVERS,
     servers: servers
+  };
+};
+var receiveData = function receiveData(payload) {
+  return {
+    type: RECEIVE_DATA,
+    payload: payload
   };
 };
 var receiveServer = function receiveServer(payload) {
@@ -342,6 +352,15 @@ var fetchServers = function fetchServers() {
   return function (dispatch) {
     return _util_server_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchServers"]().then(function (servers) {
       return dispatch(receiveServers(servers));
+    }, function (errors) {
+      return dispatch(receiveErrors(errors));
+    });
+  };
+};
+var fetchData = function fetchData() {
+  return function (dispatch) {
+    return _util_server_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchData"]().then(function (payload) {
+      return dispatch(receiveData(payload.entities));
     }, function (errors) {
       return dispatch(receiveErrors(errors));
     });
@@ -605,22 +624,19 @@ var ChannelList = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "componentDidMount",
-    value: function componentDidMount() {
-      if (!!this.props.match.params.channelId) {
-        this.props.fetchChannels(this.props.match.params.serverId);
-        this.props.fetchUsers(this.props.match.params.serverId);
-      }
+    value: function componentDidMount() {// if (!!this.props.match.params.channelId) {
+      //   this.props.fetchChannels(this.props.match.params.serverId);
+      //   this.props.fetchUsers(this.props.match.params.serverId);
+      // }
     }
   }, {
     key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {
-      if (prevProps.location.pathname !== this.props.location.pathname) {
-        this.props.fetchChannels(this.props.match.params.serverId);
-      }
-
-      if (prevProps.match.params.serverId !== this.props.match.params.serverId) {
-        this.props.fetchUsers(this.props.match.params.serverId);
-      }
+    value: function componentDidUpdate(prevProps) {// if (prevProps.location.pathname !== this.props.location.pathname) {
+      //   this.props.fetchChannels(this.props.match.params.serverId);
+      // }
+      // if (prevProps.match.params.serverId !== this.props.match.params.serverId ) {
+      //     this.props.fetchUsers(this.props.match.params.serverId);
+      // }
     }
   }, {
     key: "render",
@@ -690,8 +706,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
+  var channels = Object.values(state.entities.channels);
+  channels = channels.filter(function (channel) {
+    return Number(channel.serverId) === Number(ownProps.match.params.serverId);
+  });
   return {
-    channels: Object.values(state.entities.channels),
+    channels: channels,
     servers: state.entities.servers,
     currentUserId: state.session.currentUserId,
     users: state.entities.users
@@ -1471,7 +1491,7 @@ var Main = /*#__PURE__*/function (_React$Component) {
         path: "/channels/:serverId/",
         component: _channel_bar_server_display_container__WEBPACK_IMPORTED_MODULE_2__["default"]
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-        path: "/channels/:serverId",
+        path: "/channels/:serverId/",
         component: _socket_connector_socket_connector_container__WEBPACK_IMPORTED_MODULE_8__["default"]
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "content-body-container"
@@ -3168,7 +3188,8 @@ var ServerIndex = /*#__PURE__*/function (_React$Component) {
   _createClass(ServerIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchServers();
+      // this.props.fetchServers();
+      this.props.fetchData();
     }
   }, {
     key: "handleAddOrJoinClick",
@@ -3272,6 +3293,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var mapStateToProps = function mapStateToProps(state) {
   return {
     servers: Object.values(state.entities.servers)
@@ -3288,6 +3310,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchUsers: function fetchUsers(serverId) {
       return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_2__["fetchUsers"])(serverId));
+    },
+    fetchData: function fetchData() {
+      return dispatch(Object(_actions_server_actions__WEBPACK_IMPORTED_MODULE_3__["fetchData"])());
     }
   };
 };
@@ -3346,91 +3371,17 @@ var SocketConnector = /*#__PURE__*/function (_React$Component) {
   function SocketConnector(props) {
     _classCallCheck(this, SocketConnector);
 
-    return _super.call(this, props); // this.chats = {};
-    // this.createSockets = this.createSockets.bind(this);
-    // this.createSocket = this.createSocket.bind(this);
-    // this.actions = {
-    //   createMessage: this.props.createMessage,
-    //   createChannel: this.props.createChannel,
-    //   deleteServer: this.props.deleteServer
-    // };
-  } // componentDidMount() {
-  //   if (this.props.currentUser) {
-  //     this.createSockets();
-  //   }
-  // }
-  // componentDidUpdate(prevProps) {
-  //   let found = false;
-  //   if (prevProps.channelIds.length < this.props.channelIds.length) {
-  //     for (let i = 0; i < this.props.channelIds.length; i++) {
-  //       if (prevProps.channelIds[i] !== this.props.channelIds[i]) {
-  //         found = true;
-  //         this.createSocket(this.props.channelIds[i]);
-  //         break;
-  //       }
-  //     }
-  //     if (!found)
-  //       this.createSocket(
-  //         this.props.channelIds[this.props.channelIds.length - 1]
-  //       );
-  //   } else if (prevProps.channelIds.length > this.props.channelIds.length) {
-  //     for (let i = 0; i < prevProps.channelIds.length; i++) {
-  //       if (prevProps.channelIds[i] !== this.props.channelIds[i]) {
-  //         const identifier = `{"channel":"ServerChannel","id":${prevProps.channelIds[i]}}`;
-  //         this.chats[identifier].unsubscribe();
-  //         delete this.chats[identifier];
-  //         break;
-  //       }
-  //     }
-  //   }
-  // }
-  // componentWillUnmount() {
-  //   const chats = Object.values(this.chats);
-  //   chats.forEach((chat) => chat.unsubscribe());
-  // }
-  // createSockets() {
-  //   let channelIds = this.props.channelIds;
-  //   channelIds.forEach((id) => {
-  //     this.createSocket(id);
-  //   });
-  // }
-  // createSocket(id) {
-  //   const sub = App.cable.subscriptions.create(
-  //     {
-  //       channel: "ServerChannel",
-  //       id: id,
-  //     },
-  //     {
-  //       connected: () => {},
-  //       disconnected: () => {},
-  //       received: (data) => {
-  //         if (data.action == "deleteServer") {
-  //           const match = matchPath(this.props.location.pathname, {
-  //             path: "/channels/:serverId/:channelId",
-  //           });
-  //           if (match.params.channelId === Object.keys(data.payload.message.channelId) ) {
-  //             this.props.history.push("/channels/@me");
-  //           }
-  //         }
-  //         this.actions[data.action](data.payload.message);
-  //       },
-  //     }
-  //   );
-  //   this.chats[sub.identifier] = sub;
-  // }
-  // render() {
-  //   return null;
-  // }
-
+    return _super.call(this, props);
+  }
 
   _createClass(SocketConnector, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this = this;
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      debugger;
 
-      this.props.fetchChannels(this.props.currentServerId).then(function (channels) {
-        return _this.createSubscriptions(channels);
-      });
+      if (!!this.props.channels) {
+        this.createSubscriptions(this.props.channels);
+      }
     }
   }, {
     key: "componentDidUpdate",
@@ -3447,7 +3398,7 @@ var SocketConnector = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "createSubscriptions",
     value: function createSubscriptions(channels) {
-      var _this2 = this;
+      var _this = this;
 
       Object.values(channels.channels).map(function (channel) {
         return App.cable.subscriptions.create({
@@ -3457,7 +3408,7 @@ var SocketConnector = /*#__PURE__*/function (_React$Component) {
           received: function received(data) {
             var messagePayload = _defineProperty({}, data.message.id, data.message);
 
-            _this2.props.receiveMessage(messagePayload);
+            _this.props.receiveMessage(messagePayload);
           },
           speak: function speak(data) {
             return this.perform("speak", data);
@@ -3576,17 +3527,16 @@ var UsersIndex = /*#__PURE__*/function (_React$Component) {
 
   _createClass(UsersIndex, [{
     key: "componentDidMount",
-    value: function componentDidMount() {
-      if (this.props.match.params.serverId !== "@me") {
-        this.props.getChannelMessages(this.props.location.pathname.slice(-1));
-      }
+    value: function componentDidMount() {// if (this.props.match.params.serverId !== "@me" ) {
+      //     this.props.getChannelMessages(this.props.location.pathname.slice(-1));
+      // }
     }
   }, {
     key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {
-      if (this.props.users.length >= 2 && this.props.match.params.channelId !== prevProps.match.params.channelId || Object.values(prevProps.messages).length !== Object.values(this.props.messages).length) {
-        this.props.getChannelMessages(this.props.location.pathname.slice(-1));
-      }
+    value: function componentDidUpdate(prevProps) {// if ( ((this.props.users.length >= 2) && (this.props.match.params.channelId !== prevProps.match.params.channelId) ) || 
+      //     Object.values(prevProps.messages).length !== Object.values(this.props.messages).length ) {
+      //     this.props.getChannelMessages(this.props.location.pathname.slice(-1));
+      // }
     }
   }, {
     key: "render",
@@ -4433,6 +4383,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   window.getState = store.getState;
+  window.store = store;
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root__WEBPACK_IMPORTED_MODULE_2__["default"], {
     store: store
   }), root);
@@ -4450,7 +4401,9 @@ document.addEventListener("DOMContentLoaded", function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_channel_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/channel_actions */ "./frontend/actions/channel_actions.js");
+/* harmony import */ var _actions_server_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/server_actions */ "./frontend/actions/server_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -4460,6 +4413,9 @@ var channelsReducer = function channelsReducer() {
   Object.freeze(state);
 
   switch (action.type) {
+    case _actions_server_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_DATA"]:
+      return Object.assign({}, state, action.payload.channels);
+
     case _actions_channel_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CHANNEL"]:
       return Object.assign({}, state, _defineProperty({}, action.channel.id, action.channel));
 
@@ -4546,6 +4502,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     case _actions_server_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_SERVER"]:
       return Object.assign(nextState, action.payload.messages);
 
+    case _actions_server_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_DATA"]:
+      return Object.assign(nextState, action.payload.messages);
+
     case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_MESSAGES"]:
       return Object.assign(nextState, action.messages);
 
@@ -4581,6 +4540,9 @@ var serversReducer = function serversReducer() {
   switch (action.type) {
     case _actions_server_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_SERVERS"]:
       return Object.assign({}, state, action.servers);
+
+    case _actions_server_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_DATA"]:
+      return action.payload.servers;
 
     case _actions_server_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_SERVER"]:
       return action.payload.server;
@@ -4620,6 +4582,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var usersReducer = function usersReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
@@ -4629,8 +4592,11 @@ var usersReducer = function usersReducer() {
     case _actions_user_actions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_USERS"]:
       return action.users;
 
+    case _actions_server_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_DATA"]:
+      return action.payload.users;
+
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
-      return Object.assign({}, state, _defineProperty({}, action.currentUser.id, action.currentUser));
+      return Object.assign({}, _defineProperty({}, action.currentUser.id, action.currentUser));
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["LOGOUT_CURRENT_USER"]:
       return {};
@@ -5077,18 +5043,25 @@ var ProtectedRoute = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withR
 /*!******************************************!*\
   !*** ./frontend/util/server_api_util.js ***!
   \******************************************/
-/*! exports provided: fetchServers, fetchServer, createServer, deleteServer, joinServer, leaveServer */
+/*! exports provided: fetchServers, fetchData, fetchServer, createServer, deleteServer, joinServer, leaveServer */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchServers", function() { return fetchServers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchData", function() { return fetchData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchServer", function() { return fetchServer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createServer", function() { return createServer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteServer", function() { return deleteServer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "joinServer", function() { return joinServer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "leaveServer", function() { return leaveServer; });
 var fetchServers = function fetchServers() {
+  return $.ajax({
+    method: 'GET',
+    url: '/api/servers'
+  });
+};
+var fetchData = function fetchData() {
   return $.ajax({
     method: 'GET',
     url: '/api/servers'

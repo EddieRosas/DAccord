@@ -1,8 +1,19 @@
 class Api::ServersController < ApplicationController 
     def index 
-        @servers = current_user.servers
-
-        render :index
+        @servers = current_user.servers.includes(:users, :channels)
+        @users = Array.new
+        @channels = Array.new
+        @messages = Array.new
+        @servers.each do |server|
+            @users += server.users
+            @channels += server.channels
+        end
+        @channels.each do |channel|
+            @messages += channel.messages
+        end
+        @users = @users.uniq
+        @users.push current_user if @users.empty?
+        render :index, status: 200
     end
 
     def create

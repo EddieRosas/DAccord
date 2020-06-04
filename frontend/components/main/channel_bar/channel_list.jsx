@@ -15,20 +15,20 @@ class ChannelList extends React.Component {
 
   componentDidMount() {
 
-    if (!!this.props.match.params.channelId) {
-      this.props.fetchChannels(this.props.match.params.serverId);
-      this.props.fetchUsers(this.props.match.params.serverId);
-    }
+    // if (!!this.props.match.params.channelId) {
+    //   this.props.fetchChannels(this.props.match.params.serverId);
+    //   this.props.fetchUsers(this.props.match.params.serverId);
+    // }
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.location.pathname !== this.props.location.pathname) {
-      this.props.fetchChannels(this.props.match.params.serverId);
-    }
+    // if (prevProps.location.pathname !== this.props.location.pathname) {
+    //   this.props.fetchChannels(this.props.match.params.serverId);
+    // }
 
-    if (prevProps.match.params.serverId !== this.props.match.params.serverId ) {
-        this.props.fetchUsers(this.props.match.params.serverId);
-    }
+    // if (prevProps.match.params.serverId !== this.props.match.params.serverId ) {
+    //     this.props.fetchUsers(this.props.match.params.serverId);
+    // }
   }
 
   render() {
