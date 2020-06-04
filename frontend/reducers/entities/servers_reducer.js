@@ -15,7 +15,7 @@ const serversReducer = (state = {}, action) => {
         case RECEIVE_DATA: 
             return action.payload.servers;
         case RECEIVE_SERVER:
-            return action.payload.server;
+            return Object.assign({}, state, { [action.payload.server.id]: action.payload.server });
         case DELETE_SERVER:
             const nextState = Object.assign({}, state);
             delete nextState[action.serverId];

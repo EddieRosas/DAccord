@@ -18,6 +18,7 @@ class SocketConnector extends React.Component {
 
   
   componentDidUpdate(prevProps) {
+
     if (
       prevProps.channels.length !== 0 &&
       prevProps.channels.length < this.props.channels.length

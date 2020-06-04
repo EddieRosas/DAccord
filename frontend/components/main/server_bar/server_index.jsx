@@ -48,7 +48,7 @@ class ServerIndex extends React.Component {
                                 </div>
                                 :
                                 <div className="server-button">
-                                    <Link to={`/channels/${server.id}/${server.channel_ids[0]}`}>
+                                    <Link to={`/channels/${server.id}/${server.channelIds[0]}`}>
                                         <p className="server-button text" spellCheck="false">{nameAbrv(server)}</p>
                                         <div className="server-button-label" spellCheck="false">{server.name}</div>
                                     </Link>

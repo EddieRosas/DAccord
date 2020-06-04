@@ -12,8 +12,8 @@ class DeleteServer extends React.Component {
         const server = this.props.servers[this.props.match.params.serverId].id
         this.props.closeModal()
         this.props.deleteServer(server)
-            .then(() => this.props.history.push('/channels/@me'))
-        // this.props.history.push('/channels/@me')
+            // .then(() => this.props.history.push('/channels/@me'))
+        this.props.history.push('/channels/@me')
     }
 
 

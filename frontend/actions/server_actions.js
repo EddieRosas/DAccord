@@ -71,7 +71,7 @@ export const fetchServer = serverId => dispatch => (
 export const createServer = server => dispatch => (
     ServerApiUtil.createServer(server)
         .then(
-            server => dispatch(receiveServers(server)),
+            server => dispatch(receiveServer(server)),
             errors => dispatch(receiveErrors(errors))
         )
 );

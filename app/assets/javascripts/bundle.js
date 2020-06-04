@@ -378,7 +378,7 @@ var fetchServer = function fetchServer(serverId) {
 var createServer = function createServer(server) {
   return function (dispatch) {
     return _util_server_api_util__WEBPACK_IMPORTED_MODULE_0__["createServer"](server).then(function (server) {
-      return dispatch(receiveServers(server));
+      return dispatch(receiveServer(server));
     }, function (errors) {
       return dispatch(receiveErrors(errors));
     });
@@ -1203,7 +1203,7 @@ var ServerNameButton = /*#__PURE__*/function (_React$Component) {
       }
 
       if (this.props.servers[serverId]) {
-        isOwner = this.props.servers[serverId].owner_id === this.props.currentUserId;
+        isOwner = this.props.servers[serverId].ownerId === this.props.currentUserId;
         serverNameDropdown = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_server_display_dropdown_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
           isOwner: isOwner
         });
@@ -1854,18 +1854,43 @@ var MessageListItem = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(MessageListItem);
 
   function MessageListItem(props) {
+    var _this;
+
     _classCallCheck(this, MessageListItem);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.formatDate = _this.formatDate.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(MessageListItem, [{
+    key: "formatDate",
+    value: function formatDate(dateTimeString) {
+      var time = new Date(dateTimeString);
+      var hours = time.getHours();
+      var minutes = time.getMinutes();
+      var amOrPm = "AM";
+
+      if (hours > 12) {
+        hours = hours - 12;
+        amOrPm = "PM";
+      }
+
+      var day = time.getDate();
+      var month = time.getUTCMonth() + 1;
+      var year = time.getFullYear();
+      var abbreviatedTime = hours + ":" + minutes + " ".concat(amOrPm, " ");
+      var date = "".concat(month, "/").concat(day, "/").concat(year);
+      return "".concat(abbreviatedTime, " ").concat(date);
+    }
+  }, {
     key: "render",
     value: function render() {
       if (!!this.props.message && Object.values(this.props.users).length > 1) {
         var body = this.props.message.body;
         var username = this.props.users[this.props.message.author_id].username;
         var imageUrl = this.props.users[this.props.message.author_id].imageUrl;
+        var timeStamp = this.formatDate(this.props.message.created_at);
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "message-container"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -1875,7 +1900,9 @@ var MessageListItem = /*#__PURE__*/function (_React$Component) {
           className: "message-username"
         }, username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "message-body"
-        }, body));
+        }, body), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "message-timestamp"
+        }, timeStamp));
       } else {
         return null;
       }
@@ -2561,14 +2588,12 @@ var DeleteServer = /*#__PURE__*/function (_React$Component) {
   _createClass(DeleteServer, [{
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      var _this2 = this;
-
       e.preventDefault();
       var server = this.props.servers[this.props.match.params.serverId].id;
       this.props.closeModal();
-      this.props.deleteServer(server).then(function () {
-        return _this2.props.history.push('/channels/@me');
-      }); // this.props.history.push('/channels/@me')
+      this.props.deleteServer(server); // .then(() => this.props.history.push('/channels/@me'))
+
+      this.props.history.push('/channels/@me');
     }
   }, {
     key: "handleCancel",
@@ -3240,7 +3265,7 @@ var ServerIndex = /*#__PURE__*/function (_React$Component) {
         }, server.name))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "server-button"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "/channels/".concat(server.id, "/").concat(server.channel_ids[0])
+          to: "/channels/".concat(server.id, "/").concat(server.channelIds[0])
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
           className: "server-button text",
           spellCheck: "false"
@@ -3579,9 +3604,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
+  var users;
+
+  if (Object.values(state.entities.users).length > 1) {
+    users = Object.values(state.entities.users);
+    users = users.filter(function (user) {
+      return state.entities.servers[ownProps.match.params.serverId].userIds.includes(user.id);
+    });
+  }
+
   return {
     servers: state.entities.servers,
-    users: Object.values(state.entities.users),
+    users: users,
     messages: state.entities.messages
   };
 };
@@ -4396,6 +4430,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var channelsReducer = function channelsReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
@@ -4408,8 +4443,8 @@ var channelsReducer = function channelsReducer() {
     case _actions_channel_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CHANNEL"]:
       return Object.assign({}, state, _defineProperty({}, action.channel.id, action.channel));
 
-    case _actions_channel_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CHANNELS"]:
-      return action.channels;
+    case _actions_server_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_SERVER"]:
+      return Object.assign({}, state, _defineProperty({}, action.payload.channels.id, action.payload.channels));
 
     case _actions_channel_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_CHANNEL"]:
       var new_channels = Object.assign({}, state);
@@ -4512,6 +4547,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_server_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/server_actions */ "./frontend/actions/server_actions.js");
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -4528,7 +4565,7 @@ var serversReducer = function serversReducer() {
       return action.payload.servers;
 
     case _actions_server_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_SERVER"]:
-      return action.payload.server;
+      return Object.assign({}, state, _defineProperty({}, action.payload.server.id, action.payload.server));
 
     case _actions_server_actions__WEBPACK_IMPORTED_MODULE_0__["DELETE_SERVER"]:
       var nextState = Object.assign({}, state);

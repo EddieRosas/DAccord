@@ -23,7 +23,7 @@ class ServerNameButton extends React.Component {
             label = this.props.servers[id] ? this.props.servers[id].name : "";
         }
         if (this.props.servers[serverId]) {
-            isOwner = this.props.servers[serverId].owner_id === this.props.currentUserId;
+            isOwner = this.props.servers[serverId].ownerId === this.props.currentUserId;
             serverNameDropdown = <ServerDisplayDropdownContainer isOwner={isOwner} />
         } else {
             serverNameDropdown = null;
