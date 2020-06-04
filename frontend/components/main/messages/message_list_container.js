@@ -5,7 +5,6 @@ import { getChannelMessages } from '../../../actions/message_actions';
 
 
 const mapStateToProps = (state, ownProps) => {
-  
   let messages;
   if (!!state.entities.messages) {
       messages = Object.values(state.entities.messages)

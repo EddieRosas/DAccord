@@ -1737,6 +1737,9 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(MessageList, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {}
+  }, {
     key: "render",
     value: function render() {
       var messages = this.props.messages ? this.props.messages.map(function (message) {
@@ -3183,11 +3186,7 @@ var ServerIndex = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.handleAddOrJoinClick = _this.handleAddOrJoinClick.bind(_assertThisInitialized(_this));
     return _this;
-  } // componentDidMount() {
-  //     // this.props.fetchServers();
-  //     this.props.fetchData()
-  // }
-
+  }
 
   _createClass(ServerIndex, [{
     key: "handleAddOrJoinClick",
@@ -3396,7 +3395,6 @@ var SocketConnector = /*#__PURE__*/function (_React$Component) {
     value: function createSubscriptions(channels) {
       var _this2 = this;
 
-      debugger;
       Object.values(channels).map(function (channel) {
         return App.cable.subscriptions.create({
           channel: "ServerChannel",
@@ -3528,19 +3526,6 @@ var UsersIndex = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(UsersIndex, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {// if (this.props.match.params.serverId !== "@me" ) {
-      //     this.props.getChannelMessages(this.props.location.pathname.slice(-1));
-      // }
-    }
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {// if ( ((this.props.users.length >= 2) && (this.props.match.params.channelId !== prevProps.match.params.channelId) ) || 
-      //     Object.values(prevProps.messages).length !== Object.values(this.props.messages).length ) {
-      //     this.props.getChannelMessages(this.props.location.pathname.slice(-1));
-      // }
-    }
-  }, {
     key: "render",
     value: function render() {
       if (Object.values(this.props.servers).length === 0) return null;
@@ -4479,12 +4464,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/message_actions */ "./frontend/actions/message_actions.js");
 /* harmony import */ var _actions_server_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/server_actions */ "./frontend/actions/server_actions.js");
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -4499,7 +4478,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return Object.assign(nextState, action.payload.messages);
 
     case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_MESSAGE"]:
-      return _objectSpread({}, state, {}, action.message);
+      return Object.assign(nextState, action.message);
 
     case _actions_server_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_SERVER"]:
       return Object.assign(nextState, action.payload.messages);

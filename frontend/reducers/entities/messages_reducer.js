@@ -13,7 +13,7 @@ export default (state = {}, action) => {
     case CREATE_MESSAGE:
       return Object.assign(nextState, action.payload.messages);
     case RECEIVE_MESSAGE:
-      return { ...state, ...action.message };
+      return Object.assign(nextState, action.message)
     case RECEIVE_SERVER:
       return Object.assign(nextState, action.payload.messages);
     case RECEIVE_DATA:

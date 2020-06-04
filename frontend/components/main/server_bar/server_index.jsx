@@ -8,10 +8,6 @@ class ServerIndex extends React.Component {
         this.handleAddOrJoinClick = this.handleAddOrJoinClick.bind(this);
     }
     
-    // componentDidMount() {
-    //     // this.props.fetchServers();
-    //     this.props.fetchData()
-    // }
 
     handleAddOrJoinClick(e) {
         e.preventDefault();
@@ -19,7 +15,6 @@ class ServerIndex extends React.Component {
     }
 
     render () {
-
         function nameAbrv(server) {
             let newName = "";
             if (server.name !== undefined) {

@@ -32,7 +32,6 @@ class SocketConnector extends React.Component {
   }
 
   createSubscriptions(channels) {
-    debugger
 
     Object.values(channels).map((channel) =>
       App.cable.subscriptions.create(

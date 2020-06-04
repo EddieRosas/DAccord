@@ -8,6 +8,10 @@ class MessageList extends React.Component {
     this.bottom = React.createRef();
   }
 
+  componentDidUpdate() {
+    
+  }
+
   render() {
     const messages = this.props.messages
       ? this.props.messages.map((message) => (
