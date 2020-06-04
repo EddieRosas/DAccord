@@ -12,13 +12,13 @@ ServerMembership.destroy_all
 
 demo_user = User.create!(
     email: "iamnotarealperson@hotmail.com",
-    username: "yisBaus",
+    username: "demoUser",
     password: "password"
 )
 
 fake_user = User.create!( 
     email: "lol@haha.com",
-    username: "haiMOM",
+    username: "seededUser1994",
     password: "password"
 )
 
@@ -34,9 +34,9 @@ numba4 = User.create!(
     password: "password"
 )
 
-first_server = Server.create!(name: "cheeky cheese", owner_id: demo_user.id)
-second_server = Server.create!(name: "HAIII", owner_id: demo_user.id)
-third_servver = Server.create!(name: "joinThisOne", owner_id: fake_user.id)
+first_server = Server.create!(name: "First Demo Server", owner_id: demo_user.id)
+second_server = Server.create!(name: "Sunshine!", owner_id: demo_user.id)
+third_servver = Server.create!(name: "Action Cable Rules", owner_id: fake_user.id)
 
 membership1 = ServerMembership.create!(user_id: demo_user.id, server_id: first_server.id)
 membership2 = ServerMembership.create!(user_id: fake_user.id, server_id: first_server.id)
@@ -44,6 +44,6 @@ membership3 = ServerMembership.create!(user_id: fake_user.id, server_id: second_
 membership4 = ServerMembership.create!(user_id: demo_user.id, server_id: second_server.id)
 
 channel1 = Channel.create!(name: "general", server_id: first_server.id)
-channel2 = Channel.create!(name: "second-channel", server_id: first_server.id)
+channel2 = Channel.create!(name: "a-more-specific-topic", server_id: first_server.id)
 channel3 = Channel.create!(name: "general", server_id: second_server.id)
 channel5 = Channel.create!(name: "general", server_id: third_servver.id)
