@@ -3332,7 +3332,7 @@ var ServerIndex = /*#__PURE__*/function (_React$Component) {
         }, server.imageUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "server-button"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "/channels/".concat(server.id, "/").concat(server.channel_ids[0])
+          to: "/channels/".concat(server.id, "/").concat(server.channelIds[0])
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           className: "server-button-img",
           src: server.imageUrl

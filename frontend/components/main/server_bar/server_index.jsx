@@ -41,7 +41,7 @@ class ServerIndex extends React.Component {
                             { server.imageUrl
                                 ? 
                                 <div className="server-button">
-                                    <Link to={`/channels/${server.id}/${server.channel_ids[0]}`}>
+                                    <Link to={`/channels/${server.id}/${server.channelIds[0]}`}>
                                         <img className="server-button-img" src={server.imageUrl}></img>
                                     </Link>
                                     <div className="server-button-label">{server.name}</div>
