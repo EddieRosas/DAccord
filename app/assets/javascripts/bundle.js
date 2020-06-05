@@ -1948,6 +1948,7 @@ var MessageListItem = /*#__PURE__*/function (_React$Component) {
       var time = new Date(dateTimeString);
       var hours = time.getHours();
       var minutes = time.getMinutes();
+      Number(minutes) < 10 ? minutes = "0".concat(minutes) : null;
       var amOrPm = "AM";
 
       if (hours > 12) {

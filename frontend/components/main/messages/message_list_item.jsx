@@ -10,6 +10,9 @@ class MessageListItem extends React.Component {
     let time = new Date(dateTimeString);
     let hours = time.getHours();
     let minutes = time.getMinutes();
+    Number(minutes) < 10 ?
+      minutes = `0${minutes}`
+      : null
     let amOrPm = "AM";
     if (hours > 12) {
       hours = hours - 12;
