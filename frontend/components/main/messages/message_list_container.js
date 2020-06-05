@@ -14,10 +14,13 @@ const mapStateToProps = (state, ownProps) => {
     );
   }
 
+  debugger
+
   return ( 
     {
         messages: messages || undefined,
         users: state.entities.users,
+      channel: state.entities.channels[ownProps.location.pathname.slice(-1)]
     }
   )
 };

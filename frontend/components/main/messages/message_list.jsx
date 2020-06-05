@@ -19,9 +19,17 @@ class MessageList extends React.Component {
         ))
       : null;
 
+    const welcomeMessage = 
+        !!this.props.channel ?
+          <div id="channel-welcome">
+            Welcome to #{this.props.channel.name}!
+          </div>
+        : null
+
     return (
       <div id="message-display-container">
         <div id="message-display-inner-container">
+          {welcomeMessage}
           <div>{messages}</div>
           <div ref={this.bottom} />
         </div>

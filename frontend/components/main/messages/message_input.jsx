@@ -37,11 +37,10 @@ class MessageInput extends React.Component {
             type="text"
             value={this.state.body}
             onChange={this.handleChange}
-            placeholder="plz work"
+            placeholder="Message Channel"
             autoComplete="off"
           ></input>
 
-          <input type="submit" id="submit-message" />
         </form>
       </div>
     );
