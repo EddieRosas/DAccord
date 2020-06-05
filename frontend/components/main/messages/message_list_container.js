@@ -14,8 +14,6 @@ const mapStateToProps = (state, ownProps) => {
     );
   }
 
-  debugger
-
   return ( 
     {
         messages: messages || undefined,
