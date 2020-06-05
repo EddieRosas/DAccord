@@ -11,7 +11,9 @@ class HomePage extends React.Component {
             <div id="home-page-box">
                 <div id="home-page-content">
                     <h1 id="home-page-header">Hello, and welcome to D'Accord!</h1>
-                    <p id="home-page-paragraph">To check out a server, click on one of the circles on the bar on the left. You can also create or join a server by clicking on the <span style={{ color: '#43B581' }}>green</span> plus sign.  </p>
+                    <p id="home-page-paragraph">
+                        To check out a server, click on one of the circles on the bar on the left. You can also create or join a server by clicking on the <span style={{ color: '#43B581' }}>green</span> plus sign.
+                    </p>
                 </div>
             </div>
         )
