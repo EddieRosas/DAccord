@@ -1949,7 +1949,7 @@ var MessageListItem = /*#__PURE__*/function (_React$Component) {
       var year = time.getFullYear();
       var abbreviatedTime = hours + ":" + minutes + " ".concat(amOrPm, " ");
       var date = "".concat(month, "/").concat(day, "/").concat(year);
-      return "".concat(abbreviatedTime, " ").concat(date);
+      return "".concat(abbreviatedTime, " on ").concat(date);
     }
   }, {
     key: "render",
@@ -1961,16 +1961,18 @@ var MessageListItem = /*#__PURE__*/function (_React$Component) {
         var timeStamp = this.formatDate(this.props.message.created_at);
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "message-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "message-head"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           className: "message-user-image",
           src: imageUrl
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "message-username"
-        }, username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "message-body"
-        }, body), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, body, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "message-timestamp"
-        }, timeStamp));
+        }, "sent at ", timeStamp)));
       } else {
         return null;
       }

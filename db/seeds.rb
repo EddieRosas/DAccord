@@ -70,7 +70,7 @@ message6 = ChannelMessage.create!(
         password: password
         \n
         \n
-        Make sure you're on the same channel of the same server and you can see the websockets sending the messages live in acton :)",
+        Make sure you're on the same channel of the same server and you can see the websockets sending the messages live in action :)",
     channel_id: channel1.id,
     author_id: demo_user.id
 )

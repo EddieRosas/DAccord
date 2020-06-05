@@ -1,7 +1,7 @@
 
 .message-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
   margin-top: 17px;
   padding-top: 5px;
@@ -13,6 +13,11 @@
   margin-top: 10px;
 }
 
+.message-head {
+  display: flex;
+  flex-direction: row;
+}
+
 .message-body {
   display: flex;
   flex-direction: column;
@@ -20,7 +25,6 @@
   width: 95%;
   font-size: 16px;
   line-height: 15px;
-  margin-left: 10px;
   color: #72767d;
   margin-top: 10px;
 }
@@ -30,4 +34,11 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
+}
+
+.message-timestamp {
+  font-weight: bold;
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 300;
 }

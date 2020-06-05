@@ -2,7 +2,7 @@ import React from "react";
 
 class MessageListItem extends React.Component {
   constructor(props) {
-    super(props);
+  super(props);
     this.formatDate = this.formatDate.bind(this)
   }
 
@@ -23,7 +23,7 @@ class MessageListItem extends React.Component {
     let year = time.getFullYear();
     let abbreviatedTime = hours + ":" + minutes + ` ${amOrPm} `;
     let date = `${month}/${day}/${year}`
-    return `${abbreviatedTime} ${date}`;
+    return `${abbreviatedTime} on ${date}`;
   }
 
   render() {
@@ -35,10 +35,16 @@ class MessageListItem extends React.Component {
 
       return (
         <div className="message-container">
-          <img className="message-user-image" src={imageUrl} />
-          <div className="message-username">{username}</div>
-          <div className="message-body">{body}</div>
-          <div className="message-timestamp">{timeStamp}</div>
+          <div className="message-head">
+            <img className="message-user-image" src={imageUrl} />
+            <div className="message-username">{username}</div>
+          </div>
+          <div className="message-body">
+            {body}
+            <div className="message-timestamp">
+              sent at {timeStamp}
+            </div>
+          </div>
         </div>
       );
     } else {
