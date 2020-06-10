@@ -31,7 +31,8 @@ class Server < ApplicationRecord
 
     has_many :server_memberships, 
         foreign_key: :server_id,
-        class_name: :ServerMembership
+        class_name: :ServerMembership,
+        dependent: :destroy
 
     has_many :users,
         through: :server_memberships,
