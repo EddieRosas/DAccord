@@ -7,6 +7,7 @@ import JoinServerContainer from './join_server_container';
 import DeleteServerContainer from './delete_server_container';
 import LeaveServerContainer from './leave_server_container';
 import CreateChannelContainer from './create_channel_container';
+import EditUserContainer from './edit_user_container';
 
 
 const Modal = ({ modal, closeModal }) => {
@@ -61,6 +62,13 @@ const Modal = ({ modal, closeModal }) => {
             component = (
                 <div className="modal-child-channel" onMouseDown={e => e.stopPropagation()}>
                     <Route path="/channels/:serverId/" component={CreateChannelContainer} />
+                </div>
+            )
+            break;
+        case 'editUser':
+            component = (
+                <div className="modal-child-channel" onMouseDown={e => e.stopPropagation()}>
+                    <EditUserContainer />
                 </div>
             )
             break;

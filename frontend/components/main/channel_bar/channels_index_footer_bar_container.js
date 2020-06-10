@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 
 import { logout } from '../../../actions/session_actions';
 import ChannelsIndexFooterBar from './channels_index_footer_bar';
+import { openModal } from '../../../actions/modal_actions';
 
 const mapStateToProps = (state) => ({
     servers: state.entities.servers,
@@ -9,7 +10,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    logout: (currentUser) => dispatch(logout(currentUser))
+    logout: (currentUser) => dispatch(logout(currentUser)),
+    openModal: type => dispatch(openModal(type))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChannelsIndexFooterBar);

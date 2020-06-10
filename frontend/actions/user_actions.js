@@ -7,8 +7,22 @@ export const receiveUsers = (users) => ({
     users
 });
 
+export const editUser = payload => ({
+    type: EDIT_USER,
+    payload
+});
+
 export const fetchUsers = (serverId) => dispatch => (
     APIUtil.fetchUsers(serverId).then(
         (users) => dispatch(receiveUsers(users))
     )
+);
+
+export const updateUser = (user, id) => dispatch => 
+    UserUtil.updateUser(user, id)
+        .then(
+            res => dispatch(editUser(res.entities))
+        )
+        .fail(
+            res => dispatch(receiveUserErrors(res.responseJSON.errors.userErrors))
 );

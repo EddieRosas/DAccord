@@ -14,6 +14,7 @@ class ChannelsIndexFooterBar extends React.Component {
 
     handleImageClick(e) {
         e.preventDefault();
+        this.props.openModal('editUser');
     }
 
     render() {
