@@ -487,12 +487,13 @@ var logout = function logout() {
 /*!******************************************!*\
   !*** ./frontend/actions/user_actions.js ***!
   \******************************************/
-/*! exports provided: RECEIVE_USERS, receiveUsers, editUser, fetchUsers, updateUser */
+/*! exports provided: RECEIVE_USERS, EDIT_USER, receiveUsers, editUser, fetchUsers, updateUser */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_USERS", function() { return RECEIVE_USERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EDIT_USER", function() { return EDIT_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveUsers", function() { return receiveUsers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editUser", function() { return editUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUsers", function() { return fetchUsers; });
@@ -500,16 +501,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _util_user_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/user_api_util */ "./frontend/util/user_api_util.js");
 
 var RECEIVE_USERS = 'RECEIVE_USERS';
+var EDIT_USER = "EDIT_USER";
 var receiveUsers = function receiveUsers(users) {
   return {
     type: RECEIVE_USERS,
     users: users
   };
 };
-var editUser = function editUser(payload) {
+var editUser = function editUser(user) {
   return {
     type: EDIT_USER,
-    payload: payload
+    user: user
   };
 };
 var fetchUsers = function fetchUsers(serverId) {
@@ -521,8 +523,8 @@ var fetchUsers = function fetchUsers(serverId) {
 };
 var updateUser = function updateUser(user, id) {
   return function (dispatch) {
-    return _util_user_api_util__WEBPACK_IMPORTED_MODULE_0__["updateUser"](user, id).then(function (res) {
-      return dispatch(editUser(res.entities));
+    return _util_user_api_util__WEBPACK_IMPORTED_MODULE_0__["updateUser"](user, id).then(function (user) {
+      return dispatch(editUser(user));
     });
   };
 };
@@ -2297,7 +2299,7 @@ var CreateChannel = /*#__PURE__*/function (_React$Component) {
         className: "channel-header-label"
       }, "create channel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "channel-form-label"
-      }, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", (_React$createElement = {
+      }, "Name (no more than 16 characters)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", (_React$createElement = {
         className: "channel-form-input",
         type: "text",
         onChange: this.handleChange("name")
@@ -4132,7 +4134,7 @@ var UsersIndexListItem = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "users-index-user-image",
         src: this.props.user.imageUrl
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "users-index-user-text"
       }, this.props.user.username, " ", ownsServer));
     }
@@ -5146,6 +5148,7 @@ var usersReducer = function usersReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
+  debugger;
 
   switch (action.type) {
     case _actions_user_actions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_USERS"]:
@@ -5153,6 +5156,9 @@ var usersReducer = function usersReducer() {
 
     case _actions_server_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_DATA"]:
       return action.payload.users;
+
+    case _actions_user_actions__WEBPACK_IMPORTED_MODULE_2__["EDIT_USER"]:
+      return Object.assign({}, state, _defineProperty({}, action.user.id, action.user));
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
       return Object.assign({}, _defineProperty({}, action.currentUser.id, action.currentUser));

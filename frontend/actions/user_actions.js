@@ -1,15 +1,16 @@
 import * as APIUtil from '../util/user_api_util';
 
 export const RECEIVE_USERS = 'RECEIVE_USERS';
+export const EDIT_USER = "EDIT_USER"
 
 export const receiveUsers = (users) => ({
     type: RECEIVE_USERS,
     users
 });
 
-export const editUser = payload => ({
+export const editUser = user => ({
     type: EDIT_USER,
-    payload
+    user
 });
 
 export const fetchUsers = (serverId) => dispatch => (
@@ -21,5 +22,5 @@ export const fetchUsers = (serverId) => dispatch => (
 export const updateUser = (user, id) => dispatch => (
     APIUtil.updateUser(user, id)
         .then(
-            res => dispatch(editUser(res.entities)))
+            user => dispatch(editUser(user)))
 );

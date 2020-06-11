@@ -44,7 +44,7 @@ membership3 = ServerMembership.create!(user_id: fake_user.id, server_id: second_
 membership4 = ServerMembership.create!(user_id: demo_user.id, server_id: second_server.id)
 
 channel1 = Channel.create!(name: "general", server_id: first_server.id)
-channel2 = Channel.create!(name: "a-more-specific-topic", server_id: first_server.id)
+channel2 = Channel.create!(name: "not-general", server_id: first_server.id)
 channel3 = Channel.create!(name: "general", server_id: second_server.id)
 channel5 = Channel.create!(name: "general", server_id: third_servver.id)
 

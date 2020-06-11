@@ -6,7 +6,6 @@ class UsersIndexListItem extends React.Component {
     }
 
     render() {
-
         const ownerLabel = (
             <div className="owner-label">
                 &nbsp;
@@ -21,8 +20,7 @@ class UsersIndexListItem extends React.Component {
         return (
             <div className="users-index-user-name">
                 <img className="users-index-user-image" src={this.props.user.imageUrl}></img>
-                <p className="users-index-user-text">{this.props.user.username} {ownsServer}</p>
-                
+                <span className="users-index-user-text">{this.props.user.username} {ownsServer}</span>
             </div>
         )
     }
