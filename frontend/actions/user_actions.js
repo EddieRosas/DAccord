@@ -19,7 +19,7 @@ export const fetchUsers = (serverId) => dispatch => (
 );
 
 export const updateUser = (user, id) => dispatch => 
-    UserUtil.updateUser(user, id)
+    APIUtil.updateUser(user, id)
         .then(
             res => dispatch(editUser(res.entities))
         )

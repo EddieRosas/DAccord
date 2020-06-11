@@ -521,7 +521,7 @@ var fetchUsers = function fetchUsers(serverId) {
 };
 var updateUser = function updateUser(user, id) {
   return function (dispatch) {
-    return UserUtil.updateUser(user, id).then(function (res) {
+    return _util_user_api_util__WEBPACK_IMPORTED_MODULE_0__["updateUser"](user, id).then(function (res) {
       return dispatch(editUser(res.entities));
     }).fail(function (res) {
       return dispatch(receiveUserErrors(res.responseJSON.errors.userErrors));
@@ -2897,11 +2897,11 @@ var editUser = /*#__PURE__*/function (_React$Component) {
         src: this.state.imageUrl
       }) : null;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "user-edit-form"
+        id: "edit-user-form"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "user-edit-form-top"
+        id: "edit-user-form-top"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-        id: "user-edit-header"
+        id: "edit-user-header"
       }, "Update your user image"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "user-image-icon-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2916,20 +2916,20 @@ var editUser = /*#__PURE__*/function (_React$Component) {
         }
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         id: "user-image-upload-text"
-      }, "Upload an image"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "user-edit-name-container"
+      }, "Click on Icon to Change image"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "edit-user-name-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         id: "user-name-username"
-      }, this.props.currentUser.username, "#", this.props.currentUser.usertag))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "user-edit-buttons-bottom"
+      }, this.props.currentUser.username))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "edit-user-buttons-bottom"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "user-edit-buttons-container"
+        id: "edit-user-buttons-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.handleClick,
-        id: "user-edit-close-button"
+        id: "edit-user-close-button"
       }, "Close"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.handleSubmit,
-        id: "user-edit-edit-button"
+        id: "edit-user-edit-button"
       }, "Update Image"))));
     }
   }]);

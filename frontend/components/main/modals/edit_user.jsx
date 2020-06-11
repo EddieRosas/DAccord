@@ -50,24 +50,24 @@ class editUser extends React.Component {
     render() {
         const preview = this.state.imageUrl ? <img className="preview-image" src={this.state.imageUrl} /> : null;
         return (
-            <div id="user-edit-form">
-                <div id="user-edit-form-top">
-                    <h2 id="user-edit-header">Update your user image</h2>
+            <div id="edit-user-form">
+                <div id="edit-user-form-top">
+                    <h2 id="edit-user-header">Update your user image</h2>
                     <div id="user-image-icon-container">
                         <div id="user-image-icon-placeholder" onClick={this.handleImageClick}>
                             {preview}
                             <input id="user-image-upload-input" type="file" onChange={this.handleFile} style={{ display: "none" }} />
-                            <p id="user-image-upload-text">Upload an image</p>
+                            <p id="user-image-upload-text">Click on Icon to Change image</p>
                         </div>
                     </div>
-                    <div id="user-edit-name-container">
-                        <p id="user-name-username">{this.props.currentUser.username}#{this.props.currentUser.usertag}</p>
+                    <div id="edit-user-name-container">
+                        <p id="user-name-username">{this.props.currentUser.username}</p>
                     </div>
                 </div>
-                <div id="user-edit-buttons-bottom">
-                    <div id="user-edit-buttons-container">
-                        <button onClick={this.handleClick} id="user-edit-close-button">Close</button>
-                        <button onClick={this.handleSubmit} id="user-edit-edit-button">Update Image</button>
+                <div id="edit-user-buttons-bottom">
+                    <div id="edit-user-buttons-container">
+                        <button onClick={this.handleClick} id="edit-user-close-button">Close</button>
+                        <button onClick={this.handleSubmit} id="edit-user-edit-button">Update Image</button>
                     </div>
                 </div>
             </div>
