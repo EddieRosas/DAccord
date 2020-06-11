@@ -13,24 +13,6 @@ class ChannelList extends React.Component {
     this.props.openModal("addChannel");
   }
 
-  componentDidMount() {
-
-    // if (!!this.props.match.params.channelId) {
-    //   this.props.fetchChannels(this.props.match.params.serverId);
-    //   this.props.fetchUsers(this.props.match.params.serverId);
-    // }
-  }
-
-  componentDidUpdate(prevProps) {
-    // if (prevProps.location.pathname !== this.props.location.pathname) {
-    //   this.props.fetchChannels(this.props.match.params.serverId);
-    // }
-
-    // if (prevProps.match.params.serverId !== this.props.match.params.serverId ) {
-    //     this.props.fetchUsers(this.props.match.params.serverId);
-    // }
-  }
-
   render() {
     if (Object.values(this.props.servers).length === 0) return null;
     const isOwner =

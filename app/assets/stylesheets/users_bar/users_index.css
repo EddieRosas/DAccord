@@ -50,9 +50,15 @@
 .users-index-user-text {
   margin-left: 10px;
   margin-bottom: 12px;
+  display: flex;
+  flex-direction: row;
 }
 
 .users-index-user-name:hover {
   background-color: rgba(79,84,92,0.16);
   color: #FFFFFF;
+}
+
+.owner-label {
+  color: rgba(255, 0, 0, 0.664);
 }

@@ -7,10 +7,18 @@ class UsersIndex extends React.Component {
     super(props);
   }
 
+  
+  
   render() {
+    let serverOwnerId;
+    if (!!this.props.users) {
+      serverOwnerId = 
+      this.props.servers[this.props.match.params.serverId].ownerId;
+    } 
+
     if (Object.values(this.props.servers).length === 0) return null;
     const list = this.props.users.map((user) => (
-      <UsersIndexListItemContainer key={user.id} user={user} />
+      <UsersIndexListItemContainer key={user.id} user={user} serverOwnerId={serverOwnerId} />
     ));
 
     return (

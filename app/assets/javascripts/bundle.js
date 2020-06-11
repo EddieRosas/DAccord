@@ -638,22 +638,6 @@ var ChannelList = /*#__PURE__*/function (_React$Component) {
       this.props.openModal("addChannel");
     }
   }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {// if (!!this.props.match.params.channelId) {
-      //   this.props.fetchChannels(this.props.match.params.serverId);
-      //   this.props.fetchUsers(this.props.match.params.serverId);
-      // }
-    }
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {// if (prevProps.location.pathname !== this.props.location.pathname) {
-      //   this.props.fetchChannels(this.props.match.params.serverId);
-      // }
-      // if (prevProps.match.params.serverId !== this.props.match.params.serverId ) {
-      //     this.props.fetchUsers(this.props.match.params.serverId);
-      // }
-    }
-  }, {
     key: "render",
     value: function render() {
       if (Object.values(this.props.servers).length === 0) return null;
@@ -3999,11 +3983,18 @@ var UsersIndex = /*#__PURE__*/function (_React$Component) {
   _createClass(UsersIndex, [{
     key: "render",
     value: function render() {
+      var serverOwnerId;
+
+      if (!!this.props.users) {
+        serverOwnerId = this.props.servers[this.props.match.params.serverId].ownerId;
+      }
+
       if (Object.values(this.props.servers).length === 0) return null;
       var list = this.props.users.map(function (user) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_users_index_list_item_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: user.id,
-          user: user
+          user: user,
+          serverOwnerId: serverOwnerId
         });
       });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
@@ -4060,7 +4051,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     servers: state.entities.servers,
     users: users,
-    messages: state.entities.messages
+    messages: state.entities.messages,
+    currentUserId: state.session.currentUserId
   };
 };
 
@@ -4131,6 +4123,10 @@ var UsersIndexListItem = /*#__PURE__*/function (_React$Component) {
   _createClass(UsersIndexListItem, [{
     key: "render",
     value: function render() {
+      var ownerLabel = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "owner-label"
+      }, "\xA0 (Owner)");
+      var ownsServer = this.props.serverOwnerId === this.props.user.id ? ownerLabel : null;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "users-index-user-name"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -4138,7 +4134,7 @@ var UsersIndexListItem = /*#__PURE__*/function (_React$Component) {
         src: this.props.user.imageUrl
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "users-index-user-text"
-      }, this.props.user.username));
+      }, this.props.user.username, " ", ownsServer));
     }
   }]);
 

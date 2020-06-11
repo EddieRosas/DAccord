@@ -16,11 +16,13 @@ const mapStateToProps = (state, ownProps) => {
         state.entities.servers[ownProps.match.params.serverId].userIds.includes(user.id)
       )
     }
+    
     return(
     {
     servers: state.entities.servers,
     users: users,
-    messages: state.entities.messages
+    messages: state.entities.messages,
+    currentUserId: state.session.currentUserId
     }
     )
 };
