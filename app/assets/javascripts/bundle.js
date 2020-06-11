@@ -523,8 +523,6 @@ var updateUser = function updateUser(user, id) {
   return function (dispatch) {
     return _util_user_api_util__WEBPACK_IMPORTED_MODULE_0__["updateUser"](user, id).then(function (res) {
       return dispatch(editUser(res.entities));
-    }).fail(function (res) {
-      return dispatch(receiveUserErrors(res.responseJSON.errors.userErrors));
     });
   };
 };
@@ -3411,7 +3409,7 @@ var Modal = function Modal(_ref) {
 
     case 'createChannel':
       component = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "modal-child-channel",
+        className: "modal-child-channel-create",
         onMouseDown: function onMouseDown(e) {
           return e.stopPropagation();
         }

@@ -18,11 +18,8 @@ export const fetchUsers = (serverId) => dispatch => (
     )
 );
 
-export const updateUser = (user, id) => dispatch => 
+export const updateUser = (user, id) => dispatch => (
     APIUtil.updateUser(user, id)
         .then(
-            res => dispatch(editUser(res.entities))
-        )
-        .fail(
-            res => dispatch(receiveUserErrors(res.responseJSON.errors.userErrors))
+            res => dispatch(editUser(res.entities)))
 );

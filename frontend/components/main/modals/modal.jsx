@@ -60,7 +60,7 @@ const Modal = ({ modal, closeModal }) => {
             break;
         case 'createChannel':
             component = (
-                <div className="modal-child-channel" onMouseDown={e => e.stopPropagation()}>
+                <div className="modal-child-channel-create" onMouseDown={e => e.stopPropagation()}>
                     <Route path="/channels/:serverId/" component={CreateChannelContainer} />
                 </div>
             )
