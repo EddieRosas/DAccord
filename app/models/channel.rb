@@ -10,6 +10,7 @@
 #
 class Channel < ApplicationRecord
     validates :name, :server_id, presence: true
+    validates :name, length: { minimum: 2, maximum: 21 }
 
     has_many :messages,
         foreign_key: :channel_id,

@@ -103,4 +103,9 @@
 .channel-list-button {
   background-color: inherit;
   outline: none;
+  border: none;
+}
+
+.channel-list-button p {
+ margin-top: -3px;
 }

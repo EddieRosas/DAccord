@@ -2662,7 +2662,6 @@ var DeleteChannel = /*#__PURE__*/function (_React$Component) {
     value: function handleSubmit(e) {
       e.preventDefault();
       var channel = this.props.channels[this.props.match.params.channelId];
-      channel.serverId = channel.serverId;
       this.props.deleteChannel(channel);
       this.props.closeModal();
     }

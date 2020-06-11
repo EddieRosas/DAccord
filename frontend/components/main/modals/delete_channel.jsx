@@ -10,7 +10,6 @@ class DeleteChannel extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         let channel = this.props.channels[this.props.match.params.channelId]
-        channel.serverId = channel.serverId;
         this.props.deleteChannel(channel);
         this.props.closeModal();
     }

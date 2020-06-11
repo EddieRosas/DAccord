@@ -36,7 +36,7 @@ class Api::ChannelsController < ApplicationController
   end
 
   def destroy
-    @channel = current_user.owned_servers.find(params[:channel][:serverId]).channels.find(params[:channel][:channelId])
+    @channel = current_user.owned_servers.find(params[:channel][:serverId]).channels.find(params[:channel][:id])
 
     if @channel
       @channel.destroy
