@@ -32,10 +32,9 @@ class ChannelList extends React.Component {
   }
 
   render() {
-    
     if (Object.values(this.props.servers).length === 0) return null;
     const isOwner =
-      this.props.servers[this.props.match.params.serverId].owner_id ===
+      this.props.servers[this.props.match.params.serverId].ownerId ===
       this.props.currentUserId;
     const channelListItems =
       this.props.channels.length > 0
@@ -47,30 +46,11 @@ class ChannelList extends React.Component {
             />
           ))
         : null;
-    const addChannelButton = isOwner ? (
-      <button id="channel-list-create-button" onClick={this.handleClick}>
-        <svg
-          id="channel-list-add-channel-icon"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="false"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-        >
-          <path
-            fill="#43B581"
-            d="M21 11.001H13V3.00098H11V11.001H3V13.001H11V21.001H13V13.001H21V11.001Z"
-          ></path>
-        </svg>
-        <div className="tooltip">Add Channel</div>
-      </button>
-    ) : null;
-
+        
     return (
       <div id="channel-list-container">
         <div id="channel-list-header-container">
           <h2 id="channel-list-header-text">Text Channels</h2>
-          {addChannelButton}
         </div>
         {channelListItems}
       </div>

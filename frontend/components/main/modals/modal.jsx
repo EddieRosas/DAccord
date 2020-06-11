@@ -8,6 +8,7 @@ import DeleteServerContainer from './delete_server_container';
 import LeaveServerContainer from './leave_server_container';
 import CreateChannelContainer from './create_channel_container';
 import EditUserContainer from './edit_user_container';
+import DeleteChannelContainer from './delete_channel_container';
 
 
 const Modal = ({ modal, closeModal }) => {
@@ -60,7 +61,7 @@ const Modal = ({ modal, closeModal }) => {
             break;
         case 'createChannel':
             component = (
-                <div className="modal-child-channel-create" onMouseDown={e => e.stopPropagation()}>
+                <div className="modal-child-channel-small" onMouseDown={e => e.stopPropagation()}>
                     <Route path="/channels/:serverId/" component={CreateChannelContainer} />
                 </div>
             )
@@ -69,6 +70,13 @@ const Modal = ({ modal, closeModal }) => {
             component = (
                 <div className="modal-child-channel" onMouseDown={e => e.stopPropagation()}>
                     <EditUserContainer />
+                </div>
+            )
+            break;
+        case 'deleteChannel':
+            component = (
+                <div className="modal-child-channel-small-delete" onMouseDown={e => e.stopPropagation()}>
+                    <Route path="/channels/:serverId/:channelId" component={DeleteChannelContainer} />
                 </div>
             )
             break;
