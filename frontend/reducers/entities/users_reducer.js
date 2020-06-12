@@ -5,7 +5,6 @@ import { RECEIVE_DATA } from '../../actions/server_actions';
 
 const usersReducer = (state = {}, action) => {
     Object.freeze(state);
-    debugger
     
     switch (action.type) {
         case RECEIVE_USERS:
