@@ -2,7 +2,7 @@
 
 # [D'Accord](https://daccord-app.herokuapp.com/)
 
-D'accord is a clone of the widely-used chatting app, Discord! The app allows users to create their own accounts. When logged into those accounts, users have the ability to create their own servers and create channels within those servers. Users also have the ability to join and leave other servers.
+D'accord is a clone of the widely-used chatting app, Discord! The app allows users to create their own accounts. When logged into those accounts, users have the ability to create their own servers and create channels within those servers. Users also have the ability to join and leave other servers. Image setting for servers and users are also allowed for a more personalized user experience.
 
 ## Technologies currently used are as follows! 
 
