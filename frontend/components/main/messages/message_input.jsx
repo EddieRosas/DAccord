@@ -20,7 +20,7 @@ class MessageInput extends React.Component {
     if (this.state.body) {
       const message = {
         body: this.state.body,
-        channelId: this.props.location.pathname.slice(-1),
+        channelId: this.props.channel.id,
         authorId: this.props.currentUserId
       };
       App.cable.subscriptions.subscriptions[1].speak(message)

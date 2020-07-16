@@ -20,7 +20,11 @@ class UsersIndexListItem extends React.Component {
         return (
             <div className="users-index-user-name">
                 <img className="users-index-user-image" src={this.props.user.imageUrl}></img>
-                <span className="users-index-user-text">{this.props.user.username} {ownsServer}</span>
+                <div className="users-index-user-text">
+                    {this.props.user.username}
+                    <br />
+                    {ownsServer}
+                </div>
             </div>
         )
     }

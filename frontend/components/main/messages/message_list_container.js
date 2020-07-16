@@ -10,15 +10,15 @@ const mapStateToProps = (state, ownProps) => {
       messages = Object.values(state.entities.messages)
       messages = messages.filter(
       (message) =>
-        Number(message.channel_id) === Number(ownProps.location.pathname.slice(-1))
+        Number(message.channel_id) === Number(ownProps.match.params.channelId)
     );
   }
 
   return ( 
     {
-        messages: messages || undefined,
-        users: state.entities.users,
-      channel: state.entities.channels[ownProps.location.pathname.slice(-1)]
+      messages: messages || undefined,
+      users: state.entities.users,
+      channel: state.entities.channels[ownProps.match.params.channelId]
     }
   )
 };

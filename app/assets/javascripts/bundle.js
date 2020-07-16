@@ -1657,7 +1657,7 @@ var MessageInput = /*#__PURE__*/function (_React$Component) {
       if (this.state.body) {
         var message = {
           body: this.state.body,
-          channelId: this.props.location.pathname.slice(-1),
+          channelId: this.props.channel.id,
           authorId: this.props.currentUserId
         };
         App.cable.subscriptions.subscriptions[1].speak(message);
@@ -1710,9 +1710,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
-    channel: state.entities.channels[ownProps.location.pathname.slice(-1)],
+    channel: state.entities.channels[ownProps.match.params.channelId],
     currentUserId: state.session.currentUserId
   };
 };
@@ -1721,6 +1722,9 @@ var mapDispatchToprops = function mapDispatchToprops(dispatch) {
   return {
     createMessage: function createMessage(message, channelId) {
       return dispatch(Object(_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__["createChannelMessage"])(message, channelId));
+    },
+    receiveMessage: function receiveMessage(message) {
+      return dispatch(Object(_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__["receiveMessage"])(message));
     }
   };
 };
@@ -1839,14 +1843,14 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   if (!!state.entities.messages) {
     messages = Object.values(state.entities.messages);
     messages = messages.filter(function (message) {
-      return Number(message.channel_id) === Number(ownProps.location.pathname.slice(-1));
+      return Number(message.channel_id) === Number(ownProps.match.params.channelId);
     });
   }
 
   return {
     messages: messages || undefined,
     users: state.entities.users,
-    channel: state.entities.channels[ownProps.location.pathname.slice(-1)]
+    channel: state.entities.channels[ownProps.match.params.channelId]
   };
 };
 
@@ -2063,7 +2067,13 @@ var MessagesDisplay = /*#__PURE__*/function (_React$Component) {
         exact: true,
         path: "/channels/@me",
         component: _home_page__WEBPACK_IMPORTED_MODULE_2__["default"]
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_message_list_container__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_message_input_container__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+        path: "/channels/:serverId/:channelId",
+        component: _message_list_container__WEBPACK_IMPORTED_MODULE_3__["default"]
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+        path: "/channels/:serverId/:channelId",
+        component: _message_input_container__WEBPACK_IMPORTED_MODULE_4__["default"]
+      })));
     }
   }]);
 
@@ -3989,9 +3999,10 @@ var UsersIndex = /*#__PURE__*/function (_React$Component) {
 
       if (!!this.props.users) {
         serverOwnerId = this.props.servers[this.props.match.params.serverId].ownerId;
+      } else {
+        return null;
       }
 
-      if (Object.values(this.props.servers).length === 0) return null;
       var list = this.props.users.map(function (user) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_users_index_list_item_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: user.id,
@@ -4134,9 +4145,9 @@ var UsersIndexListItem = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "users-index-user-image",
         src: this.props.user.imageUrl
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "users-index-user-text"
-      }, this.props.user.username, " ", ownsServer));
+      }, this.props.user.username, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), ownsServer));
     }
   }]);
 

@@ -18,7 +18,7 @@ const mapStateToProps = (state, ownProps) => {
     }
     
     return(
-    {
+      {
     servers: state.entities.servers,
     users: users,
     messages: state.entities.messages,

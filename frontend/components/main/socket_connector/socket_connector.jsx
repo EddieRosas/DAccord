@@ -18,7 +18,6 @@ class SocketConnector extends React.Component {
 
   
   componentDidUpdate(prevProps) {
-
     if (
       prevProps.channels.length !== 0 &&
       prevProps.channels.length < this.props.channels.length
@@ -33,7 +32,6 @@ class SocketConnector extends React.Component {
   }
 
   createSubscriptions(channels) {
-
     Object.values(channels).map((channel) =>
       App.cable.subscriptions.create(
         { channel: "ServerChannel", channelId: channel.id },
