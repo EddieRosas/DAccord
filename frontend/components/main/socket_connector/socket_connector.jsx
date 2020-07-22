@@ -1,10 +1,6 @@
 import React from "react";
 
 
-
-import Cable from "actioncable";
-
-
 class SocketConnector extends React.Component {
   constructor(props) {
     super(props);
@@ -15,7 +11,6 @@ class SocketConnector extends React.Component {
       .then((res) => this.createSubscriptions(res.payload.channels)
     )
   }
-
   
   componentDidUpdate(prevProps) {
     if (
@@ -54,5 +49,6 @@ class SocketConnector extends React.Component {
     return null;
   }
 }
+
 
 export default SocketConnector;

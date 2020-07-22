@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 
+
 class ServerIndex extends React.Component {
+
     constructor(props) {
         super(props)
-
         this.handleAddOrJoinClick = this.handleAddOrJoinClick.bind(this);
     }
-    
 
     handleAddOrJoinClick(e) {
         e.preventDefault();
@@ -71,10 +71,10 @@ class ServerIndex extends React.Component {
                         <div className="server-button-label">Add Server</div>
                     </div>
                 </ul>
-                
             </div>
         )
     }
 }
+
 
 export default ServerIndex;

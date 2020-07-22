@@ -1,15 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+
 class ChannelListItem extends React.Component {
+
     constructor(props) {
         super(props);
         this.handleClickModal = this.handleClickModal.bind(this);
         this.handleClickEditModal = this.handleClickEditModal.bind(this);
-    }
-
-    handleClickEditModal(type, id) {
-        // this.props.openModal(type);
     }
 
     handleClickModal(type) {

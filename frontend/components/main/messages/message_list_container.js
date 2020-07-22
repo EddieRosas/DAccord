@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import MessageList from './message_list';
 import { withRouter } from 'react-router-dom';
-import { getChannelMessages } from '../../../actions/message_actions';
+
+import MessageList from './message_list';
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -17,19 +17,10 @@ const mapStateToProps = (state, ownProps) => {
   return ( 
     {
       messages: messages || undefined,
-      users: state.entities.users,
       channel: state.entities.channels[ownProps.match.params.channelId]
     }
   )
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return(
-        {
-            getChannelMessages: channelId => dispatch(getChannelMessages(channelId))
-        }
-    )
-}
 
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MessageList));
+export default withRouter(connect(mapStateToProps, null)(MessageList));

@@ -5,7 +5,6 @@ import ChannelsIndexFooterBar from './channels_index_footer_bar';
 import { openModal } from '../../../actions/modal_actions';
 
 const mapStateToProps = (state) => ({
-    servers: state.entities.servers,
     currentUser: state.entities.users[state.session.currentUserId]
 })
 

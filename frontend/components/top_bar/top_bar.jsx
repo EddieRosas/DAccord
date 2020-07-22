@@ -1,10 +1,11 @@
 import React from 'react';
 
+
 class TopBar extends React.Component {
+
     constructor(props) {
         super(props);
     }
-
 
     render() {
         const channelName = this.props.channels.hasOwnProperty(this.props.match.params.channelId) ?

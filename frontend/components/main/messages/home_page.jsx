@@ -21,5 +21,3 @@ class HomePage extends React.Component {
 }
 
 export default HomePage;
-
-// You can add or change your user icon by clicking on the circle next to your name on the bottom left. Have fun!
