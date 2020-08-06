@@ -7,20 +7,27 @@ class SocketConnector extends React.Component {
   }
 
   componentDidMount() {
-    debugger
     this.props.fetchData()
       .then((res) => this.createSubscriptions(res.payload.channels)
     )
   }
   
   componentDidUpdate(prevProps) {
-    debugger
     if (
       prevProps.channels.length !== 0 &&
       prevProps.channels.length < this.props.channels.length
     ) {
       const newChannel = {
         channels: 
+          this.props.channels[this.props.channels.length - 1]
+      };
+      this.createSubscriptions(newChannel);
+    } else if (
+      prevProps.channels.length === 0 &&
+      prevProps.channels.length < this.props.channels.length
+    ) {
+      const newChannel = {
+        channels:
           this.props.channels[this.props.channels.length - 1]
       };
       this.createSubscriptions(newChannel);
