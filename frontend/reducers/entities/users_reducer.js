@@ -1,7 +1,6 @@
 import { RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER } from '../../actions/session_actions';
-import { RECEIVE_SERVER } from '../../actions/server_actions';
 import { RECEIVE_USERS, EDIT_USER } from '../../actions/user_actions';
-import { RECEIVE_DATA } from '../../actions/server_actions';
+import { RECEIVE_DATA, RECEIVE_SERVER } from '../../actions/server_actions';
 
 const usersReducer = (state = {}, action) => {
     Object.freeze(state);
@@ -11,6 +10,8 @@ const usersReducer = (state = {}, action) => {
             return action.users;
         case RECEIVE_DATA:
             return action.payload.users;
+        case RECEIVE_SERVER:
+            return Object.assign({}, state, action.payload.users);
         case EDIT_USER:
             return Object.assign({}, state, { [action.user.id]: action.user })
         case RECEIVE_CURRENT_USER:

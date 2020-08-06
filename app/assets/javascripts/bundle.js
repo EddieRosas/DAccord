@@ -680,12 +680,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _channel_list__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./channel_list */ "./frontend/components/main/channel_bar/channel_list.jsx");
 /* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
-/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions/user_actions */ "./frontend/actions/user_actions.js");
-/* harmony import */ var _actions_channel_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../actions/channel_actions */ "./frontend/actions/channel_actions.js");
-/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../actions/message_actions */ "./frontend/actions/message_actions.js");
-
-
-
 
 
 
@@ -698,8 +692,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     channels: channels,
     servers: state.entities.servers,
-    currentUserId: state.session.currentUserId,
-    users: state.entities.users
+    currentUserId: state.session.currentUserId
   };
 };
 
@@ -707,12 +700,6 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     openModal: function openModal(data) {
       return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__["openModal"])(data));
-    },
-    fetchChannels: function fetchChannels(serverId) {
-      return dispatch(Object(_actions_channel_actions__WEBPACK_IMPORTED_MODULE_4__["fetchChannels"])(serverId));
-    },
-    fetchUsers: function fetchUsers(serverId) {
-      return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_3__["fetchUsers"])(serverId));
     }
   };
 };
@@ -770,15 +757,10 @@ var ChannelListItem = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.handleClickModal = _this.handleClickModal.bind(_assertThisInitialized(_this));
-    _this.handleClickEditModal = _this.handleClickEditModal.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(ChannelListItem, [{
-    key: "handleClickEditModal",
-    value: function handleClickEditModal(type, id) {// this.props.openModal(type);
-    }
-  }, {
     key: "handleClickModal",
     value: function handleClickModal(type) {
       this.props.openModal(type);
@@ -951,14 +933,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _channels_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./channels_index */ "./frontend/components/main/channel_bar/channels_index.jsx");
 
 
-
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    servers: Object.values(state.entities.servers)
-  };
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, null)(_channels_index__WEBPACK_IMPORTED_MODULE_1__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(null, null)(_channels_index__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 
@@ -1092,7 +1067,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    servers: state.entities.servers,
     currentUser: state.entities.users[state.session.currentUserId]
   };
 };
@@ -1287,12 +1261,6 @@ var ServerDisplayDropdown = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this = this;
 
-      // const editServerButton = this.props.isOwner ?
-      //     <button className="server-display-dropdown-item" onClick={() => this.props.openModal('editServer')}>
-      //         <div>Edit Server</div>
-      //         <svg className="channel-list-edit-icon" aria-hidden="false" width="16" height="16" viewBox="0 0 16 16"><path fill="currentColor" fillRule="evenodd" clipRule="evenodd" d="M14 7V9C14 9 12.5867 9 12.5733 9.00667C12.42 9.58667 12.1733 10.1267 11.84 10.6067L12.74 11.5067L11.4933 12.7533L10.5933 11.8533C10.1133 12.1867 9.57334 12.44 8.99334 12.5867V14H6.99334V12.58C6.41334 12.4333 5.87334 12.18 5.39334 11.8467L4.49333 12.7467L3.24667 11.5L4.14667 10.6C3.81333 10.1267 3.56 9.58 3.41333 9H2V7H3.41333C3.56 6.42 3.81333 5.88 4.14667 5.4L3.24667 4.5L4.5 3.24667L5.4 4.14667C5.87334 3.81333 6.42 3.56 7 3.41333V2H9V3.41333C9.58 3.56667 10.12 3.81333 10.6 4.14667L11.5067 3.25333L12.7533 4.5L11.8533 5.4C12.1867 5.87334 12.44 6.42 12.5867 7H14ZM8 10C9.10457 10 10 9.10457 10 8C10 6.89543 9.10457 6 8 6C6.89543 6 6 6.89543 6 8C6 9.10457 6.89543 10 8 10Z"></path></svg>
-      //     </button>
-      //     : null;
       var createChannelButton = this.props.isOwner ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "server-display-dropdown-item",
         onClick: function onClick() {
@@ -1498,21 +1466,12 @@ var Main = /*#__PURE__*/function (_React$Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./main */ "./frontend/components/main/main.jsx");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./main */ "./frontend/components/main/main.jsx");
 
 
 
-
-
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    currentUser: state.entities.users[state.session.currentUserId]
-  };
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, null)(_main__WEBPACK_IMPORTED_MODULE_1__["default"])));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(null, null)(_main__WEBPACK_IMPORTED_MODULE_2__["default"])));
 
 /***/ }),
 
@@ -1584,7 +1543,7 @@ var HomePage = /*#__PURE__*/function (_React$Component) {
   return HomePage;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (HomePage); // You can add or change your user icon by clicking on the circle next to your name on the bottom left. Have fun!
+/* harmony default export */ __webpack_exports__["default"] = (HomePage);
 
 /***/ }),
 
@@ -1704,9 +1663,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _message_input__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./message_input */ "./frontend/components/main/messages/message_input.jsx");
-/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions/message_actions */ "./frontend/actions/message_actions.js");
-
-
 
 
 
@@ -1718,18 +1674,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   };
 };
 
-var mapDispatchToprops = function mapDispatchToprops(dispatch) {
-  return {
-    createMessage: function createMessage(message, channelId) {
-      return dispatch(Object(_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__["createChannelMessage"])(message, channelId));
-    },
-    receiveMessage: function receiveMessage(message) {
-      return dispatch(Object(_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__["receiveMessage"])(message));
-    }
-  };
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToprops)(_message_input__WEBPACK_IMPORTED_MODULE_2__["default"])));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, null)(_message_input__WEBPACK_IMPORTED_MODULE_2__["default"])));
 
 /***/ }),
 
@@ -1829,10 +1774,8 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _message_list__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message_list */ "./frontend/components/main/messages/message_list.jsx");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions/message_actions */ "./frontend/actions/message_actions.js");
-
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _message_list__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./message_list */ "./frontend/components/main/messages/message_list.jsx");
 
 
 
@@ -1849,20 +1792,11 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 
   return {
     messages: messages || undefined,
-    users: state.entities.users,
     channel: state.entities.channels[ownProps.match.params.channelId]
   };
 };
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
-  return {
-    getChannelMessages: function getChannelMessages(channelId) {
-      return dispatch(Object(_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__["getChannelMessages"])(channelId));
-    }
-  };
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_message_list__WEBPACK_IMPORTED_MODULE_1__["default"])));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, null)(_message_list__WEBPACK_IMPORTED_MODULE_2__["default"])));
 
 /***/ }),
 
@@ -1940,7 +1874,7 @@ var MessageListItem = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      if (!!this.props.message && Object.values(this.props.users).length > 1) {
+      if (!!this.props.message && Object.values(this.props.users).length > 0) {
         var body = this.props.message.body;
         var username = this.props.users[this.props.message.author_id].username;
         var imageUrl = this.props.users[this.props.message.author_id].imageUrl;
@@ -1992,8 +1926,6 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     users: state.entities.users,
-    messages: state.entities.messages,
-    channels: state.entities.channels,
     message: ownProps.message
   };
 };
@@ -3748,12 +3680,7 @@ var ServerIndex = /*#__PURE__*/function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _server_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./server_index */ "./frontend/components/main/server_bar/server_index.jsx");
-/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions/user_actions */ "./frontend/actions/user_actions.js");
-/* harmony import */ var _actions_server_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions/server_actions */ "./frontend/actions/server_actions.js");
-/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
-
-
-
+/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
 
 
 
@@ -3766,17 +3693,8 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    fetchServers: function fetchServers() {
-      return dispatch(Object(_actions_server_actions__WEBPACK_IMPORTED_MODULE_3__["fetchServers"])());
-    },
     openModal: function openModal() {
-      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__["openModal"])('add/join'));
-    },
-    fetchUsers: function fetchUsers(serverId) {
-      return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_2__["fetchUsers"])(serverId));
-    },
-    fetchData: function fetchData() {
-      return dispatch(Object(_actions_server_actions__WEBPACK_IMPORTED_MODULE_3__["fetchData"])());
+      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__["openModal"])('add/join'));
     }
   };
 };
@@ -3796,8 +3714,6 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var actioncable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! actioncable */ "./node_modules/actioncable/lib/assets/compiled/action_cable.js");
-/* harmony import */ var actioncable__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(actioncable__WEBPACK_IMPORTED_MODULE_1__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -3824,7 +3740,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-
 var SocketConnector = /*#__PURE__*/function (_React$Component) {
   _inherits(SocketConnector, _React$Component);
 
@@ -3841,6 +3756,7 @@ var SocketConnector = /*#__PURE__*/function (_React$Component) {
     value: function componentDidMount() {
       var _this = this;
 
+      debugger;
       this.props.fetchData().then(function (res) {
         return _this.createSubscriptions(res.payload.channels);
       });
@@ -3848,11 +3764,11 @@ var SocketConnector = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
+      debugger;
+
       if (prevProps.channels.length !== 0 && prevProps.channels.length < this.props.channels.length) {
         var newChannel = {
-          channels: {
-            channels: this.props.channels[this.props.channels.length - 1]
-          }
+          channels: this.props.channels[this.props.channels.length - 1]
         };
         this.createSubscriptions(newChannel);
       }
@@ -3903,44 +3819,33 @@ var SocketConnector = /*#__PURE__*/function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _actions_channel_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions/channel_actions */ "./frontend/actions/channel_actions.js");
-/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions/message_actions */ "./frontend/actions/message_actions.js");
-/* harmony import */ var _actions_server_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../actions/server_actions */ "./frontend/actions/server_actions.js");
-/* harmony import */ var _socket_connector__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./socket_connector */ "./frontend/components/main/socket_connector/socket_connector.jsx");
+/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions/message_actions */ "./frontend/actions/message_actions.js");
+/* harmony import */ var _actions_server_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions/server_actions */ "./frontend/actions/server_actions.js");
+/* harmony import */ var _socket_connector__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./socket_connector */ "./frontend/components/main/socket_connector/socket_connector.jsx");
 
 
 
 
 
 
-
-
-var mapStateToProps = function mapStateToProps(state, ownProps) {
+var mapStateToProps = function mapStateToProps(state) {
   return {
-    currentServerId: ownProps.match.params.serverId,
-    currentUser: state.session.currentUserId,
     channels: Object.values(state.entities.channels)
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    fetchChannels: function fetchChannels(serverId) {
-      return dispatch(Object(_actions_channel_actions__WEBPACK_IMPORTED_MODULE_2__["fetchChannels"])(serverId));
-    },
-    createChannelMessage: function createChannelMessage(payload) {
-      return dispatch(Object(_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__["createChannelMessage"])(payload));
-    },
     receiveMessage: function receiveMessage(message) {
-      return dispatch(Object(_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__["receiveMessage"])(message));
+      return dispatch(Object(_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__["receiveMessage"])(message));
     },
     fetchData: function fetchData() {
-      return dispatch(Object(_actions_server_actions__WEBPACK_IMPORTED_MODULE_4__["fetchData"])());
+      return dispatch(Object(_actions_server_actions__WEBPACK_IMPORTED_MODULE_3__["fetchData"])());
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_socket_connector__WEBPACK_IMPORTED_MODULE_5__["default"])));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_socket_connector__WEBPACK_IMPORTED_MODULE_4__["default"])));
 
 /***/ }),
 
@@ -4039,15 +3944,7 @@ var UsersIndex = /*#__PURE__*/function (_React$Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../actions/message_actions */ "./frontend/actions/message_actions.js");
-/* harmony import */ var _actions_server_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions/server_actions */ "./frontend/actions/server_actions.js");
-/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions/user_actions */ "./frontend/actions/user_actions.js");
-/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../reducers/selectors */ "./frontend/reducers/selectors.js");
-/* harmony import */ var _users_index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./users_index */ "./frontend/components/main/users_bar/users_index.jsx");
-
-
-
-
+/* harmony import */ var _users_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_index */ "./frontend/components/main/users_bar/users_index.jsx");
 
 
 
@@ -4063,27 +3960,11 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 
   return {
     servers: state.entities.servers,
-    users: users,
-    messages: state.entities.messages,
-    currentUserId: state.session.currentUserId
+    users: users
   };
 };
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    fetchServer: function fetchServer(serverId) {
-      return dispatch(Object(_actions_server_actions__WEBPACK_IMPORTED_MODULE_2__["fetchServer"])(serverId));
-    },
-    fetchUsers: function fetchUsers(serverId) {
-      return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_3__["fetchUsers"])(serverId));
-    },
-    getChannelMessages: function getChannelMessages(channelId) {
-      return dispatch(Object(_actions_message_actions__WEBPACK_IMPORTED_MODULE_1__["getChannelMessages"])(channelId));
-    }
-  };
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_users_index__WEBPACK_IMPORTED_MODULE_5__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, null)(_users_index__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 
@@ -4977,7 +4858,9 @@ document.addEventListener("DOMContentLoaded", function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_channel_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/channel_actions */ "./frontend/actions/channel_actions.js");
 /* harmony import */ var _actions_server_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/server_actions */ "./frontend/actions/server_actions.js");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -5002,6 +4885,9 @@ var channelsReducer = function channelsReducer() {
       var new_channels = Object.assign({}, state);
       delete new_channels[action.channel.id];
       return new_channels;
+
+    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["LOGOUT_CURRENT_USER"]:
+      return {};
 
     default:
       return state;
@@ -5146,10 +5032,9 @@ var serversReducer = function serversReducer() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
-/* harmony import */ var _actions_server_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/server_actions */ "./frontend/actions/server_actions.js");
-/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
+/* harmony import */ var _actions_server_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/server_actions */ "./frontend/actions/server_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -5161,13 +5046,16 @@ var usersReducer = function usersReducer() {
   Object.freeze(state);
 
   switch (action.type) {
-    case _actions_user_actions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_USERS"]:
+    case _actions_user_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_USERS"]:
       return action.users;
 
-    case _actions_server_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_DATA"]:
+    case _actions_server_actions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_DATA"]:
       return action.payload.users;
 
-    case _actions_user_actions__WEBPACK_IMPORTED_MODULE_2__["EDIT_USER"]:
+    case _actions_server_actions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_SERVER"]:
+      return Object.assign({}, state, action.payload.users);
+
+    case _actions_user_actions__WEBPACK_IMPORTED_MODULE_1__["EDIT_USER"]:
       return Object.assign({}, state, _defineProperty({}, action.user.id, action.user));
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
@@ -5306,34 +5194,6 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
 
 /***/ }),
 
-/***/ "./frontend/reducers/selectors.js":
-/*!****************************************!*\
-  !*** ./frontend/reducers/selectors.js ***!
-  \****************************************/
-/*! exports provided: selectMembersByServer, serverChannelsSelector */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectMembersByServer", function() { return selectMembersByServer; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "serverChannelsSelector", function() { return serverChannelsSelector; });
-var selectMembersByServer = function selectMembersByServer(state, serverId) {
-  if (serverId === "@me") return [];
-  if (!serverId) return [];
-  if (!state.entities.servers[serverId]) return [];
-  return state.entities.servers[serverId].user_ids.map(function (id) {
-    return state.entities.users[id];
-  });
-};
-var serverChannelsSelector = function serverChannelsSelector(state, serverId) {
-  var allChannels = state.entities.channels;
-  return Object.values(allChannels).filter(function (channel) {
-    return channel.serverId === Number(serverId);
-  });
-};
-
-/***/ }),
-
 /***/ "./frontend/reducers/session/session_reducer.js":
 /*!******************************************************!*\
   !*** ./frontend/reducers/session/session_reducer.js ***!
@@ -5434,20 +5294,18 @@ var uiReducers = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
-/* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
-/* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../reducers/root_reducer */ "./frontend/reducers/root_reducer.js");
+/* harmony import */ var _reducers_root_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../reducers/root_reducer */ "./frontend/reducers/root_reducer.js");
 
-
+ // import logger from 'redux-logger';
 
 
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_2___default.a));
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_2__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"]));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (configureStore); // logger as second arg in applyMiddleWare
+/* harmony default export */ __webpack_exports__["default"] = (configureStore); // logger as second arg in applyMiddleWare during dev
 
 /***/ }),
 
@@ -5853,622 +5711,6 @@ function _inheritsLoose(subClass, superClass) {
 }
 
 module.exports = _inheritsLoose;
-
-/***/ }),
-
-/***/ "./node_modules/actioncable/lib/assets/compiled/action_cable.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/actioncable/lib/assets/compiled/action_cable.js ***!
-  \**********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;(function() {
-  var context = this;
-
-  (function() {
-    (function() {
-      var slice = [].slice;
-
-      this.ActionCable = {
-        INTERNAL: {
-          "message_types": {
-            "welcome": "welcome",
-            "ping": "ping",
-            "confirmation": "confirm_subscription",
-            "rejection": "reject_subscription"
-          },
-          "default_mount_path": "/cable",
-          "protocols": ["actioncable-v1-json", "actioncable-unsupported"]
-        },
-        WebSocket: window.WebSocket,
-        logger: window.console,
-        createConsumer: function(url) {
-          var ref;
-          if (url == null) {
-            url = (ref = this.getConfig("url")) != null ? ref : this.INTERNAL.default_mount_path;
-          }
-          return new ActionCable.Consumer(this.createWebSocketURL(url));
-        },
-        getConfig: function(name) {
-          var element;
-          element = document.head.querySelector("meta[name='action-cable-" + name + "']");
-          return element != null ? element.getAttribute("content") : void 0;
-        },
-        createWebSocketURL: function(url) {
-          var a;
-          if (url && !/^wss?:/i.test(url)) {
-            a = document.createElement("a");
-            a.href = url;
-            a.href = a.href;
-            a.protocol = a.protocol.replace("http", "ws");
-            return a.href;
-          } else {
-            return url;
-          }
-        },
-        startDebugging: function() {
-          return this.debugging = true;
-        },
-        stopDebugging: function() {
-          return this.debugging = null;
-        },
-        log: function() {
-          var messages, ref;
-          messages = 1 <= arguments.length ? slice.call(arguments, 0) : [];
-          if (this.debugging) {
-            messages.push(Date.now());
-            return (ref = this.logger).log.apply(ref, ["[ActionCable]"].concat(slice.call(messages)));
-          }
-        }
-      };
-
-    }).call(this);
-  }).call(context);
-
-  var ActionCable = context.ActionCable;
-
-  (function() {
-    (function() {
-      var bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
-
-      ActionCable.ConnectionMonitor = (function() {
-        var clamp, now, secondsSince;
-
-        ConnectionMonitor.pollInterval = {
-          min: 3,
-          max: 30
-        };
-
-        ConnectionMonitor.staleThreshold = 6;
-
-        function ConnectionMonitor(connection) {
-          this.connection = connection;
-          this.visibilityDidChange = bind(this.visibilityDidChange, this);
-          this.reconnectAttempts = 0;
-        }
-
-        ConnectionMonitor.prototype.start = function() {
-          if (!this.isRunning()) {
-            this.startedAt = now();
-            delete this.stoppedAt;
-            this.startPolling();
-            document.addEventListener("visibilitychange", this.visibilityDidChange);
-            return ActionCable.log("ConnectionMonitor started. pollInterval = " + (this.getPollInterval()) + " ms");
-          }
-        };
-
-        ConnectionMonitor.prototype.stop = function() {
-          if (this.isRunning()) {
-            this.stoppedAt = now();
-            this.stopPolling();
-            document.removeEventListener("visibilitychange", this.visibilityDidChange);
-            return ActionCable.log("ConnectionMonitor stopped");
-          }
-        };
-
-        ConnectionMonitor.prototype.isRunning = function() {
-          return (this.startedAt != null) && (this.stoppedAt == null);
-        };
-
-        ConnectionMonitor.prototype.recordPing = function() {
-          return this.pingedAt = now();
-        };
-
-        ConnectionMonitor.prototype.recordConnect = function() {
-          this.reconnectAttempts = 0;
-          this.recordPing();
-          delete this.disconnectedAt;
-          return ActionCable.log("ConnectionMonitor recorded connect");
-        };
-
-        ConnectionMonitor.prototype.recordDisconnect = function() {
-          this.disconnectedAt = now();
-          return ActionCable.log("ConnectionMonitor recorded disconnect");
-        };
-
-        ConnectionMonitor.prototype.startPolling = function() {
-          this.stopPolling();
-          return this.poll();
-        };
-
-        ConnectionMonitor.prototype.stopPolling = function() {
-          return clearTimeout(this.pollTimeout);
-        };
-
-        ConnectionMonitor.prototype.poll = function() {
-          return this.pollTimeout = setTimeout((function(_this) {
-            return function() {
-              _this.reconnectIfStale();
-              return _this.poll();
-            };
-          })(this), this.getPollInterval());
-        };
-
-        ConnectionMonitor.prototype.getPollInterval = function() {
-          var interval, max, min, ref;
-          ref = this.constructor.pollInterval, min = ref.min, max = ref.max;
-          interval = 5 * Math.log(this.reconnectAttempts + 1);
-          return Math.round(clamp(interval, min, max) * 1000);
-        };
-
-        ConnectionMonitor.prototype.reconnectIfStale = function() {
-          if (this.connectionIsStale()) {
-            ActionCable.log("ConnectionMonitor detected stale connection. reconnectAttempts = " + this.reconnectAttempts + ", pollInterval = " + (this.getPollInterval()) + " ms, time disconnected = " + (secondsSince(this.disconnectedAt)) + " s, stale threshold = " + this.constructor.staleThreshold + " s");
-            this.reconnectAttempts++;
-            if (this.disconnectedRecently()) {
-              return ActionCable.log("ConnectionMonitor skipping reopening recent disconnect");
-            } else {
-              ActionCable.log("ConnectionMonitor reopening");
-              return this.connection.reopen();
-            }
-          }
-        };
-
-        ConnectionMonitor.prototype.connectionIsStale = function() {
-          var ref;
-          return secondsSince((ref = this.pingedAt) != null ? ref : this.startedAt) > this.constructor.staleThreshold;
-        };
-
-        ConnectionMonitor.prototype.disconnectedRecently = function() {
-          return this.disconnectedAt && secondsSince(this.disconnectedAt) < this.constructor.staleThreshold;
-        };
-
-        ConnectionMonitor.prototype.visibilityDidChange = function() {
-          if (document.visibilityState === "visible") {
-            return setTimeout((function(_this) {
-              return function() {
-                if (_this.connectionIsStale() || !_this.connection.isOpen()) {
-                  ActionCable.log("ConnectionMonitor reopening stale connection on visibilitychange. visbilityState = " + document.visibilityState);
-                  return _this.connection.reopen();
-                }
-              };
-            })(this), 200);
-          }
-        };
-
-        now = function() {
-          return new Date().getTime();
-        };
-
-        secondsSince = function(time) {
-          return (now() - time) / 1000;
-        };
-
-        clamp = function(number, min, max) {
-          return Math.max(min, Math.min(max, number));
-        };
-
-        return ConnectionMonitor;
-
-      })();
-
-    }).call(this);
-    (function() {
-      var i, message_types, protocols, ref, supportedProtocols, unsupportedProtocol,
-        slice = [].slice,
-        bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
-        indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
-
-      ref = ActionCable.INTERNAL, message_types = ref.message_types, protocols = ref.protocols;
-
-      supportedProtocols = 2 <= protocols.length ? slice.call(protocols, 0, i = protocols.length - 1) : (i = 0, []), unsupportedProtocol = protocols[i++];
-
-      ActionCable.Connection = (function() {
-        Connection.reopenDelay = 500;
-
-        function Connection(consumer) {
-          this.consumer = consumer;
-          this.open = bind(this.open, this);
-          this.subscriptions = this.consumer.subscriptions;
-          this.monitor = new ActionCable.ConnectionMonitor(this);
-          this.disconnected = true;
-        }
-
-        Connection.prototype.send = function(data) {
-          if (this.isOpen()) {
-            this.webSocket.send(JSON.stringify(data));
-            return true;
-          } else {
-            return false;
-          }
-        };
-
-        Connection.prototype.open = function() {
-          if (this.isActive()) {
-            ActionCable.log("Attempted to open WebSocket, but existing socket is " + (this.getState()));
-            return false;
-          } else {
-            ActionCable.log("Opening WebSocket, current state is " + (this.getState()) + ", subprotocols: " + protocols);
-            if (this.webSocket != null) {
-              this.uninstallEventHandlers();
-            }
-            this.webSocket = new ActionCable.WebSocket(this.consumer.url, protocols);
-            this.installEventHandlers();
-            this.monitor.start();
-            return true;
-          }
-        };
-
-        Connection.prototype.close = function(arg) {
-          var allowReconnect, ref1;
-          allowReconnect = (arg != null ? arg : {
-            allowReconnect: true
-          }).allowReconnect;
-          if (!allowReconnect) {
-            this.monitor.stop();
-          }
-          if (this.isActive()) {
-            return (ref1 = this.webSocket) != null ? ref1.close() : void 0;
-          }
-        };
-
-        Connection.prototype.reopen = function() {
-          var error;
-          ActionCable.log("Reopening WebSocket, current state is " + (this.getState()));
-          if (this.isActive()) {
-            try {
-              return this.close();
-            } catch (error1) {
-              error = error1;
-              return ActionCable.log("Failed to reopen WebSocket", error);
-            } finally {
-              ActionCable.log("Reopening WebSocket in " + this.constructor.reopenDelay + "ms");
-              setTimeout(this.open, this.constructor.reopenDelay);
-            }
-          } else {
-            return this.open();
-          }
-        };
-
-        Connection.prototype.getProtocol = function() {
-          var ref1;
-          return (ref1 = this.webSocket) != null ? ref1.protocol : void 0;
-        };
-
-        Connection.prototype.isOpen = function() {
-          return this.isState("open");
-        };
-
-        Connection.prototype.isActive = function() {
-          return this.isState("open", "connecting");
-        };
-
-        Connection.prototype.isProtocolSupported = function() {
-          var ref1;
-          return ref1 = this.getProtocol(), indexOf.call(supportedProtocols, ref1) >= 0;
-        };
-
-        Connection.prototype.isState = function() {
-          var ref1, states;
-          states = 1 <= arguments.length ? slice.call(arguments, 0) : [];
-          return ref1 = this.getState(), indexOf.call(states, ref1) >= 0;
-        };
-
-        Connection.prototype.getState = function() {
-          var ref1, state, value;
-          for (state in WebSocket) {
-            value = WebSocket[state];
-            if (value === ((ref1 = this.webSocket) != null ? ref1.readyState : void 0)) {
-              return state.toLowerCase();
-            }
-          }
-          return null;
-        };
-
-        Connection.prototype.installEventHandlers = function() {
-          var eventName, handler;
-          for (eventName in this.events) {
-            handler = this.events[eventName].bind(this);
-            this.webSocket["on" + eventName] = handler;
-          }
-        };
-
-        Connection.prototype.uninstallEventHandlers = function() {
-          var eventName;
-          for (eventName in this.events) {
-            this.webSocket["on" + eventName] = function() {};
-          }
-        };
-
-        Connection.prototype.events = {
-          message: function(event) {
-            var identifier, message, ref1, type;
-            if (!this.isProtocolSupported()) {
-              return;
-            }
-            ref1 = JSON.parse(event.data), identifier = ref1.identifier, message = ref1.message, type = ref1.type;
-            switch (type) {
-              case message_types.welcome:
-                this.monitor.recordConnect();
-                return this.subscriptions.reload();
-              case message_types.ping:
-                return this.monitor.recordPing();
-              case message_types.confirmation:
-                return this.subscriptions.notify(identifier, "connected");
-              case message_types.rejection:
-                return this.subscriptions.reject(identifier);
-              default:
-                return this.subscriptions.notify(identifier, "received", message);
-            }
-          },
-          open: function() {
-            ActionCable.log("WebSocket onopen event, using '" + (this.getProtocol()) + "' subprotocol");
-            this.disconnected = false;
-            if (!this.isProtocolSupported()) {
-              ActionCable.log("Protocol is unsupported. Stopping monitor and disconnecting.");
-              return this.close({
-                allowReconnect: false
-              });
-            }
-          },
-          close: function(event) {
-            ActionCable.log("WebSocket onclose event");
-            if (this.disconnected) {
-              return;
-            }
-            this.disconnected = true;
-            this.monitor.recordDisconnect();
-            return this.subscriptions.notifyAll("disconnected", {
-              willAttemptReconnect: this.monitor.isRunning()
-            });
-          },
-          error: function() {
-            return ActionCable.log("WebSocket onerror event");
-          }
-        };
-
-        return Connection;
-
-      })();
-
-    }).call(this);
-    (function() {
-      var slice = [].slice;
-
-      ActionCable.Subscriptions = (function() {
-        function Subscriptions(consumer) {
-          this.consumer = consumer;
-          this.subscriptions = [];
-        }
-
-        Subscriptions.prototype.create = function(channelName, mixin) {
-          var channel, params, subscription;
-          channel = channelName;
-          params = typeof channel === "object" ? channel : {
-            channel: channel
-          };
-          subscription = new ActionCable.Subscription(this.consumer, params, mixin);
-          return this.add(subscription);
-        };
-
-        Subscriptions.prototype.add = function(subscription) {
-          this.subscriptions.push(subscription);
-          this.consumer.ensureActiveConnection();
-          this.notify(subscription, "initialized");
-          this.sendCommand(subscription, "subscribe");
-          return subscription;
-        };
-
-        Subscriptions.prototype.remove = function(subscription) {
-          this.forget(subscription);
-          if (!this.findAll(subscription.identifier).length) {
-            this.sendCommand(subscription, "unsubscribe");
-          }
-          return subscription;
-        };
-
-        Subscriptions.prototype.reject = function(identifier) {
-          var i, len, ref, results, subscription;
-          ref = this.findAll(identifier);
-          results = [];
-          for (i = 0, len = ref.length; i < len; i++) {
-            subscription = ref[i];
-            this.forget(subscription);
-            this.notify(subscription, "rejected");
-            results.push(subscription);
-          }
-          return results;
-        };
-
-        Subscriptions.prototype.forget = function(subscription) {
-          var s;
-          this.subscriptions = (function() {
-            var i, len, ref, results;
-            ref = this.subscriptions;
-            results = [];
-            for (i = 0, len = ref.length; i < len; i++) {
-              s = ref[i];
-              if (s !== subscription) {
-                results.push(s);
-              }
-            }
-            return results;
-          }).call(this);
-          return subscription;
-        };
-
-        Subscriptions.prototype.findAll = function(identifier) {
-          var i, len, ref, results, s;
-          ref = this.subscriptions;
-          results = [];
-          for (i = 0, len = ref.length; i < len; i++) {
-            s = ref[i];
-            if (s.identifier === identifier) {
-              results.push(s);
-            }
-          }
-          return results;
-        };
-
-        Subscriptions.prototype.reload = function() {
-          var i, len, ref, results, subscription;
-          ref = this.subscriptions;
-          results = [];
-          for (i = 0, len = ref.length; i < len; i++) {
-            subscription = ref[i];
-            results.push(this.sendCommand(subscription, "subscribe"));
-          }
-          return results;
-        };
-
-        Subscriptions.prototype.notifyAll = function() {
-          var args, callbackName, i, len, ref, results, subscription;
-          callbackName = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
-          ref = this.subscriptions;
-          results = [];
-          for (i = 0, len = ref.length; i < len; i++) {
-            subscription = ref[i];
-            results.push(this.notify.apply(this, [subscription, callbackName].concat(slice.call(args))));
-          }
-          return results;
-        };
-
-        Subscriptions.prototype.notify = function() {
-          var args, callbackName, i, len, results, subscription, subscriptions;
-          subscription = arguments[0], callbackName = arguments[1], args = 3 <= arguments.length ? slice.call(arguments, 2) : [];
-          if (typeof subscription === "string") {
-            subscriptions = this.findAll(subscription);
-          } else {
-            subscriptions = [subscription];
-          }
-          results = [];
-          for (i = 0, len = subscriptions.length; i < len; i++) {
-            subscription = subscriptions[i];
-            results.push(typeof subscription[callbackName] === "function" ? subscription[callbackName].apply(subscription, args) : void 0);
-          }
-          return results;
-        };
-
-        Subscriptions.prototype.sendCommand = function(subscription, command) {
-          var identifier;
-          identifier = subscription.identifier;
-          return this.consumer.send({
-            command: command,
-            identifier: identifier
-          });
-        };
-
-        return Subscriptions;
-
-      })();
-
-    }).call(this);
-    (function() {
-      ActionCable.Subscription = (function() {
-        var extend;
-
-        function Subscription(consumer, params, mixin) {
-          this.consumer = consumer;
-          if (params == null) {
-            params = {};
-          }
-          this.identifier = JSON.stringify(params);
-          extend(this, mixin);
-        }
-
-        Subscription.prototype.perform = function(action, data) {
-          if (data == null) {
-            data = {};
-          }
-          data.action = action;
-          return this.send(data);
-        };
-
-        Subscription.prototype.send = function(data) {
-          return this.consumer.send({
-            command: "message",
-            identifier: this.identifier,
-            data: JSON.stringify(data)
-          });
-        };
-
-        Subscription.prototype.unsubscribe = function() {
-          return this.consumer.subscriptions.remove(this);
-        };
-
-        extend = function(object, properties) {
-          var key, value;
-          if (properties != null) {
-            for (key in properties) {
-              value = properties[key];
-              object[key] = value;
-            }
-          }
-          return object;
-        };
-
-        return Subscription;
-
-      })();
-
-    }).call(this);
-    (function() {
-      ActionCable.Consumer = (function() {
-        function Consumer(url) {
-          this.url = url;
-          this.subscriptions = new ActionCable.Subscriptions(this);
-          this.connection = new ActionCable.Connection(this);
-        }
-
-        Consumer.prototype.send = function(data) {
-          return this.connection.send(data);
-        };
-
-        Consumer.prototype.connect = function() {
-          return this.connection.open();
-        };
-
-        Consumer.prototype.disconnect = function() {
-          return this.connection.close({
-            allowReconnect: false
-          });
-        };
-
-        Consumer.prototype.ensureActiveConnection = function() {
-          if (!this.connection.isActive()) {
-            return this.connection.open();
-          }
-        };
-
-        return Consumer;
-
-      })();
-
-    }).call(this);
-  }).call(this);
-
-  if ( true && module.exports) {
-    module.exports = ActionCable;
-  } else if (true) {
-    !(__WEBPACK_AMD_DEFINE_FACTORY__ = (ActionCable),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
-				__WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-  }
-}).call(this);
-
 
 /***/ }),
 
@@ -39105,19 +38347,6 @@ if (false) {} else {
   module.exports = __webpack_require__(/*! ./cjs/react.development.js */ "./node_modules/react/cjs/react.development.js");
 }
 
-
-/***/ }),
-
-/***/ "./node_modules/redux-logger/dist/redux-logger.js":
-/*!********************************************************!*\
-  !*** ./node_modules/redux-logger/dist/redux-logger.js ***!
-  \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(global) {!function(e,t){ true?t(exports):undefined}(this,function(e){"use strict";function t(e,t){e.super_=t,e.prototype=Object.create(t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}})}function r(e,t){Object.defineProperty(this,"kind",{value:e,enumerable:!0}),t&&t.length&&Object.defineProperty(this,"path",{value:t,enumerable:!0})}function n(e,t,r){n.super_.call(this,"E",e),Object.defineProperty(this,"lhs",{value:t,enumerable:!0}),Object.defineProperty(this,"rhs",{value:r,enumerable:!0})}function o(e,t){o.super_.call(this,"N",e),Object.defineProperty(this,"rhs",{value:t,enumerable:!0})}function i(e,t){i.super_.call(this,"D",e),Object.defineProperty(this,"lhs",{value:t,enumerable:!0})}function a(e,t,r){a.super_.call(this,"A",e),Object.defineProperty(this,"index",{value:t,enumerable:!0}),Object.defineProperty(this,"item",{value:r,enumerable:!0})}function f(e,t,r){var n=e.slice((r||t)+1||e.length);return e.length=t<0?e.length+t:t,e.push.apply(e,n),e}function u(e){var t="undefined"==typeof e?"undefined":N(e);return"object"!==t?t:e===Math?"math":null===e?"null":Array.isArray(e)?"array":"[object Date]"===Object.prototype.toString.call(e)?"date":"function"==typeof e.toString&&/^\/.*\//.test(e.toString())?"regexp":"object"}function l(e,t,r,c,s,d,p){s=s||[],p=p||[];var g=s.slice(0);if("undefined"!=typeof d){if(c){if("function"==typeof c&&c(g,d))return;if("object"===("undefined"==typeof c?"undefined":N(c))){if(c.prefilter&&c.prefilter(g,d))return;if(c.normalize){var h=c.normalize(g,d,e,t);h&&(e=h[0],t=h[1])}}}g.push(d)}"regexp"===u(e)&&"regexp"===u(t)&&(e=e.toString(),t=t.toString());var y="undefined"==typeof e?"undefined":N(e),v="undefined"==typeof t?"undefined":N(t),b="undefined"!==y||p&&p[p.length-1].lhs&&p[p.length-1].lhs.hasOwnProperty(d),m="undefined"!==v||p&&p[p.length-1].rhs&&p[p.length-1].rhs.hasOwnProperty(d);if(!b&&m)r(new o(g,t));else if(!m&&b)r(new i(g,e));else if(u(e)!==u(t))r(new n(g,e,t));else if("date"===u(e)&&e-t!==0)r(new n(g,e,t));else if("object"===y&&null!==e&&null!==t)if(p.filter(function(t){return t.lhs===e}).length)e!==t&&r(new n(g,e,t));else{if(p.push({lhs:e,rhs:t}),Array.isArray(e)){var w;e.length;for(w=0;w<e.length;w++)w>=t.length?r(new a(g,w,new i(void 0,e[w]))):l(e[w],t[w],r,c,g,w,p);for(;w<t.length;)r(new a(g,w,new o(void 0,t[w++])))}else{var x=Object.keys(e),S=Object.keys(t);x.forEach(function(n,o){var i=S.indexOf(n);i>=0?(l(e[n],t[n],r,c,g,n,p),S=f(S,i)):l(e[n],void 0,r,c,g,n,p)}),S.forEach(function(e){l(void 0,t[e],r,c,g,e,p)})}p.length=p.length-1}else e!==t&&("number"===y&&isNaN(e)&&isNaN(t)||r(new n(g,e,t)))}function c(e,t,r,n){return n=n||[],l(e,t,function(e){e&&n.push(e)},r),n.length?n:void 0}function s(e,t,r){if(r.path&&r.path.length){var n,o=e[t],i=r.path.length-1;for(n=0;n<i;n++)o=o[r.path[n]];switch(r.kind){case"A":s(o[r.path[n]],r.index,r.item);break;case"D":delete o[r.path[n]];break;case"E":case"N":o[r.path[n]]=r.rhs}}else switch(r.kind){case"A":s(e[t],r.index,r.item);break;case"D":e=f(e,t);break;case"E":case"N":e[t]=r.rhs}return e}function d(e,t,r){if(e&&t&&r&&r.kind){for(var n=e,o=-1,i=r.path?r.path.length-1:0;++o<i;)"undefined"==typeof n[r.path[o]]&&(n[r.path[o]]="number"==typeof r.path[o]?[]:{}),n=n[r.path[o]];switch(r.kind){case"A":s(r.path?n[r.path[o]]:n,r.index,r.item);break;case"D":delete n[r.path[o]];break;case"E":case"N":n[r.path[o]]=r.rhs}}}function p(e,t,r){if(r.path&&r.path.length){var n,o=e[t],i=r.path.length-1;for(n=0;n<i;n++)o=o[r.path[n]];switch(r.kind){case"A":p(o[r.path[n]],r.index,r.item);break;case"D":o[r.path[n]]=r.lhs;break;case"E":o[r.path[n]]=r.lhs;break;case"N":delete o[r.path[n]]}}else switch(r.kind){case"A":p(e[t],r.index,r.item);break;case"D":e[t]=r.lhs;break;case"E":e[t]=r.lhs;break;case"N":e=f(e,t)}return e}function g(e,t,r){if(e&&t&&r&&r.kind){var n,o,i=e;for(o=r.path.length-1,n=0;n<o;n++)"undefined"==typeof i[r.path[n]]&&(i[r.path[n]]={}),i=i[r.path[n]];switch(r.kind){case"A":p(i[r.path[n]],r.index,r.item);break;case"D":i[r.path[n]]=r.lhs;break;case"E":i[r.path[n]]=r.lhs;break;case"N":delete i[r.path[n]]}}}function h(e,t,r){if(e&&t){var n=function(n){r&&!r(e,t,n)||d(e,t,n)};l(e,t,n)}}function y(e){return"color: "+F[e].color+"; font-weight: bold"}function v(e){var t=e.kind,r=e.path,n=e.lhs,o=e.rhs,i=e.index,a=e.item;switch(t){case"E":return[r.join("."),n,"→",o];case"N":return[r.join("."),o];case"D":return[r.join(".")];case"A":return[r.join(".")+"["+i+"]",a];default:return[]}}function b(e,t,r,n){var o=c(e,t);try{n?r.groupCollapsed("diff"):r.group("diff")}catch(e){r.log("diff")}o?o.forEach(function(e){var t=e.kind,n=v(e);r.log.apply(r,["%c "+F[t].text,y(t)].concat(P(n)))}):r.log("—— no diff ——");try{r.groupEnd()}catch(e){r.log("—— diff end —— ")}}function m(e,t,r,n){switch("undefined"==typeof e?"undefined":N(e)){case"object":return"function"==typeof e[n]?e[n].apply(e,P(r)):e[n];case"function":return e(t);default:return e}}function w(e){var t=e.timestamp,r=e.duration;return function(e,n,o){var i=["action"];return i.push("%c"+String(e.type)),t&&i.push("%c@ "+n),r&&i.push("%c(in "+o.toFixed(2)+" ms)"),i.join(" ")}}function x(e,t){var r=t.logger,n=t.actionTransformer,o=t.titleFormatter,i=void 0===o?w(t):o,a=t.collapsed,f=t.colors,u=t.level,l=t.diff,c="undefined"==typeof t.titleFormatter;e.forEach(function(o,s){var d=o.started,p=o.startedTime,g=o.action,h=o.prevState,y=o.error,v=o.took,w=o.nextState,x=e[s+1];x&&(w=x.prevState,v=x.started-d);var S=n(g),k="function"==typeof a?a(function(){return w},g,o):a,j=D(p),E=f.title?"color: "+f.title(S)+";":"",A=["color: gray; font-weight: lighter;"];A.push(E),t.timestamp&&A.push("color: gray; font-weight: lighter;"),t.duration&&A.push("color: gray; font-weight: lighter;");var O=i(S,j,v);try{k?f.title&&c?r.groupCollapsed.apply(r,["%c "+O].concat(A)):r.groupCollapsed(O):f.title&&c?r.group.apply(r,["%c "+O].concat(A)):r.group(O)}catch(e){r.log(O)}var N=m(u,S,[h],"prevState"),P=m(u,S,[S],"action"),C=m(u,S,[y,h],"error"),F=m(u,S,[w],"nextState");if(N)if(f.prevState){var L="color: "+f.prevState(h)+"; font-weight: bold";r[N]("%c prev state",L,h)}else r[N]("prev state",h);if(P)if(f.action){var T="color: "+f.action(S)+"; font-weight: bold";r[P]("%c action    ",T,S)}else r[P]("action    ",S);if(y&&C)if(f.error){var M="color: "+f.error(y,h)+"; font-weight: bold;";r[C]("%c error     ",M,y)}else r[C]("error     ",y);if(F)if(f.nextState){var _="color: "+f.nextState(w)+"; font-weight: bold";r[F]("%c next state",_,w)}else r[F]("next state",w);l&&b(h,w,r,k);try{r.groupEnd()}catch(e){r.log("—— log end ——")}})}function S(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},t=Object.assign({},L,e),r=t.logger,n=t.stateTransformer,o=t.errorTransformer,i=t.predicate,a=t.logErrors,f=t.diffPredicate;if("undefined"==typeof r)return function(){return function(e){return function(t){return e(t)}}};if(e.getState&&e.dispatch)return console.error("[redux-logger] redux-logger not installed. Make sure to pass logger instance as middleware:\n// Logger with default options\nimport { logger } from 'redux-logger'\nconst store = createStore(\n  reducer,\n  applyMiddleware(logger)\n)\n// Or you can create your own logger with custom options http://bit.ly/redux-logger-options\nimport createLogger from 'redux-logger'\nconst logger = createLogger({\n  // ...options\n});\nconst store = createStore(\n  reducer,\n  applyMiddleware(logger)\n)\n"),function(){return function(e){return function(t){return e(t)}}};var u=[];return function(e){var r=e.getState;return function(e){return function(l){if("function"==typeof i&&!i(r,l))return e(l);var c={};u.push(c),c.started=O.now(),c.startedTime=new Date,c.prevState=n(r()),c.action=l;var s=void 0;if(a)try{s=e(l)}catch(e){c.error=o(e)}else s=e(l);c.took=O.now()-c.started,c.nextState=n(r());var d=t.diff&&"function"==typeof f?f(r,l):t.diff;if(x(u,Object.assign({},t,{diff:d})),u.length=0,c.error)throw c.error;return s}}}}var k,j,E=function(e,t){return new Array(t+1).join(e)},A=function(e,t){return E("0",t-e.toString().length)+e},D=function(e){return A(e.getHours(),2)+":"+A(e.getMinutes(),2)+":"+A(e.getSeconds(),2)+"."+A(e.getMilliseconds(),3)},O="undefined"!=typeof performance&&null!==performance&&"function"==typeof performance.now?performance:Date,N="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},P=function(e){if(Array.isArray(e)){for(var t=0,r=Array(e.length);t<e.length;t++)r[t]=e[t];return r}return Array.from(e)},C=[];k="object"===("undefined"==typeof global?"undefined":N(global))&&global?global:"undefined"!=typeof window?window:{},j=k.DeepDiff,j&&C.push(function(){"undefined"!=typeof j&&k.DeepDiff===c&&(k.DeepDiff=j,j=void 0)}),t(n,r),t(o,r),t(i,r),t(a,r),Object.defineProperties(c,{diff:{value:c,enumerable:!0},observableDiff:{value:l,enumerable:!0},applyDiff:{value:h,enumerable:!0},applyChange:{value:d,enumerable:!0},revertChange:{value:g,enumerable:!0},isConflict:{value:function(){return"undefined"!=typeof j},enumerable:!0},noConflict:{value:function(){return C&&(C.forEach(function(e){e()}),C=null),c},enumerable:!0}});var F={E:{color:"#2196F3",text:"CHANGED:"},N:{color:"#4CAF50",text:"ADDED:"},D:{color:"#F44336",text:"DELETED:"},A:{color:"#2196F3",text:"ARRAY:"}},L={level:"log",logger:console,logErrors:!0,collapsed:void 0,predicate:void 0,duration:!1,timestamp:!0,stateTransformer:function(e){return e},actionTransformer:function(e){return e},errorTransformer:function(e){return e},colors:{title:function(){return"inherit"},prevState:function(){return"#9E9E9E"},action:function(){return"#03A9F4"},nextState:function(){return"#4CAF50"},error:function(){return"#F20404"}},diff:!1,diffPredicate:void 0,transformer:void 0},T=function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},t=e.dispatch,r=e.getState;return"function"==typeof t||"function"==typeof r?S()({dispatch:t,getState:r}):void console.error("\n[redux-logger v3] BREAKING CHANGE\n[redux-logger v3] Since 3.0.0 redux-logger exports by default logger with default settings.\n[redux-logger v3] Change\n[redux-logger v3] import createLogger from 'redux-logger'\n[redux-logger v3] to\n[redux-logger v3] import { createLogger } from 'redux-logger'\n")};e.defaults=L,e.createLogger=S,e.logger=T,e.default=T,Object.defineProperty(e,"__esModule",{value:!0})});
-
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 

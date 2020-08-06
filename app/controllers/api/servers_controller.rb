@@ -24,7 +24,7 @@ class Api::ServersController < ApplicationController
             ServerMembership.create(user_id: @server.owner_id, server_id: @server.id)
             Channel.create(name: "general", server_id: @server.id)
             @channels = @server.channels
-            
+            @current_user = current_user
             render :show
         else
             render json: @servers.errors.full_messages, status: 422

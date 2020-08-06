@@ -28,7 +28,7 @@ class MessageListItem extends React.Component {
   }
 
   render() {
-    if (!!this.props.message && Object.values(this.props.users).length > 1) {
+    if (!!this.props.message && Object.values(this.props.users).length > 0) {
       const body = this.props.message.body;
       const username = this.props.users[this.props.message.author_id].username;
       const imageUrl = this.props.users[this.props.message.author_id].imageUrl;

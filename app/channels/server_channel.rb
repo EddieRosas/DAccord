@@ -2,7 +2,7 @@ class ServerChannel < ApplicationCable::Channel
   def subscribed
     # stream_from "some_channel"
   
-    stream_for "room-#{params["channelId"]}:messages"
+    stream_for "channel-#{params["channelId"]}:messages"
   end
 
   def speak(data) 
@@ -22,7 +22,7 @@ class ServerChannel < ApplicationCable::Channel
       }
     }
     
-    ServerChannel.broadcast_to("room-#{data["channelId"]}:messages", socket )
+    ServerChannel.broadcast_to("channel-#{data["channelId"]}:messages", socket )
   end
 
   def unsubscribed

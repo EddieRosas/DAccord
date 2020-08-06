@@ -15,5 +15,13 @@ json.channels do
         json.name channel.name
         json.serverId channel.server_id
     end 
-end 
+end
+
+json.users do
+  json.extract! @current_user, :id, :username
+  if @current_user.image.attached?
+    json.imageUrl url_for(@current_user.image)
+  end
+end
+
 
