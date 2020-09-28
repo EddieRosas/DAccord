@@ -2,6 +2,7 @@ import * as APIUtil from '../util/user_api_util';
 
 export const RECEIVE_USERS = 'RECEIVE_USERS';
 export const EDIT_USER = "EDIT_USER"
+// export const RECEIVE_USER = "RECEIVE_USER"
 
 export const receiveUsers = (users) => ({
     type: RECEIVE_USERS,
@@ -12,6 +13,11 @@ export const editUser = user => ({
     type: EDIT_USER,
     user
 });
+
+// export const receiveUser = user => ({
+//     type: RECEIVE_USERS,
+//     user
+// })
 
 export const fetchUsers = (serverId) => dispatch => (
     APIUtil.fetchUsers(serverId).then(
@@ -24,3 +30,5 @@ export const updateUser = (user, id) => dispatch => (
         .then(
             user => dispatch(editUser(user)))
 );
+
+// export const fetchUser = (serverId) =>

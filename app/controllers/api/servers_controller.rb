@@ -34,7 +34,7 @@ class Api::ServersController < ApplicationController
 
     def show
         @server = Server.find_by(id: params[:id])
-
+        
         render :show
     end
 

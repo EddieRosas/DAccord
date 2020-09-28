@@ -239,7 +239,7 @@ var receiveMessage = function receiveMessage(message) {
 var getChannelMessages = function getChannelMessages(channelId) {
   return function (dispatch) {
     return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__["getChannelMessages"](channelId).then(function (messages) {
-      return dispatch(receiveMessages(messages));
+      return dispatch(s(messages));
     });
   };
 };
@@ -501,7 +501,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _util_user_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/user_api_util */ "./frontend/util/user_api_util.js");
 
 var RECEIVE_USERS = 'RECEIVE_USERS';
-var EDIT_USER = "EDIT_USER";
+var EDIT_USER = "EDIT_USER"; // export const RECEIVE_USER = "RECEIVE_USER"
+
 var receiveUsers = function receiveUsers(users) {
   return {
     type: RECEIVE_USERS,
@@ -513,7 +514,11 @@ var editUser = function editUser(user) {
     type: EDIT_USER,
     user: user
   };
-};
+}; // export const receiveUser = user => ({
+//     type: RECEIVE_USERS,
+//     user
+// })
+
 var fetchUsers = function fetchUsers(serverId) {
   return function (dispatch) {
     return _util_user_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchUsers"](serverId).then(function (users) {
@@ -527,7 +532,7 @@ var updateUser = function updateUser(user, id) {
       return dispatch(editUser(user));
     });
   };
-};
+}; // export const fetchUser = (serverId) =>
 
 /***/ }),
 
@@ -3099,8 +3104,8 @@ var JoinServer = /*#__PURE__*/function (_React$Component) {
 
       e.preventDefault();
       this.props.closeModal();
-      this.props.joinServer(this.state.name).then(function (e) {
-        return _this3.props.history.push("/channels/".concat(e.server.id));
+      this.props.joinServer(this.state.name).then(function (res) {
+        return _this3.props.history.push("/channels/".concat(res.payload.server.id, "/").concat(res.payload.server.channelIds[0]));
       });
     }
   }, {
@@ -3177,6 +3182,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
 /* harmony import */ var _actions_server_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions/server_actions */ "./frontend/actions/server_actions.js");
 /* harmony import */ var _join_server__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./join_server */ "./frontend/components/main/modals/join_server.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
 
 
 
@@ -3202,7 +3209,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_join_server__WEBPACK_IMPORTED_MODULE_3__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_join_server__WEBPACK_IMPORTED_MODULE_3__["default"])));
 
 /***/ }),
 
@@ -3749,23 +3756,24 @@ var SocketConnector = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, SocketConnector);
 
     return _super.call(this, props);
-  }
+  } // Only component that calls fetchData --> fetches all necessary info upon
+  // logging in
+
 
   _createClass(SocketConnector, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this = this;
 
-      debugger;
       this.props.fetchData().then(function (res) {
         return _this.createSubscriptions(res.payload.channels);
-      });
-    }
+      } // connect websockets/create subs for our chat channels
+      );
+    } // Adjust to associated channels being created or destroyed
+
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      debugger;
-
       if (prevProps.channels.length !== 0 && prevProps.channels.length < this.props.channels.length) {
         var newChannel = {
           channels: this.props.channels[this.props.channels.length - 1]
@@ -3903,6 +3911,13 @@ var UsersIndex = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(UsersIndex, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (Object.values(prevProps.servers).length !== 0 && prevProps.servers[this.props.currentServerId].userIds.length !== this.props.servers[this.props.currentServerId].userIds.length) {
+        this.props.fetchUsers(this.props.currentServerId);
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var serverOwnerId;
@@ -3949,7 +3964,9 @@ var UsersIndex = /*#__PURE__*/function (_React$Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _users_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_index */ "./frontend/components/main/users_bar/users_index.jsx");
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../actions/user_actions */ "./frontend/actions/user_actions.js");
+/* harmony import */ var _users_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./users_index */ "./frontend/components/main/users_bar/users_index.jsx");
+
 
 
 
@@ -3965,11 +3982,20 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 
   return {
     servers: state.entities.servers,
-    users: users
+    users: users,
+    currentServerId: ownProps.match.params.serverId
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, null)(_users_index__WEBPACK_IMPORTED_MODULE_1__["default"]));
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    fetchUsers: function fetchUsers(serverId) {
+      return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_1__["fetchUsers"])(serverId));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_users_index__WEBPACK_IMPORTED_MODULE_2__["default"]));
 
 /***/ }),
 
@@ -5309,7 +5335,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_2___default.a));
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"]));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore); // logger as second arg in applyMiddleWare during dev

@@ -7,6 +7,16 @@ class UsersIndex extends React.Component {
     super(props);
   }
 
+  componentDidUpdate(prevProps) {
+    if (
+      Object.values(prevProps.servers).length !== 0 && 
+      prevProps.servers[this.props.currentServerId].userIds.length !== 
+        this.props.servers[this.props.currentServerId].userIds.length
+    ) {
+      this.props.fetchUsers(this.props.currentServerId)
+    }
+  }
+
   render() {
     let serverOwnerId;
     if (!!this.props.users) {

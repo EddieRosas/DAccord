@@ -6,12 +6,16 @@ class SocketConnector extends React.Component {
     super(props);
   }
 
+  // Only component that calls fetchData --> fetches all necessary info upon
+  // logging in
   componentDidMount() {
     this.props.fetchData()
       .then((res) => this.createSubscriptions(res.payload.channels)
+      // connect websockets/create subs for our chat channels
     )
   }
   
+  // Adjust to associated channels being created or destroyed
   componentDidUpdate(prevProps) {
     if (
       prevProps.channels.length !== 0 &&

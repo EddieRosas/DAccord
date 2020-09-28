@@ -20,10 +20,13 @@ export const receiveData = payload => {
     })
 }
 
-export const receiveServer = payload => ({
-    type: RECEIVE_SERVER,
-    payload
-});
+export const receiveServer = payload => {
+    return({
+        type: RECEIVE_SERVER,
+        payload
+    }
+    )
+};
 
 export const deleteServer = serverId => {
     

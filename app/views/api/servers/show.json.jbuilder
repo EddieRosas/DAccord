@@ -18,9 +18,11 @@ json.channels do
 end
 
 json.users do
-  json.extract! @current_user, :id, :username
-  if @current_user.image.attached?
-    json.imageUrl url_for(@current_user.image)
+  @server.users.each do |user|
+    json.set! user.id do
+        json.extract! user, :id, :username
+        json.imageUrl url_for(user.image)
+    end
   end
 end
 

@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 
+import { fetchUsers } from '../../../actions/user_actions'
 import UsersIndex from './users_index';
 
 const mapStateToProps = (state, ownProps) => {
@@ -15,9 +16,19 @@ const mapStateToProps = (state, ownProps) => {
       {
         servers: state.entities.servers,
         users: users,
+        currentServerId: ownProps.match.params.serverId
       }
     )
 };
 
+const mapDispatchToProps = (dispatch) => {
+  return(
+    {
+      fetchUsers: (serverId) => dispatch(fetchUsers(serverId))
+    }
+  )
 
-export default connect(mapStateToProps, null)(UsersIndex);
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(UsersIndex);

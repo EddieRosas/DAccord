@@ -20,7 +20,7 @@ class JoinServer extends React.Component {
         e.preventDefault();
         this.props.closeModal();
         this.props.joinServer(this.state.name)
-            .then((e) => this.props.history.push(`/channels/${e.server.id}`));
+            .then((res) => this.props.history.push(`/channels/${res.payload.server.id}/${res.payload.server.channelIds[0]}`));
     }
 
     handleClick(modal) {

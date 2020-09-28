@@ -19,7 +19,10 @@ class Api::ChannelMessagesController < ApplicationController
     end
 
     def destroy
-
+        # For our purposes we can leave messages constantly persisting--
+        # Would be useful to delete messages that are either very old in order
+        # clear up some space in the DB or delete messages that
+        # were sent by a user by mistake
     end 
 
     private

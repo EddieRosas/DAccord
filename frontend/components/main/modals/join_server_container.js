@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { openModal, closeModal } from '../../../actions/modal_actions';
 import { joinServer } from '../../../actions/server_actions';
 import JoinServer from './join_server';
+import { withRouter } from 'react-router-dom'
+
 
 const mapStateToProps = state => ({
     errors: state.errors.server
@@ -15,4 +17,6 @@ const mapDispatchToProps = dispatch => ({
     joinServer: (server) => dispatch(joinServer(server))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(JoinServer);
+export default withRouter(
+    connect(mapStateToProps, mapDispatchToProps)(JoinServer)
+);

@@ -22,7 +22,7 @@ class ServerChannel < ApplicationCable::Channel
       }
     }
     
-    ServerChannel.broadcast_to("channel-#{data["channelId"]}:messages", socket )
+    ServerChannel.broadcast_to("channel-#{data["channelId"]}:messages", socket)
   end
 
   def unsubscribed
