@@ -1,5 +1,5 @@
 import { RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER } from '../../actions/session_actions';
-import { RECEIVE_USERS, EDIT_USER } from '../../actions/user_actions';
+import { RECEIVE_USERS, EDIT_USER, RECEIVE_USER } from '../../actions/user_actions';
 import { RECEIVE_DATA, RECEIVE_SERVER } from '../../actions/server_actions';
 
 const usersReducer = (state = {}, action) => {
@@ -8,6 +8,8 @@ const usersReducer = (state = {}, action) => {
     switch (action.type) {
         case RECEIVE_USERS:
             return action.users;
+        case RECEIVE_USER:
+            return action.user;
         case RECEIVE_DATA:
             return action.payload.users;
         case RECEIVE_SERVER:

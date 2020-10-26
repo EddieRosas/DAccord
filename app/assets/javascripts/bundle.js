@@ -487,20 +487,24 @@ var logout = function logout() {
 /*!******************************************!*\
   !*** ./frontend/actions/user_actions.js ***!
   \******************************************/
-/*! exports provided: RECEIVE_USERS, EDIT_USER, receiveUsers, editUser, fetchUsers, updateUser */
+/*! exports provided: RECEIVE_USERS, RECEIVE_USER, EDIT_USER, receiveUsers, editUser, receiveUser, fetchUsers, updateUser, fetchUser */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_USERS", function() { return RECEIVE_USERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_USER", function() { return RECEIVE_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EDIT_USER", function() { return EDIT_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveUsers", function() { return receiveUsers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editUser", function() { return editUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveUser", function() { return receiveUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUsers", function() { return fetchUsers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateUser", function() { return updateUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUser", function() { return fetchUser; });
 /* harmony import */ var _util_user_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/user_api_util */ "./frontend/util/user_api_util.js");
 
 var RECEIVE_USERS = 'RECEIVE_USERS';
+var RECEIVE_USER = 'RECEIVE_USER';
 var EDIT_USER = "EDIT_USER"; // export const RECEIVE_USER = "RECEIVE_USER"
 
 var receiveUsers = function receiveUsers(users) {
@@ -514,11 +518,13 @@ var editUser = function editUser(user) {
     type: EDIT_USER,
     user: user
   };
-}; // export const receiveUser = user => ({
-//     type: RECEIVE_USERS,
-//     user
-// })
-
+};
+var receiveUser = function receiveUser(user) {
+  return {
+    type: RECEIVE_USER,
+    user: user
+  };
+};
 var fetchUsers = function fetchUsers(serverId) {
   return function (dispatch) {
     return _util_user_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchUsers"](serverId).then(function (users) {
@@ -532,7 +538,14 @@ var updateUser = function updateUser(user, id) {
       return dispatch(editUser(user));
     });
   };
-}; // export const fetchUser = (serverId) =>
+};
+var fetchUser = function fetchUser(userId) {
+  return function (dispatch) {
+    return _util_user_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchUser"](userId).then(function (user) {
+      return dispatch(receiveUser(user));
+    });
+  };
+};
 
 /***/ }),
 
@@ -1879,10 +1892,12 @@ var MessageListItem = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      debugger;
+
       if (!!this.props.message && Object.values(this.props.users).length > 0) {
         var body = this.props.message.body;
-        var username = this.props.users[this.props.message.author_id].username;
-        var imageUrl = this.props.users[this.props.message.author_id].imageUrl;
+        var username = !!this.props.users[this.props.message.author_id] ? this.props.users[this.props.message.author_id].username : "User not in server";
+        var imageUrl = !!this.props.users[this.props.message.author_id] ? this.props.users[this.props.message.author_id].imageUrl : null;
         var timeStamp = this.formatDate(this.props.message.created_at);
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "message-container"
@@ -3913,9 +3928,17 @@ var UsersIndex = /*#__PURE__*/function (_React$Component) {
   _createClass(UsersIndex, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
+      // debugger
       if (Object.values(prevProps.servers).length !== 0 && prevProps.servers[this.props.currentServerId].userIds.length !== this.props.servers[this.props.currentServerId].userIds.length) {
         this.props.fetchUsers(this.props.currentServerId);
-      }
+      } // if (Object.values(prevProps.servers).length !== 0) {
+      //   let prev_userIds = prevProps.servers[this.props.currentServerId].userIds
+      //   let new_userIds = this.props.servers[this.props.currentServerId].userIds
+      //   if (prev_userIds[prev_userIds.length - 1] !== new_userIds[new_userIds.length -1]) {
+      //     this.props.fetchUser(new_userIds[new_userIds.length - 1])
+      //   }
+      // }
+
     }
   }, {
     key: "render",
@@ -3991,6 +4014,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     fetchUsers: function fetchUsers(serverId) {
       return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_1__["fetchUsers"])(serverId));
+    },
+    fetchUser: function fetchUser(userId) {
+      return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_1__["fetchUsers"])(userId));
     }
   };
 };
@@ -5079,6 +5105,9 @@ var usersReducer = function usersReducer() {
   switch (action.type) {
     case _actions_user_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_USERS"]:
       return action.users;
+
+    case _actions_user_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_USER"]:
+      return action.user;
 
     case _actions_server_actions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_DATA"]:
       return action.payload.users;

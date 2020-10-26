@@ -17,6 +17,13 @@ class Api::UsersController < ApplicationController
         end
     end
 
+    def show
+      debugger
+      @user = User.find_by(id: params[:userId])
+
+      render :show
+    end
+
    def update
     unless current_user.id == params[:id].to_i
       flash.now[:errors] = ['You do not have permissions to edit this user.']

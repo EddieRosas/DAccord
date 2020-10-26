@@ -11,7 +11,7 @@ D'accord is a clone of the widely-used chatting app, Discord! The app allows use
 - Active Storage
     - Attaches image urls to users and servers, linking them with Amazon Web Services storage
 - Implementation of Action Cable 
-    - Presence of working chat rooms within channels as well as direct messages between users
+    - Presence of functional chat rooms within server channels
 - React-Redux
-    * Frontend utilization with React-Router to produce a single page application
+    - Frontend utilization with React-Router to produce a single page application
 

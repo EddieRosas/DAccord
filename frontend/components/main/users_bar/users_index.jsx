@@ -8,6 +8,7 @@ class UsersIndex extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    // debugger
     if (
       Object.values(prevProps.servers).length !== 0 && 
       prevProps.servers[this.props.currentServerId].userIds.length !== 
@@ -15,6 +16,14 @@ class UsersIndex extends React.Component {
     ) {
       this.props.fetchUsers(this.props.currentServerId)
     }
+    // if (Object.values(prevProps.servers).length !== 0) {
+    //   let prev_userIds = prevProps.servers[this.props.currentServerId].userIds
+    //   let new_userIds = this.props.servers[this.props.currentServerId].userIds
+    //   if (prev_userIds[prev_userIds.length - 1] !== new_userIds[new_userIds.length -1]) {
+    //     this.props.fetchUser(new_userIds[new_userIds.length - 1])
+    //   }
+    // }
+
   }
 
   render() {

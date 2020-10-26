@@ -17,13 +17,13 @@ class Server < ApplicationRecord
     has_one_attached :image
 
     def image_size_constraint
-    if image.attached?
-      if image.blob.byte_size > 10000000
-        image.purge
-        render json: ["Image size too large"], status: 400
+      if image.attached?
+        if image.blob.byte_size > 10000000
+          image.purge
+          render json: ["Image size too large"], status: 400
+        end
       end
     end
-  end
 
     belongs_to :owner,
         foreign_key: :owner_id,

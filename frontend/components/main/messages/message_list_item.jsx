@@ -28,10 +28,13 @@ class MessageListItem extends React.Component {
   }
 
   render() {
+    debugger
     if (!!this.props.message && Object.values(this.props.users).length > 0) {
       const body = this.props.message.body;
-      const username = this.props.users[this.props.message.author_id].username;
-      const imageUrl = this.props.users[this.props.message.author_id].imageUrl;
+      const username = !!this.props.users[this.props.message.author_id] ? 
+        this.props.users[this.props.message.author_id].username : "User not in server";
+      const imageUrl = !!this.props.users[this.props.message.author_id] ?
+        this.props.users[this.props.message.author_id].imageUrl : null;
       const timeStamp = this.formatDate(this.props.message.created_at)
 
       return (
