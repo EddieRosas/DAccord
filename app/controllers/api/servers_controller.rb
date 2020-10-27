@@ -1,6 +1,6 @@
 class Api::ServersController < ApplicationController 
     def index 
-        @servers = current_user.servers.includes(:users, :channels)
+        @servers = current_user.servers.includes(:users, :channels, channels: :messages)
         @users = Array.new
         @channels = Array.new
         @messages = Array.new
