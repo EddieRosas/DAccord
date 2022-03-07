@@ -8,7 +8,6 @@ class UsersIndex extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    // debugger
     if (
       Object.values(prevProps.servers).length !== 0 && 
       prevProps.servers[this.props.currentServerId].userIds.length !== 
