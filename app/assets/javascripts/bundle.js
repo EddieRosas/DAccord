@@ -1892,8 +1892,6 @@ var MessageListItem = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      debugger;
-
       if (!!this.props.message && Object.values(this.props.users).length > 0) {
         var body = this.props.message.body;
         var username = !!this.props.users[this.props.message.author_id] ? this.props.users[this.props.message.author_id].username : "User not in server";
@@ -3928,7 +3926,6 @@ var UsersIndex = /*#__PURE__*/function (_React$Component) {
   _createClass(UsersIndex, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      // debugger
       if (Object.values(prevProps.servers).length !== 0 && prevProps.servers[this.props.currentServerId].userIds.length !== this.props.servers[this.props.currentServerId].userIds.length) {
         this.props.fetchUsers(this.props.currentServerId);
       } // if (Object.values(prevProps.servers).length !== 0) {
